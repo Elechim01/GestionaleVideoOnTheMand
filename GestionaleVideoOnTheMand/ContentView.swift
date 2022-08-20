@@ -6,11 +6,30 @@
 //
 
 import SwiftUI
-
+import Firebase
 struct ContentView: View {
+    
+  
+    @StateObject var model = ViewModel()
+    @StateObject var login = LoginViewModel()
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        if(login.page == 0){
+            LoginView()
+                .environmentObject(login)
+                .environmentObject(model)
+        }else if(login.page == 1){
+            RegistrationView()
+                .environmentObject(login)
+                .environmentObject(model)
+        }else if(login.page == 2){
+            HomeView()
+                  .environmentObject(model)
+                  .environmentObject(login)
+        }else{
+            Text("Page not found")
+        }
+     
     }
 }
 
