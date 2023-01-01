@@ -14,15 +14,15 @@ struct ContentView: View {
     @StateObject var login = LoginViewModel()
     
     var body: some View {
-        if(login.page == 0){
+        if(login.pagina == .Login){
             LoginView()
                 .environmentObject(login)
                 .environmentObject(model)
-        }else if(login.page == 1){
+        }else if(login.pagina == .Registration){
             RegistrationView()
                 .environmentObject(login)
                 .environmentObject(model)
-        }else if(login.page == 2){
+        }else if(login.pagina == .Home){
             HomeView()
                   .environmentObject(model)
                   .environmentObject(login)

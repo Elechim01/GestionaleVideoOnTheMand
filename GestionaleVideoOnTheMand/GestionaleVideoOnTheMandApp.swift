@@ -21,6 +21,8 @@ struct GestionaleVideoOnTheMandApp: App {
         WindowGroup {
             ContentView()
         }
+        .windowStyle(HiddenTitleBarWindowStyle())
+        
     }
 }
 

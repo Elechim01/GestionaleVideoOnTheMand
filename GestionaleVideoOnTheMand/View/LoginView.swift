@@ -6,6 +6,10 @@
 //
 
 import SwiftUI
+import AuthenticationServices
+import GoogleSignIn
+import GoogleSignInSwift
+import Firebase
 
 struct LoginView: View {
     @EnvironmentObject var loginViewModel: LoginViewModel
@@ -109,6 +113,92 @@ struct LoginView: View {
                 
             }
             
+            HStack(spacing: 8){
+//                MARK: Custom Apple Sign in Button
+                HStack{
+                    Image(systemName: "applelogo")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 25, height: 25)
+                        .frame(height: 45)
+                    Text("Apple Sign in")
+                        .font(.callout)
+                        .lineLimit(1)
+                }
+                .foregroundColor(.white)
+                .padding(.horizontal,15)
+                .background {
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .fill(.black)
+                }
+                .overlay {
+                    SignInWithAppleButton { (request) in
+                        loginViewModel.nonce = loginViewModel.randomNonceString()
+                        request.requestedScopes = [.email,.fullName]
+                        request.nonce = loginViewModel.sha256(loginViewModel.nonce)
+                    } onCompletion: { (resut) in
+                        switch resut{
+                        case .success(let user):
+                            print("success")
+    //                        do Login With Firebase
+                            guard let credental = user.credential as? ASAuthorizationAppleIDCredential else {
+                                print("error with firebase")
+                                return
+                            }
+                            loginViewModel.appleAuthenticate(credential: credental)
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                        }
+                    }
+                    .signInWithAppleButtonStyle(.white)
+                    .frame(height: 55)
+                    .blendMode(.overlay)
+                }
+                .clipped()
+                
+//                 MARK: Custom Google Sign in Button
+//                HStack{
+//                    Image("Google")
+//                        .resizable()
+//                        .renderingMode(.template)
+//                        .aspectRatio(contentMode: .fit)
+//                        .frame(width: 25, height: 25)
+//                        .frame(height: 45)
+//                    Text("Google  Sign in")
+//                        .font(.callout)
+//                        .lineLimit(1)
+//                }
+//                .overlay {
+////                          MARK: We have native Google Sign in button
+////                          It's Simple to integrate Now
+//                      if let clientID = FirebaseApp.app()?.options.clientID{
+//                          GoogleSignInButton{
+//                              GIDSignIn.sharedInstance.signIn(with: .init(clientID: clientID), presenting: NSApplication.shared.rootController()) { user, error in
+//                                  if let error = error {
+//                                      print(error.localizedDescription)
+//                                      return
+//                                  }
+////                                  MARK: Logging Google User into firebase
+//                                  if let user = user{
+//                                      loginViewModel.logGoogleUser(user: user)
+//                                  }
+//                              }
+//                          }
+//                          .blendMode(.overlay)
+//                      }
+//
+//                  }
+//                .clipped()
+//                .foregroundColor(.white)
+//                .padding(.horizontal,15)
+////                .background(content: {
+////                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+////                        .fill(.black)
+////                })
+               
+            }
+            .padding(.leading,-60)
+            .frame(maxWidth:.infinity)
             Spacer()
             
         }
@@ -133,6 +223,7 @@ struct LoginView: View {
         
         
     }
+    
 }
 
 struct LoginView_Previews: PreviewProvider {

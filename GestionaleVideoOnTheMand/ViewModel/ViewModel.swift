@@ -14,8 +14,8 @@ class ViewModel: ObservableObject{
     
     @Published var fileName = ""
     var file : URL = URL(fileURLWithPath: "")
-    var listOfUrl : [URL] = []
-    var files : [URL: String] =  [:]
+    internal var listOfUrl : [URL] = []
+    internal var files : [URL: String] =  [:]
     @Published var urlFileUplodato : String = ""
     @Published var urlThumbnail: URL = URL(fileURLWithPath: "")
     @Published var progress: Double = 0
@@ -26,9 +26,9 @@ class ViewModel: ObservableObject{
     @Published var stato: String = ""
     @Published var elencoFilm : [String] = []
 //    Memorizzo la password, l'email e l'id 
-    @AppStorage("Password") var password = ""
-    @AppStorage("Email") var email = ""
-    @AppStorage("IDUser") var idUser = ""
+    @AppStorage("Password") internal var password = ""
+    @AppStorage("Email") internal var email = ""
+    @AppStorage("IDUser") internal var idUser = ""
     
    @Published var thumbnail : NSImage?
     var  indexListOfUrl = 0
@@ -39,6 +39,7 @@ class ViewModel: ObservableObject{
     
     let firestore : Firestore
     let firebaseStorage: Storage
+    
     init(){
         firestore = Firestore.firestore()
         firebaseStorage = Storage.storage()
@@ -51,7 +52,6 @@ class ViewModel: ObservableObject{
         if(files == [:]){
             return
         }
-        
 //      MARK: creo la migniatura dell'immagine
         
         for (url,_) in self.files {
@@ -62,7 +62,6 @@ class ViewModel: ObservableObject{
         self.fileName = files[listOfUrl.first!]!
         
         thumbnailAndUploadFile()
-        
     }
     
     func thumbnailAndUploadFile(){
@@ -77,9 +76,13 @@ class ViewModel: ObservableObject{
 //        MARK: Carico il film
         if(Extensions.isConnectedToInternet()){
            
-            self.uploadFilm()
-            
-           
+            self.uploadFilm {
+                self.uploadThumbnail(thumbnail: self.thumbnail!, succes: { film in
+                    self.addFilm(film: film, success: {
+                        self.getListFiles()
+                    })
+                })
+            }
         }else{
             alertMessage = "Il dispositivo non è conneso a internet"
             showAlert = true
@@ -87,7 +90,6 @@ class ViewModel: ObservableObject{
     }
     
     
-
     func selectfile(){
         let pannell = NSOpenPanel()
         pannell.allowedContentTypes = [.movie]
@@ -104,7 +106,7 @@ class ViewModel: ObservableObject{
     
 // MARK: Firebase Storage
     
-    func uploadThumbnail(thumbnail: NSImage) {
+    func uploadThumbnail(thumbnail: NSImage,succes:@escaping (Film)->Void ) {
         let data : Data = thumbnail.tiffRepresentation!
         let pathThumbnailFile =  Extensions.getThumbnailName(nameOfElement:fileName)
         let referenceRef = firebaseStorage.reference(withPath: "\(localUser.id)/\(pathThumbnailFile)")
@@ -155,18 +157,20 @@ class ViewModel: ObservableObject{
                     return
                 }
                 self.urlThumbnail = downloadUrl
-//                self.taskUploadImage!.removeAllObservers()
+                //                self.taskUploadImage!.removeAllObservers()
                 self.stato = "Aggiungo il film a db"
-        //        MARK: Aggiungo il film a db
+                //        MARK: Aggiungo il film a db
                 
-                self.addFilm(film: Film(id: "", idUtente: self.localUser.id ?? "", nome: self.fileName, url: self.urlFileUplodato, thmbnail: self.urlThumbnail.absoluteString))
+                succes(Film(id: "", idUtente: self.localUser.id, nome: self.fileName, url: self.urlFileUplodato, thmbnail: self.urlThumbnail.absoluteString))
+                
+            
             }
            
         })
         
     }
     
-    func uploadFilm() {
+    func uploadFilm(success:@escaping () ->Void) {
         let fileRef = firebaseStorage.reference().child("\(localUser.id)/\(fileName)")
         let metadata = StorageMetadata()
         metadata.contentType = "video/mp4"
@@ -213,23 +217,25 @@ class ViewModel: ObservableObject{
                 self.urlFileUplodato = downloadUrl.absoluteString
                 self.stato = "Carico la thumbnail"
         //        MARK: Carico la thumbnail
-                self.uploadThumbnail(thumbnail: self.thumbnail!)
+                success()
             }
         }
         
         
     }
    
-    func downloadFile(nomeFile:String){
+    func downloadFile(nomeFile:String, success:@escaping () -> Void, failure: @escaping (Error)->Void){
         let pathReference = firebaseStorage.reference(withPath: "\(localUser.id)/\(nomeFile)")
         let localPathReference = Extensions.getDocumentsDirectory().appendingPathComponent(nomeFile)
         self.urlFileLocale = localPathReference.absoluteString
         let downloadTask = pathReference.write(toFile: localPathReference){ url, error in
             if let error = error{
+                failure(error)
                 self.alertMessage = error.localizedDescription
                 self.showAlert.toggle()
             }else{
                 print(url?.absoluteString ?? "")
+                success()
             }
         }
         
@@ -239,6 +245,7 @@ class ViewModel: ObservableObject{
         
         downloadTask.observe(.failure) { snapshot in
             if let error = snapshot.error as? NSError{
+                failure(error)
                 switch (StorageErrorCode(rawValue: error.code)!){
                 case .objectNotFound:
                     print("File doesn't exist")
@@ -262,14 +269,27 @@ class ViewModel: ObservableObject{
     
     }
     
-    func deleteFile(nomeFile: String){
+
+    
+    public func deleteFile(nomeFile: String){
+    deleteFile(nomeFile: nomeFile) {
+        print("Success")
+    } failure: { error in
+        self.alertMessage = error.localizedDescription
+        self.showAlert.toggle()
+    }
+
+}
+    
+   private func deleteFile(nomeFile: String, success:@escaping ()->Void, failure: @escaping (Error) -> Void){
         let deleteRef = firebaseStorage.reference().child("\(localUser.id)/\(nomeFile)")
         deleteRef.delete { error in
             if let error = error{
-                self.alertMessage = error.localizedDescription
-                self.showAlert.toggle()
+                failure(error)
+               
             }else{
                 print("No Problem")
+                success()
             }
         }
     }
@@ -298,30 +318,39 @@ class ViewModel: ObservableObject{
     }
     
 // MARK: Firestore
-    func recuperoFilms(){
+    
+    
+    func recuperoFilms() {
+        recuperoFilms { documents in
+            for document in documents{
+                let id = document.documentID
+                let data = document.data()
+                let idUtente: String = data["idUtente"] as? String ?? ""
+                let nomefile = data["nome"] as? String ?? ""
+                let url :String = data["url"] as? String ?? ""
+                let thumbanil : String = data["thumbnail"] as? String ?? ""
+
+                self.films.append(Film(id: id, idUtente: idUtente, nome: nomefile, url: url, thmbnail: thumbanil))
+            }
+            print(self.films)
+            self.films =  self.films.sorted(by:{ $0.nome.compare($1.nome,options: .caseInsensitive) == .orderedAscending })
+        } failure: { error in
+            self.alertMessage = error.localizedDescription
+            self.showAlert.toggle()
+        }
+
+    }
+    
+    private func recuperoFilms(success:@escaping ([QueryDocumentSnapshot])->Void, failure:@escaping (Error) -> Void){
         print(localUser.id)
         firestore.collection("Film").whereField("idUtente", isEqualTo: localUser.id).addSnapshotListener { querySnapshot, error in
             if let erro = error{
-                self.alertMessage = erro.localizedDescription
-                self.showAlert.toggle()
-                return
+                failure(erro)
             }
             else{
                 self.films.removeAll()
-                for document in querySnapshot!.documents{
-                    let id = document.documentID
-                    let data = document.data()
-                    let idUtente: String = data["idUtente"] as? String ?? ""
-                    let nomefile = data["nome"] as? String ?? ""
-                    let url :String = data["url"] as? String ?? ""
-                    let thumbanil : String = data["thumbnail"] as? String ?? ""
-
-                    self.films.append(Film(id: id, idUtente: idUtente, nome: nomefile, url: url, thmbnail: thumbanil))
-                }
+                success(querySnapshot!.documents)
             }
-                print(self.films)
-                self.films =  self.films.sorted(by:{ $0.nome.compare($1.nome,options: .caseInsensitive) == .orderedAscending })
-
         }
     }
     
@@ -358,7 +387,7 @@ class ViewModel: ObservableObject{
         }
     }
     
-    func addFilm(film:Film) {
+    func addFilm(film:Film,success:@escaping ()->Void) {
        
         firestore.collection("Film").addDocument(data: [
             "nome":film.nome,
@@ -393,11 +422,25 @@ class ViewModel: ObservableObject{
                     self.files = [:]
                     self.urlFileUplodato = ""
                 }
+                success()
+                
+                
             }
         }
     }
     
-    func addUtente(utente: Utente){
+   
+    func addUtente(utente:Utente){
+        self.addUtente(utente: utente) {
+            print("Succes!!!")
+        } failure: { error in
+            self.alertMessage = error.localizedDescription
+            self.showAlert.toggle()
+        }
+
+    }
+    
+   private func addUtente(utente: Utente,succes:@escaping ()->Void, failure:@escaping (Error) -> Void){
         
         firestore.collection("Utenti").addDocument(data: [
             "nome":utente.nome,
@@ -407,23 +450,37 @@ class ViewModel: ObservableObject{
             "password": utente.password,
             "cellulare":utente.cellulare,
         ]){ err in
-            if err != nil{
-                self.alertMessage = err!.localizedDescription
-                self.showAlert = true
+            if let error = err{
+                failure(error)
+//                self.alertMessage = err!.localizedDescription
+//                self.showAlert = true
             }else{
-                print("Success!!!")
+             succes()
             }
         
         }
        
     }
     
-    func removeDocument(film: Film){
+    
+    func removeDocument(film:Film){
+    self.removeDocument(film: film) {
+        print("Success")
+    } failure: { error in
+        self.alertMessage = error.localizedDescription
+        self.showAlert.toggle()
+    }
+
+}
+    
+   private func removeDocument(film: Film, success:@escaping ()->Void, failure:@escaping (Error)->Void){
         firestore.collection("Film").document(film.id).delete { err in
             if let err = err{
+                failure(err)
                 print("Error removing document : \(err.localizedDescription)")
             }else{
                 print("document successfully removed!")
+                success()
             }
         }
     }

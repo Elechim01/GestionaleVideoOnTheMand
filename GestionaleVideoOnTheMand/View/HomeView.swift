@@ -11,6 +11,24 @@ struct HomeView: View {
     @EnvironmentObject var model : ViewModel
     @EnvironmentObject var loginModel: LoginViewModel
     @State var showProgressView : Bool = false
+    
+    @Environment(\.isPreview) var isPreview
+    var rows: [GridItem] {
+        if isPreview{
+           return (1...(22/4)).map { _ in
+                 GridItem(.flexible())
+             }
+        }else{
+            if(model.elencoFilm.isEmpty){ return []}
+            print("elenco elementi \(model.elencoFilm.count)")
+            return (1...(model.elencoFilm.count / 4)).map { _ in
+                GridItem(.flexible())
+            }
+        }
+    }
+   
+    
+    
     var body: some View {
         VStack {
             Text("Carica video sul db UUID: \(model.localUser.id)")
@@ -84,51 +102,63 @@ struct HomeView: View {
                
             }
            
-            ScrollView(.horizontal,showsIndicators: false) {
-                HStack {
-                    ForEach(model.elencoFilm, id:\.self){ film in
-                        Text(film)
-                            .contextMenu{let extractedExpr = Button(action: {
-                                //                                Elimino il film
-                                showProgressView.toggle()
-                                model.deleteFile(nomeFile: film)
-                                //                                Elimino la migniatura
-                                let nameThumbnail = Extensions.getThumbnailName(nameOfElement: film)
-                                model.deleteFile(nomeFile: nameThumbnail)
-                                let element =  model.films.first { filmRead in
-                                    let value = filmRead.nome
-                                    return value == film
-                                }
-                                if(element != nil){
-                                    model.removeDocument(film: element!)
-                                }else{
-                                    print("Error")
-                                }
-                                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
+            ScrollView(.vertical,showsIndicators: false) {
+                LazyVGrid(columns: rows,alignment: .center,spacing: 20) {
+                    if isPreview{
+                        ForEach(1...100, id: \.self) { number in
+                                Text("\(number)")
+                            }
+                    }else{
+                        ForEach(model.elencoFilm, id:\.self){ film in
+                            Text(film)
+                                .contextMenu{let extractedExpr = Button(action: {
+                                    //                                Elimino il film
                                     showProgressView.toggle()
-                                    model.getListFiles()
+                                    model.deleteFile(nomeFile: film)
+    //                                Elimino la migniatura
+                                    let nameThumbnail = Extensions.getThumbnailName(nameOfElement: film)
+                                    model.deleteFile(nomeFile: nameThumbnail)
+                                    let element =  model.films.first { filmRead in
+                                        let value = filmRead.nome
+                                        return value == film
+                                    }
+                                    if(element != nil){
+                                        model.removeDocument(film: element!)
+                                    }else{
+                                        print("Error")
+                                    }
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
+                                        showProgressView.toggle()
+                                        model.getListFiles()
+                                    })
+                                    
+                                }, label: {
+                                    Text("Remove Element")
+                                    
                                 })
-                                
-                            }, label: {
-                                Text("Remove Element")
-                                
-                            })
-                                extractedExpr
-                                
+                                    extractedExpr
+                                    
+                                }
+                                .padding()
                         }
                     }
                 }
             }
+            .padding()
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear {
-            if model.localUser.isEmply {
-                model.recuperoUtente(email: model.email, password: model.password, id: model.idUser) {
-//                    Recupero i film da firestore
-                    model.recuperoFilms()
-//                    Recupero i film da firebase storage
-                    model.getListFiles()
+            if !isPreview{
+                
+                
+                if model.localUser.isEmply {
+                    model.recuperoUtente(email: model.email, password: model.password, id: model.idUser) {
+                        //                    Recupero i film da firestore
+                        model.recuperoFilms()
+                        //                    Recupero i film da firebase storage
+                        model.getListFiles()
+                    }
                 }
             }
         }
