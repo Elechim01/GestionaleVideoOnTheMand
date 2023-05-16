@@ -75,9 +75,9 @@ class ViewModel: ObservableObject{
        stato = "Carico il film"
 //        MARK: Carico il film
         if(Extensions.isConnectedToInternet()){
-           
             self.uploadFilm {
-                self.uploadThumbnail(thumbnail: self.thumbnail!, succes: { film in
+                self.uploadThumbnail(thumbnail: self.thumbnail!, succes: { [weak self] film in
+                    guard let self = self else { return }
                     self.addFilm(film: film, success: {
                         self.getListFiles()
                     })
@@ -95,7 +95,7 @@ class ViewModel: ObservableObject{
         pannell.allowedContentTypes = [.movie]
         pannell.allowsMultipleSelection = true
         pannell.canChooseDirectories = false
-        if pannell.runModal() == .OK{
+        if pannell.runModal() == .OK {
             print(pannell.urls)
             for url in pannell.urls {
                 self.files.updateValue(url.lastPathComponent, forKey: url)
@@ -110,7 +110,8 @@ class ViewModel: ObservableObject{
         let data : Data = thumbnail.tiffRepresentation!
         let pathThumbnailFile =  Extensions.getThumbnailName(nameOfElement:fileName)
         let referenceRef = firebaseStorage.reference(withPath: "\(localUser.id)/\(pathThumbnailFile)")
-        taskUploadImage = referenceRef.putData(data,metadata: nil){metadata,error in
+        taskUploadImage = referenceRef.putData(data,metadata: nil){ [weak self] metadata,error in
+            guard let self = self else { return }
             guard metadata != nil else{
                 self.alertMessage = error!.localizedDescription
                 self.showAlert.toggle()
@@ -118,11 +119,13 @@ class ViewModel: ObservableObject{
             }
         }
         
-        taskUploadImage!.observe(.progress, handler: { snapshot in
+        taskUploadImage!.observe(.progress, handler: { [weak self]  snapshot in
+            guard let self = self else { return }
             self.progress = 100.0 * Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
         })
         
-        taskUploadImage!.observe(.failure) { snapshot in
+        taskUploadImage!.observe(.failure) { [weak self] snapshot in
+            guard let self = self else { return }
             if let error = snapshot.error as? NSError{
                 switch (StorageErrorCode(rawValue: error.code)!){
                 case .objectNotFound:
@@ -149,7 +152,8 @@ class ViewModel: ObservableObject{
             }
         }
         
-        taskUploadImage!.observe(.success, handler: { _ in
+        taskUploadImage!.observe(.success, handler: { [weak self] _ in
+            guard let self = self else { return }
             referenceRef.downloadURL { url, error in
                 guard let downloadUrl = url else{
                     self.alertMessage = error!.localizedDescription
@@ -177,11 +181,13 @@ class ViewModel: ObservableObject{
         taskUploadImage = fileRef.putFile(from: file,metadata: metadata)
         //        Upload File
         
-        taskUploadImage!.observe(.progress) { snapshot  in
+        taskUploadImage!.observe(.progress) { [weak self] snapshot  in
+            guard let self = self else { return }
             self.progress = 100.0 * Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
         }
         
-        taskUploadImage!.observe(.failure) { snapshot in
+        taskUploadImage!.observe(.failure) { [weak self] snapshot in
+            guard let self = self else { return }
             if let error = snapshot.error as? NSError{
                 switch (StorageErrorCode(rawValue: error.code)!){
                 case .objectNotFound:
@@ -208,9 +214,10 @@ class ViewModel: ObservableObject{
             }
         }
        
-        taskUploadImage!.observe(.success) { snapshot in
-            fileRef.downloadURL { url, err in
-                guard let downloadUrl = url else{
+        taskUploadImage!.observe(.success) { [ weak self] snapshot in
+            guard let self = self else { return }
+            fileRef.downloadURL { [weak self] url, err in
+                guard let self = self, let downloadUrl = url else{
                     print(err!.localizedDescription)
                     return
                 }
@@ -228,7 +235,8 @@ class ViewModel: ObservableObject{
         let pathReference = firebaseStorage.reference(withPath: "\(localUser.id)/\(nomeFile)")
         let localPathReference = Extensions.getDocumentsDirectory().appendingPathComponent(nomeFile)
         self.urlFileLocale = localPathReference.absoluteString
-        let downloadTask = pathReference.write(toFile: localPathReference){ url, error in
+        let downloadTask = pathReference.write(toFile: localPathReference){ [weak self] url, error in
+            guard let self = self else { return }
             if let error = error{
                 failure(error)
                 self.alertMessage = error.localizedDescription
@@ -239,47 +247,45 @@ class ViewModel: ObservableObject{
             }
         }
         
-        downloadTask.observe(.progress) { snapshot in
+        downloadTask.observe(.progress) { [weak self] snapshot in
+            guard let self = self else { return }
             self.progress = 100.0 * Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
         }
         
-        downloadTask.observe(.failure) { snapshot in
+        downloadTask.observe(.failure) { [weak self] snapshot in
+            guard let self = self else { return }
             if let error = snapshot.error as? NSError{
                 failure(error)
                 switch (StorageErrorCode(rawValue: error.code)!){
                 case .objectNotFound:
-                    print("File doesn't exist")
+                    self.alertMessage = "File doesn't exist"
                     break
                 case .unauthorized:
-                    print("User doesn't have perimission to access file")
+                    self.alertMessage = "User doesn't have perimission to access file"
                     break
                 case .cancelled:
-                    print("User canceled the upload")
+                    self.alertMessage = "User canceled the upload"
                     break
                 case .unknown:
-                    print("Unknown error occured,inspect the server respose")
+                    self.alertMessage = "Unknown error occured,inspect the server respose"
                     break
                 default:
-                    print("A separate error occurred. This is a good place to retry the upload.")
+                    self.alertMessage = "A separate error occurred. This is a good place to retry the upload."
                     break
                 }
+                self.showAlert.toggle()
             }
         }
-        
-    
     }
-    
-
     
     public func deleteFile(nomeFile: String){
-    deleteFile(nomeFile: nomeFile) {
-        print("Success")
-    } failure: { error in
-        self.alertMessage = error.localizedDescription
-        self.showAlert.toggle()
+        deleteFile(nomeFile: nomeFile) {
+            print("Success")
+        } failure: { error in
+            self.alertMessage = error.localizedDescription
+            self.showAlert.toggle()
+        }
     }
-
-}
     
    private func deleteFile(nomeFile: String, success:@escaping ()->Void, failure: @escaping (Error) -> Void){
         let deleteRef = firebaseStorage.reference().child("\(localUser.id)/\(nomeFile)")
@@ -296,7 +302,8 @@ class ViewModel: ObservableObject{
     
     func getListFiles(){
         let storageRefernce = firebaseStorage.reference().child(localUser.id)
-        storageRefernce.listAll { result, error in
+        storageRefernce.listAll { [weak self] result, error in
+            guard let self = self else { return }
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -312,16 +319,15 @@ class ViewModel: ObservableObject{
                     }
                 }
             }
-           
-            
         }
     }
     
 // MARK: Firestore
     
     
-    func recuperoFilms() {
-        recuperoFilms { documents in
+   internal func recuperoFilms() {
+        recuperoFilms { [weak self] documents in
+            guard let self = self else { return }
             for document in documents{
                 let id = document.documentID
                 let data = document.data()
@@ -334,11 +340,11 @@ class ViewModel: ObservableObject{
             }
             print(self.films)
             self.films =  self.films.sorted(by:{ $0.nome.compare($1.nome,options: .caseInsensitive) == .orderedAscending })
-        } failure: { error in
+        } failure: { [weak self] error in
+            guard let self = self else { return }
             self.alertMessage = error.localizedDescription
             self.showAlert.toggle()
         }
-
     }
     
     private func recuperoFilms(success:@escaping ([QueryDocumentSnapshot])->Void, failure:@escaping (Error) -> Void){
@@ -356,7 +362,8 @@ class ViewModel: ObservableObject{
     
     func recuperoUtente(email: String, password:String,id: String,ending: (()->())?){
         
-        firestore.collection("Utenti").whereField("email", isEqualTo: email).whereField("password",isEqualTo: password).getDocuments { querySnapshot, err  in
+        firestore.collection("Utenti").whereField("email", isEqualTo: email).whereField("password",isEqualTo: password).getDocuments { [weak self] querySnapshot, err  in
+            guard let self = self else { return }
             if let err = err {
                 self.alertMessage = err.localizedDescription
                 self.showAlert.toggle()
@@ -394,7 +401,8 @@ class ViewModel: ObservableObject{
             "url":film.url,
             "idUtente":film.idUtente,
             "thumbnail":film.thmbnail,
-        ]){err in
+        ]){ [ weak self] err in
+            guard let self = self else { return }
             if err != nil{
                 self.alertMessage = err!.localizedDescription
                 self.showAlert = true
@@ -423,8 +431,6 @@ class ViewModel: ObservableObject{
                     self.urlFileUplodato = ""
                 }
                 success()
-                
-                
             }
         }
     }
@@ -433,11 +439,11 @@ class ViewModel: ObservableObject{
     func addUtente(utente:Utente){
         self.addUtente(utente: utente) {
             print("Succes!!!")
-        } failure: { error in
+        } failure: { [weak self] error in
+            guard let self = self else { return }
             self.alertMessage = error.localizedDescription
             self.showAlert.toggle()
         }
-
     }
     
    private func addUtente(utente: Utente,succes:@escaping ()->Void, failure:@escaping (Error) -> Void){
@@ -464,14 +470,14 @@ class ViewModel: ObservableObject{
     
     
     func removeDocument(film:Film){
-    self.removeDocument(film: film) {
-        print("Success")
-    } failure: { error in
-        self.alertMessage = error.localizedDescription
-        self.showAlert.toggle()
+        self.removeDocument(film: film) {
+            print("Success")
+        } failure: { [weak self] error in
+            guard let self = self else { return }
+            self.alertMessage = error.localizedDescription
+            self.showAlert.toggle()
+        }
     }
-
-}
     
    private func removeDocument(film: Film, success:@escaping ()->Void, failure:@escaping (Error)->Void){
         firestore.collection("Film").document(film.id).delete { err in

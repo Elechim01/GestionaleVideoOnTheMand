@@ -44,8 +44,8 @@ class LoginViewModel: ObservableObject{
             showError.toggle()
             return
         }
-        Auth.auth().signIn(withEmail: email, password: password){authResult,error in
-            
+        Auth.auth().signIn(withEmail: email, password: password){ [weak self] authResult, error in
+            guard let self = self else { return }
             if let err = error{
                 print(err.localizedDescription)
                 self.errorMessage = err.localizedDescription
@@ -59,11 +59,9 @@ class LoginViewModel: ObservableObject{
                 self.email = email
                 self.idUser = authResult.user.uid
                 completition(authResult.user.uid)
-                
                 return
             }
         }
-        
     }
     
     func logOut(){
@@ -87,7 +85,8 @@ class LoginViewModel: ObservableObject{
             showError.toggle()
             return
         }
-        Auth.auth().createUser(withEmail: email, password: password){authResult,error in
+        Auth.auth().createUser(withEmail: email, password: password){[weak self] authResult,error in
+            guard let self = self else { return }
             if let error = error{
                 print(error.localizedDescription)
                 self.errorMessage = error.localizedDescription
