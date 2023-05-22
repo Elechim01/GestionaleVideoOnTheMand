@@ -32,6 +32,7 @@
 		C4C7A80628A902C9001CB803 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A80528A902C9001CB803 /* LoginViewModel.swift */; };
 		C4C7A80828A9037A001CB803 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A80728A9037A001CB803 /* LoginView.swift */; };
 		C4C7A80A28A90398001CB803 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A80928A90398001CB803 /* RegistrationView.swift */; };
+		C4D1504D2A18E0FC00186D06 /* HomeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1504C2A18E0FC00186D06 /* HomeProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		C4C7A80528A902C9001CB803 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		C4C7A80728A9037A001CB803 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C4C7A80928A90398001CB803 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		C4D1504C2A18E0FC00186D06 /* HomeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 				C4C7A7F928A65926001CB803 /* Film.swift */,
 				C4C7A7FA28A65926001CB803 /* Utente.swift */,
 				C4AB776A2961D13900BE9346 /* Enum.swift */,
+				C4D1504C2A18E0FC00186D06 /* HomeProtocol.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				C4C7A80428A901DF001CB803 /* HomeView.swift in Sources */,
 				C4C7A7FC28A65926001CB803 /* Film.swift in Sources */,
 				C4C7A80828A9037A001CB803 /* LoginView.swift in Sources */,
+				C4D1504D2A18E0FC00186D06 /* HomeProtocol.swift in Sources */,
 				C4AB776B2961D13900BE9346 /* Enum.swift in Sources */,
 				C4C7A7D428A528EB001CB803 /* ContentView.swift in Sources */,
 				C4C7A80628A902C9001CB803 /* LoginViewModel.swift in Sources */,

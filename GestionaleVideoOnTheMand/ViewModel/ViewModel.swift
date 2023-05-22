@@ -10,7 +10,7 @@ import Firebase
 import FirebaseStorage
 
 
-class ViewModel: ObservableObject{
+class ViewModel: ObservableObject, HomeProtocol{
     
     @Published var fileName = ""
     var file : URL = URL(fileURLWithPath: "")
@@ -279,7 +279,8 @@ class ViewModel: ObservableObject{
     }
     
     public func deleteFile(nomeFile: String){
-        deleteFile(nomeFile: nomeFile) {
+       
+        deleteFile(firebaseStorage: firebaseStorage,localUser: localUser.id ,nomeFile: nomeFile) {
             print("Success")
         } failure: { error in
             self.alertMessage = error.localizedDescription
@@ -287,18 +288,6 @@ class ViewModel: ObservableObject{
         }
     }
     
-   private func deleteFile(nomeFile: String, success:@escaping ()->Void, failure: @escaping (Error) -> Void){
-        let deleteRef = firebaseStorage.reference().child("\(localUser.id)/\(nomeFile)")
-        deleteRef.delete { error in
-            if let error = error{
-                failure(error)
-               
-            }else{
-                print("No Problem")
-                success()
-            }
-        }
-    }
     
     func getListFiles(){
         let storageRefernce = firebaseStorage.reference().child(localUser.id)
@@ -326,8 +315,9 @@ class ViewModel: ObservableObject{
     
     
    internal func recuperoFilms() {
-        recuperoFilms { [weak self] documents in
+       recuperoFilms(firestore: firestore, localUser: localUser.id) { [weak self] documents in
             guard let self = self else { return }
+            films.removeAll()
             for document in documents{
                 let id = document.documentID
                 let data = document.data()
@@ -347,22 +337,9 @@ class ViewModel: ObservableObject{
         }
     }
     
-    private func recuperoFilms(success:@escaping ([QueryDocumentSnapshot])->Void, failure:@escaping (Error) -> Void){
-        print(localUser.id)
-        firestore.collection("Film").whereField("idUtente", isEqualTo: localUser.id).addSnapshotListener { querySnapshot, error in
-            if let erro = error{
-                failure(erro)
-            }
-            else{
-                self.films.removeAll()
-                success(querySnapshot!.documents)
-            }
-        }
-    }
-    
     func recuperoUtente(email: String, password:String,id: String,ending: (()->())?){
         
-        firestore.collection("Utenti").whereField("email", isEqualTo: email).whereField("password",isEqualTo: password).getDocuments { [weak self] querySnapshot, err  in
+      recuperoUtente(firestore: firestore, email: email, password: password){ [weak self] querySnapshot, err  in
             guard let self = self else { return }
             if let err = err {
                 self.alertMessage = err.localizedDescription
@@ -395,13 +372,7 @@ class ViewModel: ObservableObject{
     }
     
     func addFilm(film:Film,success:@escaping ()->Void) {
-       
-        firestore.collection("Film").addDocument(data: [
-            "nome":film.nome,
-            "url":film.url,
-            "idUtente":film.idUtente,
-            "thumbnail":film.thmbnail,
-        ]){ [ weak self] err in
+     addFilm(firestore: firestore, film: film) { [ weak self] err in
             guard let self = self else { return }
             if err != nil{
                 self.alertMessage = err!.localizedDescription
@@ -434,10 +405,9 @@ class ViewModel: ObservableObject{
             }
         }
     }
-    
-   
+       
     func addUtente(utente:Utente){
-        self.addUtente(utente: utente) {
+        self.addUtente(firestore: firestore, utente: utente) {
             print("Succes!!!")
         } failure: { [weak self] error in
             guard let self = self else { return }
@@ -445,49 +415,14 @@ class ViewModel: ObservableObject{
             self.showAlert.toggle()
         }
     }
-    
-   private func addUtente(utente: Utente,succes:@escaping ()->Void, failure:@escaping (Error) -> Void){
-        
-        firestore.collection("Utenti").addDocument(data: [
-            "nome":utente.nome,
-            "cognome":utente.cogome,
-            "eta":utente.età,
-            "email":utente.email,
-            "password": utente.password,
-            "cellulare":utente.cellulare,
-        ]){ err in
-            if let error = err{
-                failure(error)
-//                self.alertMessage = err!.localizedDescription
-//                self.showAlert = true
-            }else{
-             succes()
-            }
-        
-        }
-       
-    }
-    
-    
+
     func removeDocument(film:Film){
-        self.removeDocument(film: film) {
+        self.removeDocument(firestore: firestore, film: film) {
             print("Success")
         } failure: { [weak self] error in
             guard let self = self else { return }
             self.alertMessage = error.localizedDescription
             self.showAlert.toggle()
-        }
-    }
-    
-   private func removeDocument(film: Film, success:@escaping ()->Void, failure:@escaping (Error)->Void){
-        firestore.collection("Film").document(film.id).delete { err in
-            if let err = err{
-                failure(err)
-                print("Error removing document : \(err.localizedDescription)")
-            }else{
-                print("document successfully removed!")
-                success()
-            }
         }
     }
     
