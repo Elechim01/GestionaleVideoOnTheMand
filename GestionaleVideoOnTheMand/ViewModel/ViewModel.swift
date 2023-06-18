@@ -344,14 +344,15 @@ class ViewModel: ObservableObject, HomeProtocol{
                             self.showAlert.toggle()
                         }
                     }
-                    print(self.films)
-                    self.films =  self.films.sorted(by:{ $0.nome.compare($1.nome,options: .caseInsensitive) == .orderedAscending })
-                    ending?()
+                   
                 } else {
                     self.alertMessage = CustomError.fileError.description
                     self.showAlert.toggle()
                 }
             }
+           print(self.films)
+           self.films =  self.films.sorted(by:{ $0.nome.compare($1.nome,options: .caseInsensitive) == .orderedAscending })
+           ending?()
         } failure: { [weak self] error in
             guard let self = self else { return }
             self.alertMessage = error.localizedDescription
