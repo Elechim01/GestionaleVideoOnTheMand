@@ -75,3 +75,9 @@ extension EnvironmentValues{
         return ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
     }
 }
+
+extension String {
+  static func twoDecimal(number: Double) -> String {
+        String(format: "%.2fMB", number)
+    }
+}

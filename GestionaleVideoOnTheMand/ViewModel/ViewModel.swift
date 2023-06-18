@@ -16,6 +16,7 @@ class ViewModel: ObservableObject, HomeProtocol{
     var file : URL = URL(fileURLWithPath: "")
     internal var listOfUrl : [URL] = []
     internal var files : [URL: String] =  [:]
+    internal var filesDimensionMB: [URL: Double] = [:]
     @Published var urlFileUplodato : String = ""
     @Published var urlThumbnail: URL = URL(fileURLWithPath: "")
     @Published var progress: Double = 0
@@ -24,7 +25,7 @@ class ViewModel: ObservableObject, HomeProtocol{
     @Published var urlFileLocale: String = ""
     @Published var taskUploadImage: StorageUploadTask?
     @Published var stato: String = ""
-    @Published var elencoFilm : [String] = []
+//    @Published var elencoFilm : [String] = []
 //    Memorizzo la password, l'email e l'id 
     @AppStorage("Password") internal var password = ""
     @AppStorage("Email") internal var email = ""
@@ -37,8 +38,16 @@ class ViewModel: ObservableObject, HomeProtocol{
     @Published var showAlert: Bool = false
     @Published var alertMessage: String = ""
     
-    let firestore : Firestore
-    let firebaseStorage: Storage
+    public var totalSizeFilm: Double {
+        var size = 0.0
+        films.forEach { size += $0.size }
+        return size 
+    }
+    
+    public let totalSize = 5000.0
+    
+    private let firestore : Firestore
+    private let firebaseStorage: Storage
     
     init(){
         firestore = Firestore.firestore()
@@ -49,6 +58,7 @@ class ViewModel: ObservableObject, HomeProtocol{
 //        se l'utente cancella l'upload faccio fermare tutto e svuto ogni cosa
 //        MARK: seleziono il file
         selectfile()
+        
         if(files == [:]){
             return
         }
@@ -78,17 +88,14 @@ class ViewModel: ObservableObject, HomeProtocol{
             self.uploadFilm {
                 self.uploadThumbnail(thumbnail: self.thumbnail!, succes: { [weak self] film in
                     guard let self = self else { return }
-                    self.addFilm(film: film, success: {
-                        self.getListFiles()
-                    })
+                    self.addFilm(film: film)
                 })
             }
         }else{
-            alertMessage = "Il dispositivo non è conneso a internet"
+            alertMessage = CustomError.connectionError.description
             showAlert = true
         }
     }
-    
     
     func selectfile(){
         let pannell = NSOpenPanel()
@@ -98,9 +105,26 @@ class ViewModel: ObservableObject, HomeProtocol{
         if pannell.runModal() == .OK {
             print(pannell.urls)
             for url in pannell.urls {
-                self.files.updateValue(url.lastPathComponent, forKey: url)
+                do {
+                    let attr = try FileManager.default.attributesOfItem(atPath: url.path)
+                    let fileSize = attr[FileAttributeKey.size] as? UInt64
+                    if let fileSize {
+                        let result = ByteCountFormatter.string(fromByteCount: Int64(fileSize), countStyle: .file).components(separatedBy: " ")
+                        if  let dimensionsMB = Double(result[0].replacingOccurrences(of: ",", with: ".")) {
+                            self.files.updateValue(url.lastPathComponent, forKey: url)
+                            self.filesDimensionMB.updateValue(dimensionsMB, forKey: url)
+                        } else {
+                            throw CustomError.fileError
+                        }
+                    }
+                } catch let error as CustomError {
+                    self.alertMessage = error.description
+                    self.showAlert.toggle()
+                } catch  {
+                    self.alertMessage = error.localizedDescription
+                    self.showAlert.toggle()
+                }
             }
-            
         }
     }
     
@@ -163,13 +187,16 @@ class ViewModel: ObservableObject, HomeProtocol{
                 self.urlThumbnail = downloadUrl
                 //                self.taskUploadImage!.removeAllObservers()
                 self.stato = "Aggiungo il film a db"
-                //        MARK: Aggiungo il film a db
-                
-                succes(Film(id: "", idUtente: self.localUser.id, nome: self.fileName, url: self.urlFileUplodato, thmbnail: self.urlThumbnail.absoluteString))
-                
-            
+    //        MARK: Aggiungo il film a db
+                succes(
+                    Film(id: "",
+                         idUtente: self.localUser.id,
+                         nome: self.fileName,
+                         url: self.urlFileUplodato,
+                         thmbnail: self.urlThumbnail.absoluteString,
+                         size: self.filesDimensionMB[self.file] ?? 0)
+                )
             }
-           
         })
         
     }
@@ -179,6 +206,17 @@ class ViewModel: ObservableObject, HomeProtocol{
         let metadata = StorageMetadata()
         metadata.contentType = "video/mp4"
         taskUploadImage = fileRef.putFile(from: file,metadata: metadata)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            guard let self = self else { return }
+            print(self.progress)
+             if self.progress < 7 {
+                 self.taskUploadImage?.pause()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+                    guard let self = self else { return }
+                    self.taskUploadImage?.resume()
+                }
+            }
+        }
         //        Upload File
         
         taskUploadImage!.observe(.progress) { [weak self] snapshot  in
@@ -288,48 +326,32 @@ class ViewModel: ObservableObject, HomeProtocol{
         }
     }
     
-    
-    func getListFiles(){
-        let storageRefernce = firebaseStorage.reference().child(localUser.id)
-        storageRefernce.listAll { [weak self] result, error in
-            guard let self = self else { return }
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }else{
-                for prefisso in result!.prefixes{
-                   print(prefisso.name)
-                }
-                self.elencoFilm = []
-                for item in result!.items{
-                    if(!item.name.contains("thumbnail")){
-                        self.elencoFilm.append(item.name)
-                        print(item.name)
-                    }
-                }
-            }
-        }
-    }
-    
 // MARK: Firestore
     
-    
-   internal func recuperoFilms() {
+    internal func recuperoFilms(ending: (()->())?) {
        recuperoFilms(firestore: firestore, localUser: localUser.id) { [weak self] documents in
             guard let self = self else { return }
             films.removeAll()
             for document in documents{
                 let id = document.documentID
                 let data = document.data()
-                let idUtente: String = data["idUtente"] as? String ?? ""
-                let nomefile = data["nome"] as? String ?? ""
-                let url :String = data["url"] as? String ?? ""
-                let thumbanil : String = data["thumbnail"] as? String ?? ""
-
-                self.films.append(Film(id: id, idUtente: idUtente, nome: nomefile, url: url, thmbnail: thumbanil))
+                if var film = Film.getFilm(json: data) {
+                    film.id = id
+                    self.films.append(film)
+                    updateFilm(firestore: firestore, film: film) { error in
+                        if let err = error {
+                            self.alertMessage = err.localizedDescription
+                            self.showAlert.toggle()
+                        }
+                    }
+                    print(self.films)
+                    self.films =  self.films.sorted(by:{ $0.nome.compare($1.nome,options: .caseInsensitive) == .orderedAscending })
+                    ending?()
+                } else {
+                    self.alertMessage = CustomError.fileError.description
+                    self.showAlert.toggle()
+                }
             }
-            print(self.films)
-            self.films =  self.films.sorted(by:{ $0.nome.compare($1.nome,options: .caseInsensitive) == .orderedAscending })
         } failure: { [weak self] error in
             guard let self = self else { return }
             self.alertMessage = error.localizedDescription
@@ -356,22 +378,28 @@ class ViewModel: ObservableObject, HomeProtocol{
                         return
                     }
                     let data = querySnapshot!.documents.first!.data()
-                    let nome : String = data["nome"] as? String ?? ""
-                    let cognome: String = data["cognome"] as? String ?? ""
-                    let eta: Int = data["eta"] as? Int ?? 0
-                    let email: String = data["email"] as? String ?? ""
-                    let password: String = data["password"] as? String ?? ""
-                    let cellulare: String = data["cellulare"] as? String ?? ""
-                    self.localUser = Utente(id: id, nome: nome, cognome: cognome, età: eta, email: email, password: password, cellulare: cellulare)
-//                    per la pagina
-                    ending?()
+                    
+                    if let user = Utente.getUser(json: data) {
+                        self.localUser = user
+                        self.localUser.id = id
+                        updateUser(firestore: firestore, user: self.localUser) { error in
+                            if let err = error {
+                                self.alertMessage = err.localizedDescription
+                                self.showAlert.toggle()
+                            }
+                        }
+                        ending?()
+                    } else {
+                        self.alertMessage = CustomError.fileError.description
+                        self.showAlert.toggle()
+                    }
                 }
                 print(self.localUser)
             }
         }
     }
     
-    func addFilm(film:Film,success:@escaping ()->Void) {
+    func addFilm(film:Film) {
      addFilm(firestore: firestore, film: film) { [ weak self] err in
             guard let self = self else { return }
             if err != nil{
@@ -401,7 +429,6 @@ class ViewModel: ObservableObject, HomeProtocol{
                     self.files = [:]
                     self.urlFileUplodato = ""
                 }
-                success()
             }
         }
     }
