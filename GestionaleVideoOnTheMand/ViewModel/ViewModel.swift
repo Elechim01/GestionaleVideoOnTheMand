@@ -52,6 +52,12 @@ class ViewModel: ObservableObject, HomeProtocol{
     init(){
         firestore = Firestore.firestore()
         firebaseStorage = Storage.storage()
+        
+        #if DEV
+        email = "morotto91@outlook.it"
+        password = "Michele1"
+        idUser = "zglR4HvR0sP3KEqaRGL8Ma5cx5t2"
+        #endif
     }
     
     func uploadFileToDb(){
@@ -422,7 +428,10 @@ class ViewModel: ObservableObject, HomeProtocol{
                     self.indexListOfUrl += 1
                     self.file = self.listOfUrl[self.indexListOfUrl]
                     self.fileName = self.files[self.listOfUrl[self.indexListOfUrl]]!
-                    self.thumbnailAndUploadFile()
+                    DispatchQueue.main.async {
+                        self.thumbnailAndUploadFile()
+                    }
+                  
                     
                 }else
                 {

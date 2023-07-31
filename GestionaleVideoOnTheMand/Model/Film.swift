@@ -66,18 +66,18 @@ struct Film: Identifiable, Codable {
 }
 
 var filmsPreview: [Film] = [
-    .init(id: "", idUtente: "", nome: "Prova1", url: "", thmbnail: "", size: 45.34),
-    .init(id: "", idUtente: "", nome: "Prova2", url: "", thmbnail: "", size: 49.34),
-    .init(id: "", idUtente: "", nome: "Prova3", url: "", thmbnail: "", size: 45.34),
-    .init(id: "", idUtente: "", nome: "Prova4", url: "", thmbnail: "", size: 49.34),
-    .init(id: "", idUtente: "", nome: "Prova5", url: "", thmbnail: "", size: 40.34),
-    .init(id: "", idUtente: "", nome: "Prova6", url: "", thmbnail: "", size: 45.34),
-    .init(id: "", idUtente: "", nome: "Prova7", url: "", thmbnail: "", size: 49.34),
-    .init(id: "", idUtente: "", nome: "Prova8", url: "", thmbnail: "", size: 200),
-    .init(id: "", idUtente: "", nome: "Prova9", url: "", thmbnail: "", size: 200),
-    .init(id: "", idUtente: "", nome: "Prova10", url: "", thmbnail: "", size: 200),
-    .init(id: "", idUtente: "", nome: "Prova8", url: "", thmbnail: "", size: 500),
-    .init(id: "", idUtente: "", nome: "Prova9", url: "", thmbnail: "", size: 500),
-    .init(id: "", idUtente: "", nome: "Prova10", url: "", thmbnail: "", size: 500),
+    .init(id: "1", idUtente: "", nome: "OnePiece_Ep_1069_SUB_ITA.mp4", url: "", thmbnail: "", size: 45.34),
+    .init(id: "2", idUtente: "", nome: "OnePiece_Ep_1069_SUB_ITA.mp4", url: "", thmbnail: "", size: 49.34),
+    .init(id: "3", idUtente: "", nome: "ShuumatsuNoHarem_Ep_01_SUB_ITA.mp4", url: "", thmbnail: "", size: 45.34),
+    .init(id: "4", idUtente: "", nome: "ShuumatsuNoHarem_Ep_02_SUB_ITA.mp4", url: "", thmbnail: "", size: 49.34),
+    .init(id: "5", idUtente: "", nome: "ShuumatsuNoHarem_Ep_03_SUB_ITA.mp4", url: "", thmbnail: "", size: 40.34),
+    .init(id: "6", idUtente: "", nome: "ShuumatsuNoHarem_Ep_04_SUB_ITA.mp4", url: "", thmbnail: "", size: 45.34),
+    .init(id: "7", idUtente: "", nome: "ShuumatsuNoHarem_Ep_05_SUB_ITA.mp4", url: "", thmbnail: "", size: 49.34),
+    .init(id: "8", idUtente: "", nome: "ShuumatsuNoHarem_Ep_06_SUB_ITA.mp4", url: "", thmbnail: "", size: 200),
+    .init(id: "9", idUtente: "", nome: "ShuumatsuNoHarem_Ep_07_SUB_ITA.mp4", url: "", thmbnail: "", size: 200),
+    .init(id: "10", idUtente: "", nome: "ShuumatsuNoHarem_Ep_08_SUB_ITA.mp4", url: "", thmbnail: "", size: 200),
+    .init(id: "11", idUtente: "", nome: "ShuumatsuNoHarem_Ep_09_SUB_ITA.mp4", url: "", thmbnail: "", size: 500),
+    .init(id: "12", idUtente: "", nome: "ShuumatsuNoHarem_Ep_10_SUB_ITA.mp4", url: "", thmbnail: "", size: 500),
+    .init(id: "13", idUtente: "", nome: "ShuumatsuNoHarem_Ep_11_SUB_ITA.mp4", url: "", thmbnail: "", size: 500),
     
 ]
