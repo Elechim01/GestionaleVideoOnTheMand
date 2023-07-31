@@ -10,7 +10,7 @@ import Firebase
 struct ContentView: View {
     
   
-    @StateObject var model = ViewModel()
+    @EnvironmentObject var model: ViewModel
     @StateObject var login = LoginViewModel()
     
     var body: some View {
@@ -23,9 +23,14 @@ struct ContentView: View {
                 .environmentObject(login)
                 .environmentObject(model)
         }else if(login.pagina == .Home){
+            
+            #if DEV
+             NewHome()
+            #else
             HomeView()
                   .environmentObject(model)
                   .environmentObject(login)
+            #endif
         }else{
             Text("Page not found")
         }
@@ -36,5 +41,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(ViewModel())
     }
 }

@@ -104,7 +104,6 @@ struct HomeView: View {
                         Text("Size \(String.twoDecimal(number: model.totalSize)) / \( String.twoDecimal(number: model.totalSizeFilm)) ")
                     }
                     scrollView()
-                 
                 }
                 if isLoading {
                     ProgressView()
@@ -112,7 +111,6 @@ struct HomeView: View {
             }
             
         }
-      
         .alert(model.alertMessage, isPresented: $model.showAlert, actions: {
             Button("OK",role: .cancel) {
                 model.showAlert.toggle()

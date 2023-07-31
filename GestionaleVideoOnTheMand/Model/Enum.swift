@@ -28,5 +28,9 @@ enum CustomError: Error {
            
        }
     }
-    
+}
+
+enum HomeSection {
+    case film
+    case spazio
 }

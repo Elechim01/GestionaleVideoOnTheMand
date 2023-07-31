@@ -17,9 +17,18 @@ struct GestionaleVideoOnTheMandApp: App {
         FirebaseApp.configure()
     }
     
+    @StateObject var model = ViewModel()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(model)
+        }
+        .windowStyle(HiddenTitleBarWindowStyle())
+        
+        Window("UploadfFilm", id: "uploadFilm") {
+            UploadFilmView()
+                .environmentObject(model)
         }
         .windowStyle(HiddenTitleBarWindowStyle())
         
