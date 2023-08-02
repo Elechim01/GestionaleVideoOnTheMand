@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import FirebaseStorage
+import LocalAuthentication
 
 
 class ViewModel: ObservableObject, HomeProtocol{
@@ -21,7 +22,7 @@ class ViewModel: ObservableObject, HomeProtocol{
     @Published var urlThumbnail: URL = URL(fileURLWithPath: "")
     @Published var progress: Double = 0
     @Published var films : [Film] = []
-    @Published var localUser : Utente = Utente()
+    @Published var localUser: Utente?
     @Published var urlFileLocale: String = ""
     @Published var taskUploadImage: StorageUploadTask?
     @Published var stato: String = ""
@@ -139,6 +140,7 @@ class ViewModel: ObservableObject, HomeProtocol{
     func uploadThumbnail(thumbnail: NSImage,succes:@escaping (Film)->Void ) {
         let data : Data = thumbnail.tiffRepresentation!
         let pathThumbnailFile =  Extensions.getThumbnailName(nameOfElement:fileName)
+        guard let localUser = self.localUser else { return }
         let referenceRef = firebaseStorage.reference(withPath: "\(localUser.id)/\(pathThumbnailFile)")
         taskUploadImage = referenceRef.putData(data,metadata: nil){ [weak self] metadata,error in
             guard let self = self else { return }
@@ -194,9 +196,10 @@ class ViewModel: ObservableObject, HomeProtocol{
                 //                self.taskUploadImage!.removeAllObservers()
                 self.stato = "Aggiungo il film a db"
     //        MARK: Aggiungo il film a db
+                guard let localUser = self.localUser else { return }
                 succes(
                     Film(id: "",
-                         idUtente: self.localUser.id,
+                         idUtente: localUser.id,
                          nome: self.fileName,
                          url: self.urlFileUplodato,
                          thmbnail: self.urlThumbnail.absoluteString,
@@ -208,6 +211,7 @@ class ViewModel: ObservableObject, HomeProtocol{
     }
     
     func uploadFilm(success:@escaping () ->Void) {
+        guard let localUser = self.localUser else { return }
         let fileRef = firebaseStorage.reference().child("\(localUser.id)/\(fileName)")
         let metadata = StorageMetadata()
         metadata.contentType = "video/mp4"
@@ -276,6 +280,7 @@ class ViewModel: ObservableObject, HomeProtocol{
     }
    
     func downloadFile(nomeFile:String, success:@escaping () -> Void, failure: @escaping (Error)->Void){
+        guard let localUser = self.localUser else { return }
         let pathReference = firebaseStorage.reference(withPath: "\(localUser.id)/\(nomeFile)")
         let localPathReference = Extensions.getDocumentsDirectory().appendingPathComponent(nomeFile)
         self.urlFileLocale = localPathReference.absoluteString
@@ -323,7 +328,7 @@ class ViewModel: ObservableObject, HomeProtocol{
     }
     
     public func deleteFile(nomeFile: String){
-       
+        guard let localUser = self.localUser else { return }
         deleteFile(firebaseStorage: firebaseStorage,localUser: localUser.id ,nomeFile: nomeFile) {
             print("Success")
         } failure: { error in
@@ -335,6 +340,7 @@ class ViewModel: ObservableObject, HomeProtocol{
 // MARK: Firestore
     
     internal func recuperoFilms(ending: (()->())?) {
+        guard let localUser = self.localUser else { return }
        recuperoFilms(firestore: firestore, localUser: localUser.id) { [weak self] documents in
             guard let self = self else { return }
             films.removeAll()
@@ -388,8 +394,8 @@ class ViewModel: ObservableObject, HomeProtocol{
                     
                     if let user = Utente.getUser(json: data) {
                         self.localUser = user
-                        self.localUser.id = id
-                        updateUser(firestore: firestore, user: self.localUser) { error in
+                        self.localUser?.id = id
+                        updateUser(firestore: firestore, user: self.localUser!) { error in
                             if let err = error {
                                 self.alertMessage = err.localizedDescription
                                 self.showAlert.toggle()
@@ -462,5 +468,31 @@ class ViewModel: ObservableObject, HomeProtocol{
             self.showAlert.toggle()
         }
     }
+    
+    func authenticate(response: @escaping (Bool) -> ()) {
+        let contex = LAContext()
+        var error: NSError?
+        if contex.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometricsOrWatch, error: &error) {
+            let reason = "Dacci i tuou dati stronzo!:)"
+            contex.evaluatePolicy(.deviceOwnerAuthenticationWithBiometricsOrWatch, localizedReason: reason) { [ weak self] value, error in
+                guard let self = self else { return }
+                if let error = error {
+                    self.alertMessage = error.localizedDescription
+                    self.showAlert.toggle()
+                }
+                response(value)
+//                if succes {
+//                   succes?()
+//                } else {
+//                    print("NO Success")
+//                }
+            }
+        } else {
+            guard let error = error else { return }
+            self.alertMessage =  error.localizedDescription
+            self.showAlert.toggle()
+        }
+    }
+    
     
 }

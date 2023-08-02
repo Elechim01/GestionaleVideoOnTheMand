@@ -34,7 +34,7 @@ struct HomeView: View {
         ScrollView {
             ZStack {
                 VStack {
-                    Text("Carica video sul db UUID: \(model.localUser.id)")
+                    Text("Carica video sul db UUID: \(model.localUser?.id ?? "")")
                         .font(.title)
                         .padding()
                     Text("Nome:\(model.fileName)")
@@ -119,7 +119,8 @@ struct HomeView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear {
             if !isPreview{
-                if model.localUser.isEmply {
+//                guard let user = model.localUser, !user.isEmply else { return }
+//                if model.localUser.isEmply {
                     Task {
                         DispatchQueue.main.async {
                             isLoading = true
@@ -133,7 +134,7 @@ struct HomeView: View {
                             }
                         }
                     }
-                }
+//                }
             } else {
                 model.films = filmsPreview
             }

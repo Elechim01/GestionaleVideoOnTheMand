@@ -26,6 +26,7 @@ struct ContentView: View {
             
             #if DEV
              NewHome()
+                .environmentObject(model)
             #else
             HomeView()
                   .environmentObject(model)

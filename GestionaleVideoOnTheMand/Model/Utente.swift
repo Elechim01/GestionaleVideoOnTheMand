@@ -25,14 +25,6 @@ struct Utente: Identifiable, Codable {
         }
     }
     
-    init() {
-        id = ""
-        nome = ""
-        cognome = ""
-        email = ""
-        password = ""
-        cellulare = ""
-    }
     init(id: String,
          nome:String,
          cognome: String,
@@ -69,5 +61,7 @@ struct Utente: Identifiable, Codable {
     }
     
 }
+
+var previewUser = Utente(id: "", nome: "Pippo", cognome: "Pluto", email: "paperino@outlook.it", password: "plutone", cellulare: "23456788")
 
 

@@ -32,6 +32,13 @@ struct GestionaleVideoOnTheMandApp: App {
         }
         .windowStyle(HiddenTitleBarWindowStyle())
         
+        Window("InfoUser", id:"infoUser") {
+            InfoUserView()
+                .frame(maxWidth: 250, maxHeight: 200)
+                .environmentObject(model)
+        }
+        .windowStyle(HiddenTitleBarWindowStyle())
+        
     }
 }
 

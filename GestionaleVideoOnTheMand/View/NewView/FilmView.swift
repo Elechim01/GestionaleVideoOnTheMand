@@ -62,7 +62,8 @@ struct FilmView: View {
         }
         .onAppear {
             guard !isPreview else { return }
-                if homeModel.localUser.isEmply {
+//            guard let user = homeModel.localUser, !user.isEmply else { return}
+//            if .user?.isEmply) != nil) {
                     Task {
                         DispatchQueue.main.async {
                             showProgressView.toggle()
@@ -76,7 +77,7 @@ struct FilmView: View {
                             }
                         }
                     }
-                }
+//                }
             }
     }
     

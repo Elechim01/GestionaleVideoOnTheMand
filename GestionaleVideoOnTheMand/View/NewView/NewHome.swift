@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NewHome: View {
     
-    @StateObject var model = ViewModel()
+    @EnvironmentObject var model: ViewModel 
     @State private var columsVisibility = NavigationSplitViewVisibility.all
     @Environment(\.openWindow) var openWindow
     @State var homeSection: HomeSection = .film
@@ -44,6 +44,11 @@ struct NewHome: View {
             }
         }
         .navigationSplitViewStyle(.balanced)
+        .alert(model.alertMessage, isPresented: $model.showAlert, actions: {
+            Button("OK",role: .cancel) {
+                model.showAlert.toggle()
+            }
+        })
     }
     
     @ViewBuilder
@@ -94,7 +99,7 @@ struct NewHome: View {
     @ViewBuilder
     func InfoUser(name: String) -> some View {
         CustomButton(falseColor: .green.opacity(0.6), action: {
-         #warning("Open Window Info User")
+            openWindow(id:"infoUser")
         }, label: {
             HStack {
                 Image(systemName: "person")
@@ -132,28 +137,8 @@ struct NewHome: View {
 struct NewHome_Previews: PreviewProvider {
     static var previews: some View {
         NewHome()
+            .environmentObject(ViewModel())
     }
 }
 
-extension View {
-    func CustomButton(condition: Bool = false,
-                      trueColor: Color = .white,
-                      falseColor: Color,
-                      action: @escaping () ->(),
-                      label: @escaping () -> some View) -> some View {
-        Button(action: {
-            action()
-        }, label: {
-            label()
-        })
-        .frame(maxWidth: .infinity)
-        .padding(.vertical,5)
-        .background {
-            RoundedRectangle(cornerRadius: 5)
-                .fill(condition ? trueColor : falseColor)
-        }
-        .buttonStyle(PlainButtonStyle())
-        .padding(.horizontal,5)
-        .padding(.top,5)
-    }
-}
+

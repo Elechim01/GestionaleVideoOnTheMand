@@ -38,6 +38,8 @@
 		C4880F1228B2A1230091B7C4 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = C4880F1128B2A1230091B7C4 /* GoogleSignIn */; };
 		C4880F1428B2A1230091B7C4 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C4880F1328B2A1230091B7C4 /* GoogleSignInSwift */; };
 		C4AB776B2961D13900BE9346 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AB776A2961D13900BE9346 /* Enum.swift */; };
+		C4B8D4C22A78100C008D3CEB /* InfoUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B8D4C12A78100C008D3CEB /* InfoUserView.swift */; };
+		C4B8D4C32A78100C008D3CEB /* InfoUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B8D4C12A78100C008D3CEB /* InfoUserView.swift */; };
 		C4BE732E2A757C8800175BF3 /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = C4BE732D2A757C8800175BF3 /* GRPC */; };
 		C4BE73302A757C8800175BF3 /* protoc-gen-grpc-swift in Frameworks */ = {isa = PBXBuildFile; productRef = C4BE732F2A757C8800175BF3 /* protoc-gen-grpc-swift */; };
 		C4C7A7D228A528EB001CB803 /* GestionaleVideoOnTheMandApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A7D128A528EB001CB803 /* GestionaleVideoOnTheMandApp.swift */; };
@@ -69,6 +71,7 @@
 		C448E6CD2A75BC4100A18EBE /* GestionaleVideoOnTheMandDev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = GestionaleVideoOnTheMandDev.plist; path = /Users/michelemanniello/Documents/Sviluppo/Swift/GestionaleVideoOnTheMand/GestionaleVideoOnTheMandDev.plist; sourceTree = "<absolute>"; };
 		C4880F1528B2A1480091B7C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C4AB776A2961D13900BE9346 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
+		C4B8D4C12A78100C008D3CEB /* InfoUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoUserView.swift; sourceTree = "<group>"; };
 		C4C7A7CE28A528EB001CB803 /* GestionaleVideoOnTheMand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GestionaleVideoOnTheMand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4C7A7D128A528EB001CB803 /* GestionaleVideoOnTheMandApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestionaleVideoOnTheMandApp.swift; sourceTree = "<group>"; };
 		C4C7A7D328A528EB001CB803 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -127,6 +130,7 @@
 				C433B0682A72ADC700A0CA1E /* NewHome.swift */,
 				C448E69D2A75B55E00A18EBE /* FilmView.swift */,
 				C448E69F2A75B56F00A18EBE /* StorageView.swift */,
+				C4B8D4C12A78100C008D3CEB /* InfoUserView.swift */,
 			);
 			path = NewView;
 			sourceTree = "<group>";
@@ -331,6 +335,7 @@
 				C448E6AD2A75BC4100A18EBE /* Utente.swift in Sources */,
 				C448E6AE2A75BC4100A18EBE /* HomeView.swift in Sources */,
 				C448E6AF2A75BC4100A18EBE /* Film.swift in Sources */,
+				C4B8D4C32A78100C008D3CEB /* InfoUserView.swift in Sources */,
 				C448E6B02A75BC4100A18EBE /* LoginView.swift in Sources */,
 				C448E6B12A75BC4100A18EBE /* HomeProtocol.swift in Sources */,
 				C448E6B22A75BC4100A18EBE /* Enum.swift in Sources */,
@@ -354,6 +359,7 @@
 				C4C7A7FD28A65926001CB803 /* Utente.swift in Sources */,
 				C4C7A80428A901DF001CB803 /* HomeView.swift in Sources */,
 				C4C7A7FC28A65926001CB803 /* Film.swift in Sources */,
+				C4B8D4C22A78100C008D3CEB /* InfoUserView.swift in Sources */,
 				C4C7A80828A9037A001CB803 /* LoginView.swift in Sources */,
 				C4D1504D2A18E0FC00186D06 /* HomeProtocol.swift in Sources */,
 				C4AB776B2961D13900BE9346 /* Enum.swift in Sources */,

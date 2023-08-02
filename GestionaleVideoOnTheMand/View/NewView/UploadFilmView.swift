@@ -9,6 +9,9 @@ import SwiftUI
 
 struct UploadFilmView: View {
     @EnvironmentObject var model: ViewModel
+    #warning("Quando è completato chiudere la finestra")
+    #warning("Enumerare gli step e dare un valore totale")
+    #warning("Mettere il titolo del film che si sta caricando")
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
             
