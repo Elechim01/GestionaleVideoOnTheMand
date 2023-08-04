@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C443CD9F2A7BCE2100ED417F /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C443CD9E2A7BCE2100ED417F /* CustomView.swift */; };
+		C443CDA02A7BEB9100ED417F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A7F828A65926001CB803 /* Extensions.swift */; };
+		C443CDA12A7BEB9600ED417F /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C443CD9E2A7BCE2100ED417F /* CustomView.swift */; };
 		C448E69E2A75B55E00A18EBE /* FilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C448E69D2A75B55E00A18EBE /* FilmView.swift */; };
 		C448E6A02A75B56F00A18EBE /* StorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C448E69F2A75B56F00A18EBE /* StorageView.swift */; };
 		C448E6AD2A75BC4100A18EBE /* Utente.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A7FA28A65926001CB803 /* Utente.swift */; };
@@ -23,7 +26,6 @@
 		C448E6B82A75BC4100A18EBE /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A7E028A575D6001CB803 /* ViewModel.swift */; };
 		C448E6B92A75BC4100A18EBE /* StorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C448E69F2A75B56F00A18EBE /* StorageView.swift */; };
 		C448E6BA2A75BC4100A18EBE /* GestionaleVideoOnTheMandApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A7D128A528EB001CB803 /* GestionaleVideoOnTheMandApp.swift */; };
-		C448E6BB2A75BC4100A18EBE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A7F828A65926001CB803 /* Extensions.swift */; };
 		C448E6BC2A75BC4100A18EBE /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A80928A90398001CB803 /* RegistrationView.swift */; };
 		C448E6BE2A75BC4100A18EBE /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = C448E6A42A75BC4100A18EBE /* FirebaseFirestore */; };
 		C448E6BF2A75BC4100A18EBE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C448E6A22A75BC4100A18EBE /* FirebaseAuth */; };
@@ -65,6 +67,7 @@
 
 /* Begin PBXFileReference section */
 		C433B0682A72ADC700A0CA1E /* NewHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHome.swift; sourceTree = "<group>"; };
+		C443CD9E2A7BCE2100ED417F /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		C448E69D2A75B55E00A18EBE /* FilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmView.swift; sourceTree = "<group>"; };
 		C448E69F2A75B56F00A18EBE /* StorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageView.swift; sourceTree = "<group>"; };
 		C448E6CC2A75BC4100A18EBE /* GestionaleVideoOnTheMandDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GestionaleVideoOnTheMandDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,6 +126,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C443CD9C2A7BCDFC00ED417F /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				C4C7A7F828A65926001CB803 /* Extensions.swift */,
+				C443CD9E2A7BCE2100ED417F /* CustomView.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		C448E69C2A75B54000A18EBE /* NewView */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +168,7 @@
 		C4C7A7D028A528EB001CB803 /* GestionaleVideoOnTheMand */ = {
 			isa = PBXGroup;
 			children = (
+				C443CD9C2A7BCDFC00ED417F /* Extension */,
 				C4880F1528B2A1480091B7C4 /* Info.plist */,
 				C4C7A7F728A65490001CB803 /* View */,
 				C4C7A7F628A65488001CB803 /* Model */,
@@ -190,7 +203,6 @@
 		C4C7A7F628A65488001CB803 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C4C7A7F828A65926001CB803 /* Extensions.swift */,
 				C4C7A7F928A65926001CB803 /* Film.swift */,
 				C4C7A7FA28A65926001CB803 /* Utente.swift */,
 				C4AB776A2961D13900BE9346 /* Enum.swift */,
@@ -335,6 +347,7 @@
 				C448E6AD2A75BC4100A18EBE /* Utente.swift in Sources */,
 				C448E6AE2A75BC4100A18EBE /* HomeView.swift in Sources */,
 				C448E6AF2A75BC4100A18EBE /* Film.swift in Sources */,
+				C443CDA12A7BEB9600ED417F /* CustomView.swift in Sources */,
 				C4B8D4C32A78100C008D3CEB /* InfoUserView.swift in Sources */,
 				C448E6B02A75BC4100A18EBE /* LoginView.swift in Sources */,
 				C448E6B12A75BC4100A18EBE /* HomeProtocol.swift in Sources */,
@@ -346,8 +359,8 @@
 				C448E6B72A75BC4100A18EBE /* LoginViewModel.swift in Sources */,
 				C448E6B82A75BC4100A18EBE /* ViewModel.swift in Sources */,
 				C448E6B92A75BC4100A18EBE /* StorageView.swift in Sources */,
+				C443CDA02A7BEB9100ED417F /* Extensions.swift in Sources */,
 				C448E6BA2A75BC4100A18EBE /* GestionaleVideoOnTheMandApp.swift in Sources */,
-				C448E6BB2A75BC4100A18EBE /* Extensions.swift in Sources */,
 				C448E6BC2A75BC4100A18EBE /* RegistrationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,6 +372,7 @@
 				C4C7A7FD28A65926001CB803 /* Utente.swift in Sources */,
 				C4C7A80428A901DF001CB803 /* HomeView.swift in Sources */,
 				C4C7A7FC28A65926001CB803 /* Film.swift in Sources */,
+				C443CD9F2A7BCE2100ED417F /* CustomView.swift in Sources */,
 				C4B8D4C22A78100C008D3CEB /* InfoUserView.swift in Sources */,
 				C4C7A80828A9037A001CB803 /* LoginView.swift in Sources */,
 				C4D1504D2A18E0FC00186D06 /* HomeProtocol.swift in Sources */,
@@ -404,8 +418,12 @@
 				OTHER_SWIFT_FLAGS = "-DDEV";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MicheleManniello.GestionaleVideoOnTheMand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -434,8 +452,12 @@
 				OTHER_SWIFT_FLAGS = "-DDEV";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MicheleManniello.GestionaleVideoOnTheMand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
@@ -577,8 +599,12 @@
 				OTHER_SWIFT_FLAGS = "-DPROD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MicheleManniello.GestionaleVideoOnTheMand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -607,8 +633,12 @@
 				OTHER_SWIFT_FLAGS = "-DPROD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MicheleManniello.GestionaleVideoOnTheMand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

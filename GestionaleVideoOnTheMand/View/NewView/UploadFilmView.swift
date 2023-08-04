@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct UploadFilmView: View {
+    
     @EnvironmentObject var model: ViewModel
+    
     #warning("Quando è completato chiudere la finestra")
     #warning("Enumerare gli step e dare un valore totale")
-    #warning("Mettere il titolo del film che si sta caricando")
+
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
             
@@ -22,40 +24,46 @@ struct UploadFilmView: View {
                     .font(.title)
             })
             .frame(width: 300)
-            if(model.thumbnail != nil){
-                Image(nsImage: model.thumbnail!)
-            }
-            ProgressView(value: model.progress, total: 100) {
-                Text(model.stato)
-                    .font(.title3)
-                    .padding(.leading)
-            }
-            .padding(.horizontal)
             
-            HStack(alignment: .center, spacing: 20) {
-                Button(action: {
-                    guard model.taskUploadImage != nil else { return }
-                    model.taskUploadImage!.pause()
-                   
-                }, label: {
-                    Image(systemName: "pause")
-                })
+            if model.stato != nil {
                 
-                Button(action: {
-                    guard model.taskUploadImage != nil else { return }
-                    model.taskUploadImage!.resume()
-                    
-                }, label: {
-                    Image(systemName: "play")
-                })
+                if(model.thumbnail != nil){
+                    Image(nsImage: model.thumbnail!)
+                }
                 
-                Button(action: {
-                    guard model.taskUploadImage != nil else { return }
-                    model.taskUploadImage!.cancel()
+                Text("File: \(model.fileName)")
+                ProgressView(value: model.progress, total: 100) {
+                    Text(model.stato?.rawValue ?? "")
+                        .font(.title3)
+                        .padding(.leading)
+                }
+                .padding(.horizontal)
+                
+                HStack(alignment: .center, spacing: 20) {
+                    Button(action: {
+                        guard model.taskUploadImage != nil else { return }
+                        model.taskUploadImage!.pause()
+                        
+                    }, label: {
+                        Image(systemName: "pause")
+                    })
                     
-                }, label: {
-                    Image(systemName: "stop")
-                })
+                    Button(action: {
+                        guard model.taskUploadImage != nil else { return }
+                        model.taskUploadImage!.resume()
+                        
+                    }, label: {
+                        Image(systemName: "play")
+                    })
+                    
+                    Button(action: {
+                        guard model.taskUploadImage != nil else { return }
+                        model.taskUploadImage!.cancel()
+                        
+                    }, label: {
+                        Image(systemName: "stop")
+                    })
+                }
             }
             
         }

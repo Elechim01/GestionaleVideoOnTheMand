@@ -34,3 +34,12 @@ enum HomeSection {
     case film
     case spazio
 }
+
+enum UploadStatus: String {
+    case cancel = "Cancellato"
+    case uploadFilm = "Carico il Film"
+    case addFilmToDB = "Carico il film a db"
+    case createThumnail = "Creo la thumbnail"
+    case uploadThumbnail = "Carico la thumbnail"
+    case succes = "Completato con successo"
+}

@@ -15,6 +15,8 @@ struct HomeView: View {
     @State var isLoading: Bool = false
     
     @Environment(\.isPreview) var isPreview
+    
+    
     var rows: [GridItem] {
         if isPreview{
            return (1...(22/4)).map { _ in
@@ -41,7 +43,7 @@ struct HomeView: View {
                     Text("Path:\(model.file.absoluteString)")
                     Text("Url file uplodato:\(model.urlFileUplodato)")
                     if(model.progress > 0){
-                        ProgressView(model.stato, value: model.progress,total: 100)
+                        ProgressView(model.stato?.rawValue ?? "", value: model.progress,total: 100)
                             .frame(width: 400)
                             .padding(.leading)
                             .padding(.trailing)

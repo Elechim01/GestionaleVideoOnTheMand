@@ -25,7 +25,7 @@ class ViewModel: ObservableObject, HomeProtocol{
     @Published var localUser: Utente?
     @Published var urlFileLocale: String = ""
     @Published var taskUploadImage: StorageUploadTask?
-    @Published var stato: String = ""
+    @Published var stato: UploadStatus? 
 //    @Published var elencoFilm : [String] = []
 //    Memorizzo la password, l'email e l'id 
     @AppStorage("Password") internal var password = ""
@@ -82,14 +82,14 @@ class ViewModel: ObservableObject, HomeProtocol{
     }
     
     func thumbnailAndUploadFile(){
-        stato = "creo la migniatura dell'immagine"
+        stato = .createThumnail
         thumbnail =  Extensions.createThumbnail(url: file)
        if(thumbnail == nil){
            self.alertMessage = "Impossibile creare migniatura"
            self.showAlert = true
            return
        }
-       stato = "Carico il film"
+        stato = .uploadFilm
 //        MARK: Carico il film
         if(Extensions.isConnectedToInternet()){
             self.uploadFilm {
@@ -168,7 +168,7 @@ class ViewModel: ObservableObject, HomeProtocol{
                     break
                 case .cancelled:
                     print("User canceled the upload")
-                    self.stato = "Cancellato"
+                    self.stato = .cancel
                     self.fileName = ""
                     self.urlFileUplodato = ""
                     self.urlThumbnail = URL(fileURLWithPath: "")
@@ -194,7 +194,7 @@ class ViewModel: ObservableObject, HomeProtocol{
                 }
                 self.urlThumbnail = downloadUrl
                 //                self.taskUploadImage!.removeAllObservers()
-                self.stato = "Aggiungo il film a db"
+                self.stato = .addFilmToDB
     //        MARK: Aggiungo il film a db
                 guard let localUser = self.localUser else { return }
                 succes(
@@ -246,7 +246,7 @@ class ViewModel: ObservableObject, HomeProtocol{
                     break
                 case .cancelled:
                     print("User canceled the upload")
-                    self.stato = "Cancellato"
+                    self.stato = .cancel
                     self.fileName = ""
                     self.urlFileUplodato = ""
                     self.urlThumbnail = URL(fileURLWithPath: "")
@@ -270,7 +270,7 @@ class ViewModel: ObservableObject, HomeProtocol{
                     return
                 }
                 self.urlFileUplodato = downloadUrl.absoluteString
-                self.stato = "Carico la thumbnail"
+                self.stato = .uploadThumbnail
         //        MARK: Carico la thumbnail
                 success()
             }
@@ -356,7 +356,7 @@ class ViewModel: ObservableObject, HomeProtocol{
                             self.showAlert.toggle()
                         }
                     }
-                   
+                    
                 } else {
                     self.alertMessage = CustomError.fileError.description
                     self.showAlert.toggle()
@@ -420,7 +420,7 @@ class ViewModel: ObservableObject, HomeProtocol{
                 self.showAlert = true
             }else{
                 print("Success")
-                self.stato = "Completato con successo"
+                self.stato = .succes
                 
         //        MARK: Resetto le variabili
                 self.fileName = ""
@@ -437,13 +437,13 @@ class ViewModel: ObservableObject, HomeProtocol{
                     DispatchQueue.main.async {
                         self.thumbnailAndUploadFile()
                     }
-                  
                     
-                }else
-                {
+                } else {
                     self.listOfUrl = []
                     self.files = [:]
                     self.urlFileUplodato = ""
+                    self.thumbnail = nil
+                    self.stato = nil
                 }
             }
         }

@@ -18,6 +18,7 @@ struct InfoUserView: View {
         VStack(alignment: .leading) {
             Text("Info Utente:")
                 .font(.title)
+                .fontWeight(.bold)
                 .padding(.horizontal,3)
             InfoElement(description: "Nome", element: model.localUser?.nome)
             InfoElement(description: "Cognome", element: model.localUser?.cognome)
@@ -41,7 +42,11 @@ struct InfoUserView: View {
     
     @ViewBuilder
     func InfoElement(description: String, element: String?) -> some View {
-        Text("\(description): \(element ?? "")")
+        
+       ( Text(description)
+            .fontWeight(.bold)
+         +
+        Text(": \(element ?? "")"))
             .font(.body)
             .padding(.horizontal,3)
             .padding(.vertical, 4)
@@ -51,11 +56,9 @@ struct InfoUserView: View {
     func PasswordElement() -> some View {
         HStack(alignment: .center) {
                 if showPassword {
-                    Text("Password: \(model.localUser?.password ?? "")")
+                    InfoElement(description: "Password", element: model.localUser?.password ?? "")
                 } else {
-                    Text("Password: *********")
-                        .padding(.vertical,5)
-                        .padding(.top,5)
+                    InfoElement(description: "Password", element: "*******")
                 }
             
             CustomButton(falseColor: .clear, action: {
@@ -76,7 +79,7 @@ struct InfoUserView: View {
                     Image(systemName: "eye.slash.fill")
                 }
             })
-            .frame(width: 50)
+            .frame(width: 30)
             
         }
     }

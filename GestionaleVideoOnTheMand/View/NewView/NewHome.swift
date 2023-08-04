@@ -16,46 +16,43 @@ struct NewHome: View {
     
     var body: some View {
         
-        NavigationSplitView(columnVisibility: $columsVisibility) {
-            
-            VStack(alignment: .leading) {
+            NavigationSplitView(columnVisibility: $columsVisibility) {
                 
-                InfoUser(name: "Michele")
-                
-                ListButton(text: "Film", imageName: "film",section: .film) {
-                    print("Ciao")
+                VStack(alignment: .leading) {
+                    
+                    InfoUser(name: model.localUser?.nome ?? "")
+                    
+                    ListButton(text: "Film", imageName: "film",section: .film, onTap: nil)
+
+                    
+                    ListButton(text: "Spazio", imageName: "opticaldiscdrive",section: .spazio, onTap: nil)
+                    
+                    Spacer()
                 }
                 
-                ListButton(text: "Spazio", imageName: "opticaldiscdrive",section: .spazio) {
-                    print("Ciao")
+            } detail: {
+                switch homeSection {
+                case .film:
+                    FilmView()
+                        .environmentObject(model)
+                case .spazio:
+                    StorageView()
+                        .environmentObject(model)
                 }
-                
-                Spacer()
             }
-            
-        } detail: {
-            switch homeSection {
-            case .film:
-                FilmView()
-                    .environmentObject(model)
-            case .spazio:
-                StorageView()
-                    .environmentObject(model)
-            }
-        }
-        .navigationSplitViewStyle(.balanced)
-        .alert(model.alertMessage, isPresented: $model.showAlert, actions: {
-            Button("OK",role: .cancel) {
-                model.showAlert.toggle()
-            }
-        })
+            .navigationSplitViewStyle(.balanced)
+            .alert(model.alertMessage, isPresented: $model.showAlert, actions: {
+                Button("OK",role: .cancel) {
+                    model.showAlert.toggle()
+                }
+            })
     }
     
     @ViewBuilder
     func ListButton(text: String,
                     imageName: String,
                     section: HomeSection,
-                    onTap: @escaping ()->()
+                    onTap: (()->())?
     ) -> some View {
         
         CustomButton(condition: homeSection == section ,
@@ -63,7 +60,7 @@ struct NewHome: View {
                      falseColor: .clear,
                      action: {
             homeSection = section
-            onTap()
+            onTap?()
         },label: {
             HStack(alignment: .center) {
                 Image(systemName: imageName)
@@ -72,28 +69,6 @@ struct NewHome: View {
                 Spacer()
             }
         })
-        /*
-        Button {
-           
-            
-        } label: {
-            HStack(alignment: .center) {
-                Image(systemName: imageName)
-                    .padding(.leading,5)
-                Text(text)
-                Spacer()
-            }
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical,5)
-        .background {
-            RoundedRectangle(cornerRadius: 5)
-                .fill(?  : .clear)
-        }
-        .buttonStyle(PlainButtonStyle())
-        .padding(.horizontal,5)
-        .padding(.top,5)
-        */
     }
     
     @ViewBuilder
@@ -110,24 +85,6 @@ struct NewHome: View {
                 Spacer()
             }
         })
-        
-//        Button {
-//
-//
-//        } label: {
-//
-//
-//        }
-//        .frame(maxWidth: .infinity)
-//        .buttonStyle(PlainButtonStyle())
-//        .padding(.vertical,5)
-//        .background {
-//            RoundedRectangle(cornerRadius: 4)
-//                .fill(.green.opacity(0.6))
-////                .frame(height: 30)
-//        }
-//        .padding(.vertical,10)
-//        .padding(.horizontal,5)
         
         Divider()
     }
