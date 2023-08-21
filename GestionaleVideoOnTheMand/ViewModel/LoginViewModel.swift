@@ -77,7 +77,7 @@ class LoginViewModel: ObservableObject{
         }
     }
     
-    func logOut(){
+    func logOut(){ 
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
