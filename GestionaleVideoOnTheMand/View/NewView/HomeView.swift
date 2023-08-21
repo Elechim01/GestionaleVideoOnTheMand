@@ -7,12 +7,14 @@
 
 import SwiftUI
 
-struct NewHome: View {
+struct HomeView: View {
     
-    @EnvironmentObject var model: ViewModel 
+    @EnvironmentObject var model: ViewModel
+    @EnvironmentObject var loginModel: LoginViewModel
     @State private var columsVisibility = NavigationSplitViewVisibility.all
     @Environment(\.openWindow) var openWindow
     @State var homeSection: HomeSection = .film
+    @State var showLogoutConfirm: Bool = false
     
     var body: some View {
         
@@ -44,6 +46,19 @@ struct NewHome: View {
             .alert(model.alertMessage, isPresented: $model.showAlert, actions: {
                 Button("OK",role: .cancel) {
                     model.showAlert.toggle()
+                }
+            })
+            .alert("Sei sicuro di voler fare Logout", isPresented: $showLogoutConfirm,actions: {
+                Button("Annulla", role: .cancel) {
+                    showLogoutConfirm.toggle()
+                }
+                Button("Conferma", role: .destructive) {
+                    #if PROD
+                    Task(priority: .background) {
+                        loginModel.logOut()
+                    }
+                    #endif
+                    showLogoutConfirm.toggle()
                 }
             })
     }
@@ -86,6 +101,20 @@ struct NewHome: View {
             }
         })
         
+        CustomButton(falseColor: .white, action: {
+            showLogoutConfirm.toggle()
+        }, label: {
+            
+            HStack {
+                Image(systemName: "escape")
+                    .foregroundColor(.black)
+                    .padding(.leading,5)
+                Text("Logout")
+                    .foregroundColor(.black)
+                Spacer()
+            }
+        })
+        
         Divider()
     }
     
@@ -93,8 +122,9 @@ struct NewHome: View {
 
 struct NewHome_Previews: PreviewProvider {
     static var previews: some View {
-        NewHome()
+        HomeView()
             .environmentObject(ViewModel())
+            .environmentObject(LoginViewModel())
     }
 }
 

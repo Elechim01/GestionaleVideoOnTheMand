@@ -18,11 +18,13 @@ struct GestionaleVideoOnTheMandApp: App {
     }
     
     @StateObject var model = ViewModel()
+    @StateObject var loginModel = LoginViewModel()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(model)
+                .environmentObject(loginModel)
         }
         .windowStyle(HiddenTitleBarWindowStyle())
         
@@ -34,7 +36,6 @@ struct GestionaleVideoOnTheMandApp: App {
         
         Window("InfoUser", id:"infoUser") {
             InfoUserView()
-                .frame(maxWidth: 250, maxHeight: 200)
                 .environmentObject(model)
         }
         .windowStyle(HiddenTitleBarWindowStyle())

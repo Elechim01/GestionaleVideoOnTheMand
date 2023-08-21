@@ -126,6 +126,10 @@ struct RegistrationView: View {
     func customTextfield (title: String, value: Binding<String>, isSecure: Bool = false ) -> some View {
         if(isSecure){
             SecureField(title, text: value)
+                .placeholder(when:  value.wrappedValue.isEmpty , placeholder: {
+                    Text(title)
+                        .foregroundColor(.black)
+                })
                 .padding(5)
                 .textFieldStyle(PlainTextFieldStyle())
                 .frame(height: 30)
@@ -136,6 +140,10 @@ struct RegistrationView: View {
                 .padding(.trailing)
         }else{
           TextField(title, text: value)
+                .placeholder(when:  value.wrappedValue.isEmpty , placeholder: {
+                    Text(title)
+                        .foregroundColor(.black)
+                })
                 .padding(5)
                 .textFieldStyle(PlainTextFieldStyle())
                 .frame(height: 30)

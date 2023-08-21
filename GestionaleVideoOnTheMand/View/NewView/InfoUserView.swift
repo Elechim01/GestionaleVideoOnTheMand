@@ -25,9 +25,10 @@ struct InfoUserView: View {
             InfoElement(description: "Cellulare", element: model.localUser?.cellulare)
             InfoElement(description: "E-mail", element: model.localUser?.email)
             PasswordElement()
+            
             Spacer()
         }
-        .frame(maxWidth: 250, maxHeight: 200)
+        .frame(maxWidth: 250, maxHeight: 250)
         .alert(model.alertMessage, isPresented: $model.showAlert, actions: {
             Button("OK",role: .cancel) {
                 model.showAlert.toggle()
@@ -83,8 +84,6 @@ struct InfoUserView: View {
             
         }
     }
-    
-   
     
 }
 

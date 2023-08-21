@@ -55,6 +55,19 @@ class LoginViewModel: ObservableObject{
             }else{
                 guard let authResult = authResult else { return }
                 //                Salvo i valori per renderli permanenti
+                let attributes: [String : Any] = [
+                    kSecClass as String: kSecClassGenericPassword,
+                    kSecAttrAccount as String: email,
+                    kSecValueData as String: password.data(using: .utf8)!
+                ]
+                Task(priority: .background) {
+                    if SecItemAdd(attributes as CFDictionary, nil) == noErr {
+                        print("User saved succes")
+                    } else {
+                        print("Error")
+                    }
+                    
+                }
                 self.password = password
                 self.email = email
                 self.idUser = authResult.user.uid
@@ -69,13 +82,13 @@ class LoginViewModel: ObservableObject{
         do {
             try firebaseAuth.signOut()
             //               svuoto i valori
-            self.email = ""
-            self.password = ""
-            self.idUser = ""
-            page = 0
         } catch let singoutError as NSError {
             print("Error %@",singoutError)
         }
+        self.email = ""
+        self.password = ""
+        self.idUser = ""
+        page = 0
     }
     
     //    Funzione di Registrazione

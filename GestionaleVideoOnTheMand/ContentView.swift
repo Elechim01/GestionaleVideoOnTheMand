@@ -11,7 +11,7 @@ struct ContentView: View {
     
   
     @EnvironmentObject var model: ViewModel
-    @StateObject var login = LoginViewModel()
+    @EnvironmentObject var login: LoginViewModel
     
     var body: some View {
         if(login.pagina == .Login){
@@ -23,15 +23,8 @@ struct ContentView: View {
                 .environmentObject(login)
                 .environmentObject(model)
         }else if(login.pagina == .Home){
-            
-            #if DEV
-             NewHome()
+             HomeView()
                 .environmentObject(model)
-            #else
-            HomeView()
-                  .environmentObject(model)
-                  .environmentObject(login)
-            #endif
         }else{
             Text("Page not found")
         }
@@ -43,5 +36,6 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .environmentObject(ViewModel())
+            .environmentObject(LoginViewModel())
     }
 }

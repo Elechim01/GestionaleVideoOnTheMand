@@ -20,9 +20,10 @@ struct FilmView: View {
              }
         }else{
             if(homeModel.films.isEmpty){ return []}
+            var filmCount = homeModel.films.count
             print("elenco elementi \(homeModel.films.count)")
-            if homeModel.films.count < 4 { return [ GridItem() ]}
-            return (1...(homeModel.films.count / 4)).map { _ in
+            if filmCount < 3 { return [ GridItem() ]}
+            return (1...(filmCount / 3)).map { _ in
                 GridItem(.flexible())
             }
         }
@@ -87,10 +88,12 @@ struct FilmView: View {
             Text(film.nome)
                 .font(.title3)
                 .fontWeight(.bold)
+                .foregroundColor(.black)
 
             Text(String.twoDecimal(number: film.size))
                 .font(.subheadline)
                 .padding(.top,3)
+                .foregroundColor(.black)
     
         }
         .padding()

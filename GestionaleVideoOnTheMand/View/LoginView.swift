@@ -47,8 +47,13 @@ struct LoginView: View {
             Text("Effettua l'accesso")
                 .padding()
             
-            TextField("Email", text: $email)
+            TextField("", text: $email)
+                .placeholder(when: email.isEmpty, placeholder: {
+                    Text("Email")
+                        .foregroundColor(.black)
+                })
                 .padding(5)
+                .foregroundColor(.black)
                 .textFieldStyle(PlainTextFieldStyle())
                 .frame(height: 30)
                 .background(Color.white)
@@ -57,8 +62,13 @@ struct LoginView: View {
                 .padding(.leading)
                 .padding(.trailing)
             
-            SecureField("Password",text: $password)
+            SecureField("",text: $password)
+                .placeholder(when: password.isEmpty, placeholder: {
+                    Text("Password")
+                        .foregroundColor(.black)
+                })
                 .padding(5)
+                .foregroundColor(.black)
                 .textFieldStyle(PlainTextFieldStyle())
                 .frame(height: 30)
                 .background(Color.white)
@@ -230,5 +240,6 @@ struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
             .environmentObject(LoginViewModel())
+            .environmentObject(ViewModel())
     }
 }
