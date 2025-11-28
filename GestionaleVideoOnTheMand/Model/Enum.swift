@@ -42,4 +42,5 @@ enum UploadStatus: String {
     case createThumnail = "Creo la thumbnail"
     case uploadThumbnail = "Carico la thumbnail"
     case succes = "Completato con successo"
+    case error = "Errore nel caricamento"
 }

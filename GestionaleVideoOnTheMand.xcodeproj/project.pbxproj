@@ -703,8 +703,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.0;
 			};
 		};
 		C4BE732A2A757C8800175BF3 /* XCRemoteSwiftPackageReference "grpc-swift" */ = {
@@ -712,7 +712,7 @@
 			repositoryURL = "https://github.com/grpc/grpc-swift";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 1.23.0;
 			};
 		};
 		C4C7A7E428A5A09E001CB803 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
@@ -720,7 +720,7 @@
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
+				minimumVersion = 10.26.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

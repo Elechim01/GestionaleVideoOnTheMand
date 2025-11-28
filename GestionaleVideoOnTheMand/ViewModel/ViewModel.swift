@@ -216,22 +216,23 @@ class ViewModel: ObservableObject, HomeProtocol{
         let metadata = StorageMetadata()
         metadata.contentType = "video/mp4"
         taskUploadImage = fileRef.putFile(from: file,metadata: metadata)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-            guard let self = self else { return }
-            print(self.progress)
-             if self.progress < 7 {
-                 self.taskUploadImage?.pause()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
-                    guard let self = self else { return }
-                    self.taskUploadImage?.resume()
-                }
-            }
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+//            guard let self = self else { return }
+//            print(self.progress)
+//             if self.progress < 7 {
+//                 self.taskUploadImage?.pause()
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+//                    guard let self = self else { return }
+//                    self.taskUploadImage?.resume()
+//                }
+//            }
+//        }
         //        Upload File
         
         taskUploadImage!.observe(.progress) { [weak self] snapshot  in
             guard let self = self else { return }
             self.progress = 100.0 * Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
+            print("Progress: \(self.progress)%")
         }
         
         taskUploadImage!.observe(.failure) { [weak self] snapshot in
@@ -240,9 +241,18 @@ class ViewModel: ObservableObject, HomeProtocol{
                 switch (StorageErrorCode(rawValue: error.code)!){
                 case .objectNotFound:
                     print("File doesn't exist")
+                    self.stato = .error
+                    self.fileName = ""
+                    self.urlFileUplodato = ""
+                    self.urlThumbnail = URL(fileURLWithPath: "")
+                    self.progress = 0
                     break
                 case .unauthorized:
                     print("User doesn't have perimission to access file")
+                    self.fileName = ""
+                    self.urlFileUplodato = ""
+                    self.urlThumbnail = URL(fileURLWithPath: "")
+                    self.progress = 0
                     break
                 case .cancelled:
                     print("User canceled the upload")
@@ -254,6 +264,11 @@ class ViewModel: ObservableObject, HomeProtocol{
                     return
                 case .unknown:
                     print("Unknown error occured,inspect the server respose")
+                    self.stato = .error
+                    self.fileName = ""
+                    self.urlFileUplodato = ""
+                    self.urlThumbnail = URL(fileURLWithPath: "")
+                    self.progress = 0
                     break
                 default:
                     print("A separate error occurred. This is a good place to retry the upload.")
