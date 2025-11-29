@@ -36,6 +36,8 @@
 		C448E6C62A75BC4100A18EBE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4C7A7E228A59FEE001CB803 /* GoogleService-Info.plist */; };
 		C448E6C72A75BC4100A18EBE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4C7A7D828A528ED001CB803 /* Preview Assets.xcassets */; };
 		C448E6C82A75BC4100A18EBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4C7A7D528A528ED001CB803 /* Assets.xcassets */; };
+		C473578C2EDB58EC00F1B9AF /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473578B2EDB58EC00F1B9AF /* ApiManager.swift */; };
+		C473578D2EDB58EC00F1B9AF /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473578B2EDB58EC00F1B9AF /* ApiManager.swift */; };
 		C4880F1228B2A1230091B7C4 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = C4880F1128B2A1230091B7C4 /* GoogleSignIn */; };
 		C4880F1428B2A1230091B7C4 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C4880F1328B2A1230091B7C4 /* GoogleSignInSwift */; };
 		C4AB776B2961D13900BE9346 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AB776A2961D13900BE9346 /* Enum.swift */; };
@@ -72,6 +74,8 @@
 		C448E69F2A75B56F00A18EBE /* StorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageView.swift; sourceTree = "<group>"; };
 		C448E6CC2A75BC4100A18EBE /* GestionaleVideoOnTheMandDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GestionaleVideoOnTheMandDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C448E6CD2A75BC4100A18EBE /* GestionaleVideoOnTheMandDev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = GestionaleVideoOnTheMandDev.plist; path = /Users/michelemanniello/Documents/Sviluppo/Swift/GestionaleVideoOnTheMand/GestionaleVideoOnTheMandDev.plist; sourceTree = "<absolute>"; };
+		C473578B2EDB58EC00F1B9AF /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
+		C473578E2EDB5FBD00F1B9AF /* GestionaleVideoOnTheMandDev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GestionaleVideoOnTheMandDev.entitlements; sourceTree = "<group>"; };
 		C4880F1528B2A1480091B7C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C4AB776A2961D13900BE9346 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		C4B8D4C12A78100C008D3CEB /* InfoUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoUserView.swift; sourceTree = "<group>"; };
@@ -147,6 +151,14 @@
 			path = NewView;
 			sourceTree = "<group>";
 		};
+		C473578A2EDB58BA00F1B9AF /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C473578B2EDB58EC00F1B9AF /* ApiManager.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		C4C7A7C528A528EB001CB803 = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +180,7 @@
 		C4C7A7D028A528EB001CB803 /* GestionaleVideoOnTheMand */ = {
 			isa = PBXGroup;
 			children = (
+				C473578A2EDB58BA00F1B9AF /* Api */,
 				C443CD9C2A7BCDFC00ED417F /* Extension */,
 				C4880F1528B2A1480091B7C4 /* Info.plist */,
 				C4C7A7F728A65490001CB803 /* View */,
@@ -178,6 +191,7 @@
 				C4D0ABB82A81136800478531 /* GestionaleVideoOnTheMand.icns */,
 				C4C7A7D528A528ED001CB803 /* Assets.xcassets */,
 				C4C7A7DA28A528ED001CB803 /* GestionaleVideoOnTheMand.entitlements */,
+				C473578E2EDB5FBD00F1B9AF /* GestionaleVideoOnTheMandDev.entitlements */,
 				C4C7A7E228A59FEE001CB803 /* GoogleService-Info.plist */,
 				C4C7A7D728A528ED001CB803 /* Preview Content */,
 			);
@@ -356,6 +370,7 @@
 				C448E6B32A75BC4100A18EBE /* UploadFilmView.swift in Sources */,
 				C448E6B42A75BC4100A18EBE /* HomeView.swift in Sources */,
 				C448E6B52A75BC4100A18EBE /* FilmView.swift in Sources */,
+				C473578C2EDB58EC00F1B9AF /* ApiManager.swift in Sources */,
 				C448E6B62A75BC4100A18EBE /* ContentView.swift in Sources */,
 				C448E6B72A75BC4100A18EBE /* LoginViewModel.swift in Sources */,
 				C448E6B82A75BC4100A18EBE /* ViewModel.swift in Sources */,
@@ -380,6 +395,7 @@
 				C4D634682A72A45900B54E1C /* UploadFilmView.swift in Sources */,
 				C4F1FD1F2A730315000443AE /* HomeView.swift in Sources */,
 				C448E69E2A75B55E00A18EBE /* FilmView.swift in Sources */,
+				C473578D2EDB58EC00F1B9AF /* ApiManager.swift in Sources */,
 				C4C7A7D428A528EB001CB803 /* ContentView.swift in Sources */,
 				C4C7A80628A902C9001CB803 /* LoginViewModel.swift in Sources */,
 				C4C7A7E128A575D6001CB803 /* ViewModel.swift in Sources */,
@@ -399,6 +415,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = GestionaleVideoOnTheMand/GestionaleVideoOnTheMandDev.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -416,7 +433,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				OTHER_SWIFT_FLAGS = "-DDEV";
-				PRODUCT_BUNDLE_IDENTIFIER = com.MicheleManniello.GestionaleVideoOnTheMand;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MicheleManniello.GestionaleVideoOnTheMandDev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = YES;
@@ -433,6 +450,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = GestionaleVideoOnTheMand/GestionaleVideoOnTheMandDev.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -450,7 +468,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				OTHER_SWIFT_FLAGS = "-DDEV";
-				PRODUCT_BUNDLE_IDENTIFIER = com.MicheleManniello.GestionaleVideoOnTheMand;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MicheleManniello.GestionaleVideoOnTheMandDev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = YES;
