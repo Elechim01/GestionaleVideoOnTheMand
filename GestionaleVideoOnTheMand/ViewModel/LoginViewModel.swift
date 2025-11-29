@@ -77,7 +77,7 @@ class LoginViewModel: ObservableObject{
         }
     }
     
-    func logOut(){
+    func logOut(){ 
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
@@ -152,8 +152,8 @@ class LoginViewModel: ObservableObject{
     func logGoogleUser(user: GIDGoogleUser){
         Task{
             do{
-                guard let idToken = user.authentication.idToken else{return}
-                let accessToken = user.authentication.accessToken
+                guard let idToken = user.idToken?.tokenString else{return}
+                let accessToken = user.accessToken.tokenString
                 let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
                 try await Auth.auth().signIn(with: credential)
                 print("Ya fatta !")
