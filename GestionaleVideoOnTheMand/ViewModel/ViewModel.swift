@@ -29,8 +29,8 @@ class ViewModel: ObservableObject, HomeProtocol {
 //    @Published var elencoFilm : [String] = []
 //    Memorizzo la password, l'email e l'id 
     @AppStorage("IDUser") internal var idUser = ""
-    var email: String
-    var password: String
+    var email: String = ""
+    var password: String = ""
    @Published var thumbnail : NSImage?
     var  indexListOfUrl = 0
     
@@ -54,6 +54,10 @@ class ViewModel: ObservableObject, HomeProtocol {
     init(){
         firestore = Firestore.firestore()
         firebaseStorage = Storage.storage()
+       
+        #warning("Remove this and load with keychain")
+        email = "morotto91@outlook.it"
+        password = "Michele1"
         
         #if DEV
         email = "morotto91@outlook.it"
@@ -94,7 +98,6 @@ class ViewModel: ObservableObject, HomeProtocol {
 //        MARK: Carico il film
         
         if(Extensions.isConnectedToInternet()){
-            
             // Upload Film
             Task {
                 

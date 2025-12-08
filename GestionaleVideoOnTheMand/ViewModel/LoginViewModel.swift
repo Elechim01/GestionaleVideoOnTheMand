@@ -84,9 +84,12 @@ class LoginViewModel: ObservableObject{
                }
               
            } catch  {
-               print(error.localizedDescription)
-               self.errorMessage = error.localizedDescription
-               self.showError.toggle()
+               await MainActor.run { [weak self] in
+                   guard let self = self else { return  }
+                   print(error.localizedDescription)
+                   self.errorMessage = error.localizedDescription
+                   self.showError.toggle()
+               }
            }
        } else {
            await MainActor.run { [weak self] in
