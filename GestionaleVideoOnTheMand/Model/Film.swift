@@ -19,6 +19,8 @@ struct Film: Identifiable, Codable {
     var url: String
     var thumbnail: String
     var size: Double
+    var fileName: String
+    var thumbnailName: String
     
     init(){
         id = ""
@@ -27,6 +29,8 @@ struct Film: Identifiable, Codable {
         url = ""
         thumbnail = ""
         size = 0
+        fileName = ""
+        thumbnailName = ""
     }
     
     init(id : String,
@@ -34,13 +38,17 @@ struct Film: Identifiable, Codable {
          nome: String,
          url: String,
          thmbnail: String,
-         size: Double){
+         size: Double,
+         fileName: String,
+         thumbnailName: String){
         self.id = id
         self.idUtente = idUtente
         self.nome = nome
         self.url = url
         self.thumbnail = thmbnail
         self.size = size
+        self.fileName = fileName
+        self.thumbnailName = thumbnailName
     }
     
     func getData() -> [String:Any]? {
@@ -66,6 +74,7 @@ struct Film: Identifiable, Codable {
 }
 
 var filmsPreview: [Film] = [
+    /*
     .init(id: "1", idUtente: "", nome: "OnePiece_Ep_1069_SUB_ITA.mp4", url: "", thmbnail: "", size: 45.34),
     .init(id: "2", idUtente: "", nome: "OnePiece_Ep_1069_SUB_ITA.mp4", url: "", thmbnail: "", size: 49.34),
     .init(id: "3", idUtente: "", nome: "ShuumatsuNoHarem_Ep_01_SUB_ITA.mp4", url: "", thmbnail: "", size: 45.34),
@@ -79,5 +88,5 @@ var filmsPreview: [Film] = [
     .init(id: "11", idUtente: "", nome: "ShuumatsuNoHarem_Ep_09_SUB_ITA.mp4", url: "", thmbnail: "", size: 500),
     .init(id: "12", idUtente: "", nome: "ShuumatsuNoHarem_Ep_10_SUB_ITA.mp4", url: "", thmbnail: "", size: 500),
     .init(id: "13", idUtente: "", nome: "ShuumatsuNoHarem_Ep_11_SUB_ITA.mp4", url: "", thmbnail: "", size: 500),
-    
+    */
 ]

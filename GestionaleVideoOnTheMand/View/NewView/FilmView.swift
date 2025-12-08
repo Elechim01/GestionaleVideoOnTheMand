@@ -20,7 +20,7 @@ struct FilmView: View {
              }
         }else{
             if(homeModel.films.isEmpty){ return []}
-            var filmCount = homeModel.films.count
+            let filmCount = homeModel.films.count
             print("elenco elementi \(homeModel.films.count)")
             if filmCount < 3 { return [ GridItem() ]}
             return (1...(filmCount / 3)).map { _ in
@@ -66,17 +66,18 @@ struct FilmView: View {
 //            guard let user = homeModel.localUser, !user.isEmply else { return}
 //            if .user?.isEmply) != nil) {
                     Task {
-                        DispatchQueue.main.async {
-                            showProgressView.toggle()
+                       await  MainActor.run {
+                            showProgressView = false
                         }
                         homeModel.recuperoUtente(email: homeModel.email, password: homeModel.password, id: homeModel.idUser) {
                             //                    Recupero i film da firestore
                             homeModel.recuperoFilms {
                                 DispatchQueue.main.async {
-                                    showProgressView.toggle()
+                                    showProgressView = false
                                 }
                             }
                         }
+                        
                     }
 //                }
             }
@@ -103,25 +104,25 @@ struct FilmView: View {
         }
         .contextMenu {
             Button(action: {
-                //                                Elimino il film
+    //  Elimino il film
                 showProgressView.toggle()
-                homeModel.deleteFile(nomeFile: film.nome)
-//                                Elimino la migniatura
-                let nameThumbnail = Extensions.getThumbnailName(nameOfElement: film.nome)
-                homeModel.deleteFile(nomeFile: nameThumbnail)
-                let element = homeModel.films.first { filmRead in
-                    let value = filmRead.nome
-                    return value == film.nome
+                Task {
+                    await  homeModel.deleteFile(fileName: film.fileName)
+                    //                                Elimino la migniatura
+                    //let nameThumbnail = Extensions.getThumbnailName(nameOfElement: film.nome)
+                    await  homeModel.deleteFile(fileName: film.thumbnailName)
+                    let element = homeModel.films.first { filmRead in
+                        let value = filmRead.nome
+                        return value == film.nome
+                    }
+                    guard let element  else { return }
+                    homeModel.removeDocument(film: element)
+                   // try? await Task.sleep(nanoseconds: 3_000_000_000)
+                    
+                    await MainActor.run {
+                        showProgressView.toggle()
+                    }
                 }
-                if(element != nil){
-                    homeModel.removeDocument(film: element!)
-                }else{
-                    print("Error")
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
-                    showProgressView.toggle()
-                  //  model.getListFiles()
-                })
                 
             }, label: {
                 Text("Remove Element")

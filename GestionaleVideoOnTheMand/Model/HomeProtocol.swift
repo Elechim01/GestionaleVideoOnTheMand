@@ -125,6 +125,4 @@ extension HomeProtocol {
             completion?(error)
         }
     }
-    
-    
 }

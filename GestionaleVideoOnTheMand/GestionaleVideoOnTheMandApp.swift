@@ -25,27 +25,36 @@ struct GestionaleVideoOnTheMandApp: App {
             ContentView()
                 .environmentObject(model)
                 .environmentObject(loginModel)
+                .onAppear {
+                    // Load Session
+                    Task {
+                       await  loginModel.restoreSession()
+                    }
+                    
+                }
         }
         .windowStyle(HiddenTitleBarWindowStyle())
         
         Window("UploadfFilm", id: "uploadFilm") {
             UploadFilmView()
                 .environmentObject(model)
+                .bringToFront()
+            // Quando carico i film
         }
         .windowStyle(HiddenTitleBarWindowStyle())
         
         Window("InfoUser", id:"infoUser") {
             InfoUserView()
+                .bringToFront()
                 .environmentObject(model)
         }
         .windowStyle(HiddenTitleBarWindowStyle())
-        
     }
 }
 
 extension NSTextField{
     open override var focusRingType: NSFocusRingType{
-        get{.none}
-        set{}
+        get { .none }
+        set { }
     }
 }

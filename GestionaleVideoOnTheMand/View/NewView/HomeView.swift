@@ -18,49 +18,48 @@ struct HomeView: View {
     
     var body: some View {
         
-            NavigationSplitView(columnVisibility: $columsVisibility) {
+        NavigationSplitView(columnVisibility: $columsVisibility) {
+            
+            VStack(alignment: .leading) {
                 
-                VStack(alignment: .leading) {
-                    
-                    InfoUser(name: model.localUser?.nome ?? "")
-                    
-                    ListButton(text: "Film", imageName: "film",section: .film, onTap: nil)
-
-                    
-                    ListButton(text: "Spazio", imageName: "opticaldiscdrive",section: .spazio, onTap: nil)
-                    
-                    Spacer()
-                }
+                InfoUser(name: model.localUser?.nome ?? "")
                 
-            } detail: {
-                switch homeSection {
-                case .film:
-                    FilmView()
-                        .environmentObject(model)
-                case .spazio:
-                    StorageView()
-                        .environmentObject(model)
-                }
+                ListButton(text: "Film", imageName: "film",section: .film, onTap: nil)
+                
+                
+                ListButton(text: "Spazio", imageName: "opticaldiscdrive",section: .spazio, onTap: nil)
+                
+                Spacer()
             }
-            .navigationSplitViewStyle(.balanced)
-            .alert(model.alertMessage, isPresented: $model.showAlert, actions: {
-                Button("OK",role: .cancel) {
-                    model.showAlert.toggle()
+            
+        } detail: {
+            switch homeSection {
+            case .film:
+                FilmView()
+                    .environmentObject(model)
+            case .spazio:
+                StorageView()
+                    .environmentObject(model)
+            }
+        }
+        .navigationSplitViewStyle(.balanced)
+        .alert(model.alertMessage, isPresented: $model.showAlert, actions: {
+            Button("OK",role: .cancel) {
+                model.showAlert.toggle()
+            }
+        })
+        .alert("Sei sicuro di voler fare Logout", isPresented: $showLogoutConfirm,actions: {
+            Button("Annulla", role: .cancel) {
+                showLogoutConfirm.toggle()
+            }
+            Button("Conferma", role: .destructive) {
+
+                Task(priority: .background) {
+                    loginModel.logOut()
                 }
-            })
-            .alert("Sei sicuro di voler fare Logout", isPresented: $showLogoutConfirm,actions: {
-                Button("Annulla", role: .cancel) {
-                    showLogoutConfirm.toggle()
-                }
-                Button("Conferma", role: .destructive) {
-                    #if PROD
-                    Task(priority: .background) {
-                        loginModel.logOut()
-                    }
-                    #endif
-                    showLogoutConfirm.toggle()
-                }
-            })
+                showLogoutConfirm.toggle()
+            }
+        })
     }
     
     @ViewBuilder

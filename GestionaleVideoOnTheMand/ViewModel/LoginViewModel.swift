@@ -32,61 +32,77 @@ class LoginViewModel: ObservableObject{
     @Published var errorMessage : String = ""
     
     //    Memorizzo la password e l'email
-    @AppStorage("Password") internal var password = ""
-    @AppStorage("Email") internal var email = ""
     @AppStorage("IDUser") internal var idUser = ""
     @Published var nonce: String = ""
     
     //    Funzioni di Login e Logout
-    func login(email: String, password: String, completition : @escaping (String)->()){
+    func login(email: String, password: String) async -> String? {
         if(!Extensions.isConnectedToInternet()){
             errorMessage = "Impossibile effettuare il login in assenza di connessione internet"
             showError.toggle()
-            return
+            return nil
         }
-        Auth.auth().signIn(withEmail: email, password: password){ [weak self] authResult, error in
-            guard let self = self else { return }
-            if let err = error{
-                print(err.localizedDescription)
-                self.errorMessage = err.localizedDescription
-                self.showError.toggle()
-                completition("")
-                return
-            }else{
-                guard let authResult = authResult else { return }
-                //                Salvo i valori per renderli permanenti
-                let attributes: [String : Any] = [
-                    kSecClass as String: kSecClassGenericPassword,
-                    kSecAttrAccount as String: email,
-                    kSecValueData as String: password.data(using: .utf8)!
-                ]
-                Task(priority: .background) {
-                    if SecItemAdd(attributes as CFDictionary, nil) == noErr {
-                        print("User saved succes")
-                    } else {
-                        print("Error")
-                    }
-                    
+        do {
+           let authResult =  try await FirebaseUtils.shared.singIn(email: email, password: password)
+            let attributes: [String : Any] = [
+                kSecClass as String: kSecClassGenericPassword,
+                kSecAttrAccount as String: email,
+                kSecValueData as String: password.data(using: .utf8)!
+            ]
+            Task(priority: .background) {
+                if SecItemAdd(attributes as CFDictionary, nil) == noErr {
+                    print("User saved succes")
+                } else {
+                    print("Error")
                 }
-                self.password = password
-                self.email = email
-                self.idUser = authResult.user.uid
-                completition(authResult.user.uid)
-                return
             }
+           await MainActor.run { [weak self] in
+               guard let self = self else { return }
+               self.idUser = authResult.user.uid
+            }
+            
+            try await TokenRequest(tokenBody: TokenBodyRequest(username: "Michele", password: "Michele1")).performRequestAsync()
+            #warning("Save credential in keychain")
+            return authResult.user.uid
+            
+        } catch  {
+            print(error.localizedDescription)
+            self.errorMessage = error.localizedDescription
+            self.showError.toggle()
+            return nil
         }
     }
+
+    func restoreSession() async {
+       if let user = Auth.auth().currentUser {
+            // Credential
+           do {
+               try await TokenRequest(tokenBody: TokenBodyRequest(username: "Michele", password: "Michele1")).performRequestAsync()
+               await MainActor.run { [weak self] in
+                   guard let self = self else { return  }
+                   self.page = 2
+               }
+              
+           } catch  {
+               print(error.localizedDescription)
+               self.errorMessage = error.localizedDescription
+               self.showError.toggle()
+           }
+       } else {
+           await MainActor.run { [weak self] in
+               guard let self = self else { return  }
+               self.page = 0
+           }
+       }
+    }
     
-    func logOut(){ 
+    func logOut(){
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
-            //               svuoto i valori
         } catch let singoutError as NSError {
             print("Error %@",singoutError)
         }
-        self.email = ""
-        self.password = ""
         self.idUser = ""
         page = 0
     }
@@ -111,9 +127,7 @@ class LoginViewModel: ObservableObject{
                     return
                 }
                 print(authResult.user.uid)
-                //                Salvo i valori per renderli permanenti
-                self.email = email
-                self.password = password
+                //  Salvo i valori per renderli permanenti
                 self.idUser = authResult.user.uid
                 completion(authResult.user.uid)
                 return
@@ -141,7 +155,7 @@ class LoginViewModel: ObservableObject{
             }
             print("Logged in Success")
             withAnimation(.easeInOut){
-                //                    self.logStatus = true
+        // self.logStatus = true
             }
         }
         
@@ -171,45 +185,46 @@ class LoginViewModel: ObservableObject{
     
     //MARK: Apple Sign in Hepers
     func sha256(_ input: String) -> String {
-     let inputData = Data(input.utf8)
-     let hashedData = SHA256.hash(data: inputData)
-     let hashString = hashedData.compactMap {
-       return String(format: "%02x", $0)
-     }.joined()
-
-     return hashString
+        let inputData = Data(input.utf8)
+        let hashedData = SHA256.hash(data: inputData)
+        let hashString = hashedData.compactMap {
+            return String(format: "%02x", $0)
+        }.joined()
+        
+        return hashString
     }
+    
     // Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
     func randomNonceString(length: Int = 32) -> String {
-     precondition(length > 0)
-     let charset: Array<Character> =
-         Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
-     var result = ""
-     var remainingLength = length
-
-     while remainingLength > 0 {
-       let randoms: [UInt8] = (0 ..< 16).map { _ in
-         var random: UInt8 = 0
-         let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
-         if errorCode != errSecSuccess {
-           fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
-         }
-         return random
-       }
-
-       randoms.forEach { random in
-         if remainingLength == 0 {
-           return
-         }
-
-         if random < charset.count {
-           result.append(charset[Int(random)])
-           remainingLength -= 1
-         }
-       }
-     }
-
-     return result
+        precondition(length > 0)
+        let charset: Array<Character> =
+        Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+        var result = ""
+        var remainingLength = length
+        
+        while remainingLength > 0 {
+            let randoms: [UInt8] = (0 ..< 16).map { _ in
+                var random: UInt8 = 0
+                let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
+                if errorCode != errSecSuccess {
+                    fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
+                }
+                return random
+            }
+            
+            randoms.forEach { random in
+                if remainingLength == 0 {
+                    return
+                }
+                
+                if random < charset.count {
+                    result.append(charset[Int(random)])
+                    remainingLength -= 1
+                }
+            }
+        }
+        
+        return result
     }
 }
 
@@ -219,8 +234,6 @@ extension NSApplication{
     func rootController() -> NSViewController {
         guard let window =  windows.first as? NSWindow else { return .init() }
         guard let viewController = window.contentViewController else {return .init()}
-//                rootViewController else { return .init() }
-        
         return viewController
     }
 }

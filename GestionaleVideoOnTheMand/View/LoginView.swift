@@ -82,19 +82,18 @@ struct LoginView: View {
                 Spacer()
                 Button {
                     if getCheck{
-                        loginViewModel.login(email: email, password: password, completition: {id in
-                            if(!id.isEmpty){
-                                
-                                //Recupero utente
-                                self.model.recuperoUtente(email: email, password: password, id: id) {
-                                    if(!model.showAlert){
-                                        loginViewModel.page = 2
-                                    }
+                        Task {
+                            guard let id = await loginViewModel.login(email: email, password: password) else {
+                                return
+                            }
+                            //Recupero utente
+                            self.model.recuperoUtente(email: email, password: password, id: id) {
+                                if(!model.showAlert){
+                                    loginViewModel.page = 2
                                 }
                             }
-                        })
-                    }
-                    else{
+                        }
+                    }else {
                         loginViewModel.showError = true
                     }
                 } label: {
@@ -209,6 +208,7 @@ struct LoginView: View {
             }
             .padding(.leading,-60)
             .frame(maxWidth:.infinity)
+            
             Spacer()
             
         }

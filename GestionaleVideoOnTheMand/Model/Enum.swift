@@ -13,22 +13,7 @@ enum Page: Int{
     case Home = 2
 }
 
-enum CustomError: Error {
-    case genericError
-    case fileError
-    case connectionError
-   public var description: String {
-       switch self {
-       case .genericError:
-           return "Generic Error"
-       case .fileError:
-           return "File Error"
-       case .connectionError:
-           return "Il dispositivo non è conneso a internet"
-           
-       }
-    }
-}
+
 
 enum HomeSection {
     case film
