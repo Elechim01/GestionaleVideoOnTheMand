@@ -9,10 +9,11 @@
 import SwiftUI
 import AppKit
 import Foundation
+@preconcurrency import FirebaseFirestore
 
-struct Film: Identifiable, Codable {
+struct Film: Identifiable, Codable,Sendable {
     
-    //  MARK:  ID Recuperato da query firebase
+    @DocumentID var documentId: String?
     var id: String
     var idUtente: String
     var nome: String
@@ -21,6 +22,8 @@ struct Film: Identifiable, Codable {
     var size: Double
     var fileName: String
     var thumbnailName: String
+    #warning("Read message")
+    //TODO: AGGIUNGERE UNA DATA
     
     init(){
         id = ""
@@ -51,6 +54,7 @@ struct Film: Identifiable, Codable {
         self.thumbnailName = thumbnailName
     }
     
+    
     func getData() -> [String:Any]? {
         do {
             let data = try JSONEncoder().encode(self)
@@ -74,19 +78,12 @@ struct Film: Identifiable, Codable {
 }
 
 var filmsPreview: [Film] = [
-    /*
-    .init(id: "1", idUtente: "", nome: "OnePiece_Ep_1069_SUB_ITA.mp4", url: "", thmbnail: "", size: 45.34),
-    .init(id: "2", idUtente: "", nome: "OnePiece_Ep_1069_SUB_ITA.mp4", url: "", thmbnail: "", size: 49.34),
-    .init(id: "3", idUtente: "", nome: "ShuumatsuNoHarem_Ep_01_SUB_ITA.mp4", url: "", thmbnail: "", size: 45.34),
-    .init(id: "4", idUtente: "", nome: "ShuumatsuNoHarem_Ep_02_SUB_ITA.mp4", url: "", thmbnail: "", size: 49.34),
-    .init(id: "5", idUtente: "", nome: "ShuumatsuNoHarem_Ep_03_SUB_ITA.mp4", url: "", thmbnail: "", size: 40.34),
-    .init(id: "6", idUtente: "", nome: "ShuumatsuNoHarem_Ep_04_SUB_ITA.mp4", url: "", thmbnail: "", size: 45.34),
-    .init(id: "7", idUtente: "", nome: "ShuumatsuNoHarem_Ep_05_SUB_ITA.mp4", url: "", thmbnail: "", size: 49.34),
-    .init(id: "8", idUtente: "", nome: "ShuumatsuNoHarem_Ep_06_SUB_ITA.mp4", url: "", thmbnail: "", size: 200),
-    .init(id: "9", idUtente: "", nome: "ShuumatsuNoHarem_Ep_07_SUB_ITA.mp4", url: "", thmbnail: "", size: 200),
-    .init(id: "10", idUtente: "", nome: "ShuumatsuNoHarem_Ep_08_SUB_ITA.mp4", url: "", thmbnail: "", size: 200),
-    .init(id: "11", idUtente: "", nome: "ShuumatsuNoHarem_Ep_09_SUB_ITA.mp4", url: "", thmbnail: "", size: 500),
-    .init(id: "12", idUtente: "", nome: "ShuumatsuNoHarem_Ep_10_SUB_ITA.mp4", url: "", thmbnail: "", size: 500),
-    .init(id: "13", idUtente: "", nome: "ShuumatsuNoHarem_Ep_11_SUB_ITA.mp4", url: "", thmbnail: "", size: 500),
-    */
+    .init(id: "1", idUtente: "", nome: "OnePiece_Ep_1069_SUB_ITA.mp4", url: "", thmbnail: "http://192.168.1.119:3000/media/1765792379878-thumbnail.png", size: 30, fileName: "", thumbnailName: ""),
+    .init(id: "2", idUtente: "", nome: "OnePiece_Ep_1069_SUB_ITA.mp4", url: "", thmbnail: "http://192.168.1.119:3000/media/1765792379878-thumbnail.png", size: 30, fileName: "", thumbnailName: ""),
+    .init(id: "3", idUtente: "", nome: "OnePiece_Ep_1069_SUB_ITA.mp4", url: "", thmbnail: "http://192.168.1.119:3000/media/1765792379878-thumbnail.png", size: 30, fileName: "", thumbnailName: ""),
+    .init(id: "4", idUtente: "", nome: "OnePiece_Ep_1069_SUB_ITA.mp4", url: "", thmbnail: "http://192.168.1.119:3000/media/1765792379878-thumbnail.png", size: 30, fileName: "", thumbnailName: ""),
+    .init(id: "5", idUtente: "", nome: "OnePiece_Ep_1069_SUB_ITA.mp4", url: "", thmbnail: "http://192.168.1.119:3000/media/1765792379878-thumbnail.png", size: 30, fileName: "", thumbnailName: ""),
+    
+    
+    
 ]

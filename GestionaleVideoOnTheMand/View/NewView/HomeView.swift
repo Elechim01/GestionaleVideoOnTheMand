@@ -9,8 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @EnvironmentObject var model: ViewModel
-    @EnvironmentObject var loginModel: LoginViewModel
+    @EnvironmentObject var homeViewModel: ViewModel
+    @EnvironmentObject var loginViewModel: LoginViewModel
     @State private var columsVisibility = NavigationSplitViewVisibility.all
     @Environment(\.openWindow) var openWindow
     @State var homeSection: HomeSection = .film
@@ -22,7 +22,7 @@ struct HomeView: View {
             
             VStack(alignment: .leading) {
                 
-                InfoUser(name: model.localUser?.nome ?? "")
+                InfoUser(name: homeViewModel.localUser?.nome ?? "")
                 
                 ListButton(text: "Film", imageName: "film",section: .film, onTap: nil)
                 
@@ -33,19 +33,26 @@ struct HomeView: View {
             }
             
         } detail: {
-            switch homeSection {
-            case .film:
-                FilmView()
-                    .environmentObject(model)
-            case .spazio:
-                StorageView()
-                    .environmentObject(model)
+            ZStack(alignment: .center) {
+                switch homeSection {
+                case .film:
+                    FilmView()
+                        .environmentObject(homeViewModel)
+                case .spazio:
+                    StorageView()
+                        .environmentObject(homeViewModel)
+                }
+                
+                if homeViewModel.showAlert {
+                    ProgressView()
+                }
             }
+            
         }
         .navigationSplitViewStyle(.balanced)
-        .alert(model.alertMessage, isPresented: $model.showAlert, actions: {
+        .alert(homeViewModel.alertMessage, isPresented: $homeViewModel.showAlert, actions: {
             Button("OK",role: .cancel) {
-                model.showAlert.toggle()
+                homeViewModel.showAlert.toggle()
             }
         })
         .alert("Sei sicuro di voler fare Logout", isPresented: $showLogoutConfirm,actions: {
@@ -55,7 +62,7 @@ struct HomeView: View {
             Button("Conferma", role: .destructive) {
 
                 Task(priority: .background) {
-                    loginModel.logOut()
+                    loginViewModel.logOut()
                 }
                 showLogoutConfirm.toggle()
             }

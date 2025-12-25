@@ -19,19 +19,19 @@ struct LoginView: View {
     
     var getCheck: Bool{
         if(email.isEmpty){
-            loginViewModel.errorMessage = "Il campo email è vuoto"
+            loginViewModel.alertMessage = "Il campo email è vuoto"
             return false
         }
         if(!Extensions.isValidEmail(email)){
-            loginViewModel.errorMessage = "L'email non è valida"
+            loginViewModel.alertMessage = "L'email non è valida"
             return false
         }
         if(password.isEmpty){
-            loginViewModel.errorMessage = "Il campo password è vuoto"
+            loginViewModel.alertMessage = "Il campo password è vuoto"
             return false
         }
         if(!Extensions.isValidPassword(testStr: password)){
-            loginViewModel.errorMessage = "la password non è valida, deve comprendere: Almeno una maiuscola, Almeno un numero, Almeno una minuscola, 8 caratteri in totale"
+            loginViewModel.alertMessage = "la password non è valida, deve comprendere: Almeno una maiuscola, Almeno un numero, Almeno una minuscola, 8 caratteri in totale"
             return false
         }
         return true
@@ -83,18 +83,10 @@ struct LoginView: View {
                 Button {
                     if getCheck{
                         Task {
-                            guard let id = await loginViewModel.login(email: email, password: password) else {
-                                return
-                            }
-                            //Recupero utente
-                            self.model.recuperoUtente(email: email, password: password, id: id) {
-                                if(!model.showAlert){
-                                    loginViewModel.page = 2
-                                }
-                            }
+                         await loginViewModel.login(email: email, password: password) 
                         }
                     }else {
-                        loginViewModel.showError = true
+                        loginViewModel.showAlert = true
                     }
                 } label: {
                     Text("Login")
@@ -214,9 +206,9 @@ struct LoginView: View {
         }
         .background(Color("Blue").ignoresSafeArea())
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .alert(loginViewModel.errorMessage, isPresented: $loginViewModel.showError, actions: {
+        .alert(loginViewModel.alertMessage, isPresented: $loginViewModel.showAlert, actions: {
             Button {
-                loginViewModel.showError.toggle()
+                loginViewModel.showAlert.toggle()
             } label: {
                 Text("OK")
             }

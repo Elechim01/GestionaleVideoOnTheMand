@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Services
 
 struct RegistrationView: View {
     @EnvironmentObject var loginModel: LoginViewModel
@@ -15,35 +16,35 @@ struct RegistrationView: View {
     var checkCampi: Bool{
 //        Controllo nome:
         if nome.isEmpty {
-            loginModel.errorMessage = "Il campo nome è vuoto"
+            loginModel.alertMessage = "Il campo nome è vuoto"
             return false
         }
         if cognome.isEmpty {
-            loginModel.errorMessage = "Il campo cognome è vuoto"
+            loginModel.alertMessage = "Il campo cognome è vuoto"
             return false
         }
         if email.isEmpty {
-            loginModel.errorMessage = "Il campo email è vuoto"
+            loginModel.alertMessage = "Il campo email è vuoto"
             return false
         }
         if !Extensions.isValidEmail(email){
-            loginModel.errorMessage = "L'email non è valida"
+            loginModel.alertMessage = "L'email non è valida"
             return false
         }
         if password.isEmpty{
-            loginModel.errorMessage = "Il campo password è vuoto"
+            loginModel.alertMessage = "Il campo password è vuoto"
             return false
         }
         if !Extensions.isValidPassword(testStr: password){
-            loginModel.errorMessage = "la password non è valida, deve comprendere: Almeno una maiuscola, Almeno un numero, Almeno una minuscola, 8 caratteri in totale"
+            loginModel.alertMessage = "la password non è valida, deve comprendere: Almeno una maiuscola, Almeno un numero, Almeno una minuscola, 8 caratteri in totale"
             return false
         }
         if cellulare.isEmpty{
-            loginModel.errorMessage = "Il campo cellulare è vuoto"
+            loginModel.alertMessage = "Il campo cellulare è vuoto"
             return false
         }
         if Int(cellulare) == nil{
-            loginModel.errorMessage = "Il valore non è un numero"
+            loginModel.alertMessage = "Il valore non è un numero"
             return false
         }
         
@@ -86,20 +87,24 @@ struct RegistrationView: View {
                     if checkCampi {
     //                    Creo utente
 //                        #warning("implementare controllo utente, se si sta registrando 2 volte")
-                        var utente = Utente(id: "", nome: self.nome, cognome: self.cognome, email: self.email, password: self.password, cellulare: self.cellulare)
-                        model.addUtente(utente: utente)
+                        Task {
+                            var utente = Utente(id: "", nome: self.nome, cognome: self.cognome, email: self.email, password: self.password, cellulare: self.cellulare)
+                            try  await FirebaseUtils.shared.addUtente(utente: utente)
+                            loginModel.registration(email: utente.email, password: utente.password, completion: { id in
+                                if(!id.isEmpty){
+                                    utente.id = id
+                                    print("Utente:\(utente.id)")
+                                    model.localUser = utente
+                                    loginModel.page = 2
+                                }
+                            })
+                        }
+                       
                         
     //                    Registra utente e passa alla home
-                        loginModel.registration(email: utente.email, password: utente.password, completion: { id in
-                            if(!id.isEmpty){
-                                utente.id = id
-                                print("Utente:\(utente.id)")
-                                model.localUser = utente
-                                loginModel.page = 2
-                            }
-                        })
+                        
                     } else {
-                        loginModel.showError = true
+                        loginModel.showAlert = true
                     }
                 } label: {
                     Text("Registrati")
@@ -113,9 +118,9 @@ struct RegistrationView: View {
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .alert(loginModel.errorMessage, isPresented: $loginModel.showError) {
+        .alert(loginModel.alertMessage, isPresented: $loginModel.showAlert) {
             Button {
-                loginModel.showError.toggle()
+                loginModel.showAlert.toggle()
             } label: {
                 Text("OK")
             }

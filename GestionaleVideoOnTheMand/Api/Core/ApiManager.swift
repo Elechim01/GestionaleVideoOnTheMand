@@ -3,7 +3,7 @@ import Foundation
 final class ApiManager {
 
     static let shared = ApiManager()
-    private static let baseUrl = "http://192.168.1.100:3000"
+    private static let baseUrl = "http://192.168.1.119:3000"
     
     var token: String? {
         get {

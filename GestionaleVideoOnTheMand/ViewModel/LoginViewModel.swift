@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Services
 import Firebase
 import AuthenticationServices
 import GoogleSignIn
@@ -28,19 +29,18 @@ class LoginViewModel: ObservableObject{
         }
     }
     
-    @Published var showError : Bool = false
-    @Published var errorMessage : String = ""
+    @Published var showAlert : Bool = false
+    @Published var alertMessage : String = ""
     
     //    Memorizzo la password e l'email
     @AppStorage("IDUser") internal var idUser = ""
     @Published var nonce: String = ""
     
     //    Funzioni di Login e Logout
-    func login(email: String, password: String) async -> String? {
+    func login(email: String, password: String) async {
         if(!Extensions.isConnectedToInternet()){
-            errorMessage = "Impossibile effettuare il login in assenza di connessione internet"
-            showError.toggle()
-            return nil
+            alertMessage = "Impossibile effettuare il login in assenza di connessione internet"
+            showAlert.toggle()
         }
         do {
            let authResult =  try await FirebaseUtils.shared.singIn(email: email, password: password)
@@ -62,21 +62,37 @@ class LoginViewModel: ObservableObject{
             }
             
             try await TokenRequest(tokenBody: TokenBodyRequest(username: "Michele", password: "Michele1")).performRequestAsync()
-            #warning("Save credential in keychain")
-            return authResult.user.uid
+           
+            AuthKeyChain.shared.setCredential(email: email, password: password)
+        
+            await MainActor.run { [weak self] in
+                guard let self = self else { return }
+                self.page = 2
+            }
             
         } catch  {
-            print(error.localizedDescription)
-            self.errorMessage = error.localizedDescription
-            self.showError.toggle()
-            return nil
+            await MainActor.run { [weak self] in
+                guard let self = self else { return }
+                showError(from: error)
+            }
         }
     }
 
     func restoreSession() async {
+        await MainActor.run { [weak self] in
+            guard let self = self else { return }
+            self.page = 0
+            
+        }
        if let user = Auth.auth().currentUser {
             // Credential
            do {
+               let credential = AuthKeyChain.shared.redCredential()
+               guard let email = credential.email,
+                     let password = credential.password else {
+                   // TODO: CHANGE ERROR TYPE
+                 return
+               }
                try await TokenRequest(tokenBody: TokenBodyRequest(username: "Michele", password: "Michele1")).performRequestAsync()
                await MainActor.run { [weak self] in
                    guard let self = self else { return  }
@@ -87,8 +103,7 @@ class LoginViewModel: ObservableObject{
                await MainActor.run { [weak self] in
                    guard let self = self else { return  }
                    print(error.localizedDescription)
-                   self.errorMessage = error.localizedDescription
-                   self.showError.toggle()
+                   showError(from: error)
                }
            }
        } else {
@@ -103,26 +118,30 @@ class LoginViewModel: ObservableObject{
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
+            
         } catch let singoutError as NSError {
             print("Error %@",singoutError)
         }
+        AuthKeyChain.shared.delete()
         self.idUser = ""
         page = 0
     }
     
+#warning("Move to Async/Await")
+    
     //    Funzione di Registrazione
-    func registration(email:String, password: String,completion:@escaping (String) ->()){
+    func registration(email:String, password: String,completion: @escaping (String) ->()){
         if(!Extensions.isConnectedToInternet()){
-            errorMessage = "Impossibile effettuare il login in assenza di connessione internet"
-            showError.toggle()
+            alertMessage = "Impossibile effettuare il login in assenza di connessione internet"
+            showAlert.toggle()
             return
         }
         Auth.auth().createUser(withEmail: email, password: password){[weak self] authResult,error in
             guard let self = self else { return }
             if let error = error{
                 print(error.localizedDescription)
-                self.errorMessage = error.localizedDescription
-                self.showError.toggle()
+                self.alertMessage = error.localizedDescription
+                self.showAlert.toggle()
                 completion("")
                 return
             }else{
@@ -228,6 +247,15 @@ class LoginViewModel: ObservableObject{
         }
         
         return result
+    }
+    
+    private func showError(from error: Error) {
+        if let custom = error as? CustomError {
+            alertMessage = custom.description
+        } else {
+            alertMessage = error.localizedDescription
+        }
+        self.showAlert.toggle()
     }
 }
 

@@ -17,52 +17,68 @@ struct UploadFilmView: View {
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
             
-            CustomButton(falseColor: .green, action: {
-                model.uploadFileToDb()
-            }, label: {
-                Text("Carica i film")
-                    .font(.title)
-            })
-            .frame(width: 300)
+            if model.stato == .loadFilm {
+                CustomButton(falseColor: .green, action: {
+                    model.uploadFileToDb()
+                }, label: {
+                    Text("Seleziona i  film da caricare")
+                        .font(.title)
+                })
+                .frame(width: 300)
+            }
             
-            if model.stato != nil {
+            if model.stato != .loadFilm {
                 
-                if(model.thumbnail != nil){
-                    Image(nsImage: model.thumbnail!)
-                }
-                
-                Text("File: \(model.fileName)")
-                ProgressView(value: model.progress, total: 100) {
-                    Text(model.stato?.rawValue ?? "")
-                        .font(.title3)
-                        .padding(.leading)
-                }
-                .padding(.horizontal)
-                
-                HStack(alignment: .center, spacing: 20) {
-                    Button(action: {
-                        guard model.taskUploadImage != nil else { return }
-                        model.taskUploadImage!.pause()
-                        
-                    }, label: {
-                        Image(systemName: "pause")
-                    })
+                if model.stato == .succes {
                     
-                    Button(action: {
-                        guard model.taskUploadImage != nil else { return }
-                        model.taskUploadImage!.resume()
-                        
+                    CustomButton(falseColor: .green, action: {
+                        model.stato = .loadFilm
                     }, label: {
-                        Image(systemName: "play")
+                        Text("Carica Film")
+                            .font(.title)
                     })
+                    .frame(width: 300)
                     
-                    Button(action: {
-                        guard model.taskUploadImage != nil else { return }
-                        model.taskUploadImage!.cancel()
+                } else {
+                    
+                    if(model.thumbnail != nil){
+                        Image(nsImage: model.thumbnail!)
+                    }
+                    
+                    Text("File: \(model.fileName)")
+                    ProgressView(value: min(max(model.progress, 0), 100), total: 100) {
+                        Text(model.stato.rawValue)
+                            .font(.title3)
+                            .padding(.leading)
+                    }
+                    .padding(.horizontal)
+                    /*
+                    HStack(alignment: .center, spacing: 20) {
+                        Button(action: {
+                            guard model.taskUploadImage != nil else { return }
+                            model.taskUploadImage!.pause()
+                            
+                        }, label: {
+                            Image(systemName: "pause")
+                        })
                         
-                    }, label: {
-                        Image(systemName: "stop")
-                    })
+                        Button(action: {
+                            guard model.taskUploadImage != nil else { return }
+                            model.taskUploadImage!.resume()
+                            
+                        }, label: {
+                            Image(systemName: "play")
+                        })
+                        
+                        Button(action: {
+                            guard model.taskUploadImage != nil else { return }
+                            model.taskUploadImage!.cancel()
+                            
+                        }, label: {
+                            Image(systemName: "stop")
+                        })
+                    }
+                    */
                 }
             }
             

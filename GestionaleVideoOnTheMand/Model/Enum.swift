@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Page: Int{
+enum Page: Int, Equatable {
     case Login = 0
     case Registration = 1
     case Home = 2
@@ -28,4 +28,5 @@ enum UploadStatus: String {
     case uploadThumbnail = "Carico la thumbnail"
     case succes = "Completato con successo"
     case error = "Errore nel caricamento"
+    case loadFilm = "Carica Film"
 }

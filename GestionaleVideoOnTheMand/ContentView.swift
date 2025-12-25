@@ -7,28 +7,37 @@
 
 import SwiftUI
 import Firebase
+
 struct ContentView: View {
     
-  
-    @EnvironmentObject var model: ViewModel
+    @EnvironmentObject var homeModel: ViewModel
     @EnvironmentObject var login: LoginViewModel
     
     var body: some View {
-        if(login.pagina == .Login){
-            LoginView()
-                .environmentObject(login)
-                .environmentObject(model)
-        }else if(login.pagina == .Registration){
-            RegistrationView()
-                .environmentObject(login)
-                .environmentObject(model)
-        }else if(login.pagina == .Home){
-             HomeView()
-                .environmentObject(model)
-        }else{
-            Text("Page not found")
+        Group {
+            if login.pagina == .Login {
+                LoginView()
+                    .environmentObject(login)
+                    .environmentObject(homeModel)
+            } else if login.pagina == .Registration {
+                RegistrationView()
+                    .environmentObject(login)
+                    .environmentObject(homeModel)
+            } else if login.pagina == .Home {
+                HomeView()
+                    .environmentObject(homeModel)
+            } else {
+                Text("Page not found")
+            }
         }
-     
+        .onChange(of: login.pagina) { newPagina in
+            if newPagina == .Home {
+                Task {
+                    await homeModel.loadFilmView()
+                }
+            }
+        }
+        
     }
 }
 

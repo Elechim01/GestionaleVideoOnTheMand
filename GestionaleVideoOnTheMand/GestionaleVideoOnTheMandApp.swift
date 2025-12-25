@@ -10,12 +10,28 @@ import AppKit
 import Cocoa
 import Firebase
 
-@main
-struct GestionaleVideoOnTheMandApp: App {
+
+
+import SwiftUI
+import FirebaseCore
+import FirebaseFirestore
+
+// 1. Definisci un AppDelegate standard per macOS
+class AppDelegate: NSObject, NSApplicationDelegate {
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        // Configura qui. È il posto più sicuro in assoluto su macOS.
+        setupFirebase()
+    }
     
-    init(){
+    func setupFirebase() {
         FirebaseApp.configure()
     }
+}
+
+
+@main
+struct GestionaleVideoOnTheMandApp: App {
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     @StateObject var model = ViewModel()
     @StateObject var loginModel = LoginViewModel()
@@ -26,31 +42,40 @@ struct GestionaleVideoOnTheMandApp: App {
                 .environmentObject(model)
                 .environmentObject(loginModel)
                 .onAppear {
-                    // Load Session
                     Task {
                        await  loginModel.restoreSession()
                     }
-                    
                 }
         }
         .windowStyle(HiddenTitleBarWindowStyle())
+        .commands {
+            CommandGroup(replacing: .appSettings) {
+                Button("Impostazioni") {
+                    print("Impostazioni")
+                }
+                .keyboardShortcut(",", modifiers: .command)
+            }
+        }
         
         Window("UploadfFilm", id: "uploadFilm") {
             UploadFilmView()
                 .environmentObject(model)
-                .bringToFront()
+                .alwaysOnTop()
             // Quando carico i film
         }
         .windowStyle(HiddenTitleBarWindowStyle())
         
         Window("InfoUser", id:"infoUser") {
             InfoUserView()
-                .bringToFront()
+                .alwaysOnTop()
                 .environmentObject(model)
         }
         .windowStyle(HiddenTitleBarWindowStyle())
     }
 }
+
+
+
 
 extension NSTextField{
     open override var focusRingType: NSFocusRingType{

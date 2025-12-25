@@ -8,7 +8,7 @@
 import SwiftUI
 import AppKit
 
-struct Utente: Identifiable, Codable {
+struct Utente: Identifiable, Codable, Sendable {
 //   MARK: Id preso da frebase 
     var id: String
     var nome: String

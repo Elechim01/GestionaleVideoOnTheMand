@@ -20,7 +20,24 @@ struct BringToFront: NSViewRepresentable {
 }
 
 extension View {
-    func bringToFront() -> some View {
-        background(BringToFront())
+    func alwaysOnTop() -> some View {
+        self.background(WindowAccessor { window in
+            window?.level = .floating
+        })
     }
+}
+
+// Helper per catturare la finestra
+struct WindowAccessor: NSViewRepresentable {
+    var callback: (NSWindow?) -> ()
+
+    func makeNSView(context: Context) -> NSView {
+        let view = NSView()
+        DispatchQueue.main.async {
+            callback(view.window)
+        }
+        return view
+    }
+
+    func updateNSView(_ nsView: NSView, context: Context) {}
 }
