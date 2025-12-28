@@ -84,15 +84,17 @@ class LoginViewModel: ObservableObject{
             self.page = 0
             
         }
-       if let user = Auth.auth().currentUser {
+       if let _ = Auth.auth().currentUser {
             // Credential
            do {
                let credential = AuthKeyChain.shared.redCredential()
                guard let email = credential.email,
-                     let password = credential.password else {
+                     let password = credential.password,
+                     Extensions.isConnectedToInternet() else {
                    // TODO: CHANGE ERROR TYPE
-                 return
+                   return
                }
+               
                try await TokenRequest(tokenBody: TokenBodyRequest(username: "Michele", password: "Michele1")).performRequestAsync()
                await MainActor.run { [weak self] in
                    guard let self = self else { return  }
@@ -127,8 +129,7 @@ class LoginViewModel: ObservableObject{
         page = 0
     }
     
-#warning("Move to Async/Await")
-    
+    #warning("Move to Async/Await")
     //    Funzione di Registrazione
     func registration(email:String, password: String,completion: @escaping (String) ->()){
         if(!Extensions.isConnectedToInternet()){
@@ -252,8 +253,10 @@ class LoginViewModel: ObservableObject{
     private func showError(from error: Error) {
         if let custom = error as? CustomError {
             alertMessage = custom.description
+        } else if let apiError = error as? ApiError {
+            alertMessage = apiError.error.localizedDescription
         } else {
-            alertMessage = error.localizedDescription
+            alertMessage = "Genic Error"
         }
         self.showAlert.toggle()
     }

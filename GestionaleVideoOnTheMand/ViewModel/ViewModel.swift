@@ -11,7 +11,6 @@ import LocalAuthentication
 
 @MainActor
 class ViewModel: ObservableObject {
-    let api = ApiManager()
     @Published var fileName = ""
     var file : URL = URL(fileURLWithPath: "")
     internal var listOfUrl : [URL] = []

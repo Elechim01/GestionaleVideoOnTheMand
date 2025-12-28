@@ -43,7 +43,7 @@ struct GestionaleVideoOnTheMandApp: App {
                 .environmentObject(loginModel)
                 .onAppear {
                     Task {
-                       await  loginModel.restoreSession()
+                       await loginModel.restoreSession()
                     }
                 }
         }
