@@ -18,7 +18,7 @@ struct UploadFilmView: View {
         VStack(alignment: .center, spacing: 10) {
             
             if model.stato == .loadFilm {
-                CustomButton(falseColor: .green, action: {
+                SimpleButton(color:  .green, action: {
                     model.uploadFileToDb()
                 }, label: {
                     Text("Seleziona i  film da caricare")
@@ -31,7 +31,7 @@ struct UploadFilmView: View {
                 
                 if model.stato == .succes {
                     
-                    CustomButton(falseColor: .green, action: {
+                    SimpleButton(color:  .green, action: {
                         model.stato = .loadFilm
                     }, label: {
                         Text("Carica Film")

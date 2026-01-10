@@ -76,12 +76,12 @@ class ViewModel: ObservableObject {
     func thumbnailAndUploadFile() {
        
         
-        if(Extensions.isConnectedToInternet()){
+        if(Utils.isConnectedToInternet()){
             // Upload Film
             Task {
                 do {
                     stato = .createThumnail
-                    thumbnail = await Extensions.createThumbnail(url: file)
+                    thumbnail = await Utils.createThumbnail(url: file)
                     if(thumbnail == nil){
                         self.alertMessage = "Impossibile creare migniatura"
                         self.showAlert = true
@@ -257,7 +257,7 @@ class ViewModel: ObservableObject {
     func downloadFile(nomeFile:String, success:@escaping () -> Void, failure: @escaping (Error)->Void){
         guard let localUser = self.localUser else { return }
         let pathReference = firebaseStorage.reference(withPath: "\(localUser.id)/\(nomeFile)")
-        let localPathReference = Extensions.getDocumentsDirectory().appendingPathComponent(nomeFile)
+        let localPathReference = Utils.getDocumentsDirectory().appendingPathComponent(nomeFile)
         self.urlFileLocale = localPathReference.absoluteString
         let downloadTask = pathReference.write(toFile: localPathReference){ [weak self] url, error in
             guard let self = self else { return }

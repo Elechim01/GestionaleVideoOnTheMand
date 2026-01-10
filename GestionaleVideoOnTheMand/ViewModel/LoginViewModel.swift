@@ -38,7 +38,7 @@ class LoginViewModel: ObservableObject{
     
     //    Funzioni di Login e Logout
     func login(email: String, password: String) async {
-        if(!Extensions.isConnectedToInternet()){
+        if(!Utils.isConnectedToInternet()){
             alertMessage = "Impossibile effettuare il login in assenza di connessione internet"
             showAlert.toggle()
         }
@@ -53,7 +53,7 @@ class LoginViewModel: ObservableObject{
                 if SecItemAdd(attributes as CFDictionary, nil) == noErr {
                     print("User saved succes")
                 } else {
-                    print("Error")
+                    print("Error User unsaved succes")
                 }
             }
            await MainActor.run { [weak self] in
@@ -90,7 +90,7 @@ class LoginViewModel: ObservableObject{
                let credential = AuthKeyChain.shared.redCredential()
                guard let email = credential.email,
                      let password = credential.password,
-                     Extensions.isConnectedToInternet() else {
+                     Utils.isConnectedToInternet() else {
                    // TODO: CHANGE ERROR TYPE
                    return
                }
@@ -132,7 +132,7 @@ class LoginViewModel: ObservableObject{
     #warning("Move to Async/Await")
     //    Funzione di Registrazione
     func registration(email:String, password: String,completion: @escaping (String) ->()){
-        if(!Extensions.isConnectedToInternet()){
+        if(!Utils.isConnectedToInternet()){
             alertMessage = "Impossibile effettuare il login in assenza di connessione internet"
             showAlert.toggle()
             return

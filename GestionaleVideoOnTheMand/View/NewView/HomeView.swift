@@ -13,7 +13,7 @@ struct HomeView: View {
     @EnvironmentObject var loginViewModel: LoginViewModel
     @State private var columsVisibility = NavigationSplitViewVisibility.all
     @Environment(\.openWindow) var openWindow
-    @State var homeSection: HomeSection = .film
+    @State var homeSection: HomeSection = .spazio
     @State var showLogoutConfirm: Bool = false
     
     var body: some View {
@@ -22,7 +22,7 @@ struct HomeView: View {
             
             VStack(alignment: .leading) {
                 
-                InfoUser(name: homeViewModel.localUser?.nome ?? "")
+                InfoUser(name: homeViewModel.localUser?.nome ?? "TEST")
                 
                 ListButton(text: "Film", imageName: "film",section: .film, onTap: nil)
                 
@@ -31,6 +31,7 @@ struct HomeView: View {
                 
                 Spacer()
             }
+            .padding(.horizontal,5)
             
         } detail: {
             ZStack(alignment: .center) {
@@ -49,6 +50,8 @@ struct HomeView: View {
             }
             
         }
+        .frame(minWidth: 300, idealWidth: 600, maxWidth: .infinity, minHeight: 400, idealHeight: 700, maxHeight: .infinity)
+        .containerBackground(.ultraThinMaterial, for: .window)
         .navigationSplitViewStyle(.balanced)
         .alert(homeViewModel.alertMessage, isPresented: $homeViewModel.showAlert, actions: {
             Button("OK",role: .cancel) {
@@ -76,7 +79,7 @@ struct HomeView: View {
                     onTap: (()->())?
     ) -> some View {
         
-        CustomButton(condition: homeSection == section ,
+        CustomButton(isActive: homeSection == section ,
                      trueColor: .blue,
                      falseColor: .clear,
                      action: {
@@ -94,7 +97,7 @@ struct HomeView: View {
     
     @ViewBuilder
     func InfoUser(name: String) -> some View {
-        CustomButton(falseColor: .green.opacity(0.6), action: {
+        SimpleButton(color: .green.opacity(0.6), action: {
             openWindow(id:"infoUser")
         }, label: {
             HStack {
@@ -107,7 +110,7 @@ struct HomeView: View {
             }
         })
         
-        CustomButton(falseColor: .white, action: {
+        SimpleButton(color: .white, action: {
             showLogoutConfirm.toggle()
         }, label: {
             
@@ -122,6 +125,7 @@ struct HomeView: View {
         })
         
         Divider()
+            .padding(.top)
     }
     
 }
@@ -129,6 +133,7 @@ struct HomeView: View {
 struct NewHome_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+            .frame(width: 900, height: 600)
             .environmentObject(ViewModel())
             .environmentObject(LoginViewModel())
     }

@@ -19,13 +19,6 @@ struct BringToFront: NSViewRepresentable {
     func updateNSView(_ nsView: NSView, context: Context) {}
 }
 
-extension View {
-    func alwaysOnTop() -> some View {
-        self.background(WindowAccessor { window in
-            window?.level = .floating
-        })
-    }
-}
 
 // Helper per catturare la finestra
 struct WindowAccessor: NSViewRepresentable {

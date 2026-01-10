@@ -1,5 +1,5 @@
 //
-//  Extensions.swift
+//  Utils.swift
 //  VideoOnThemand
 //
 //  Created by Michele Manniello on 09/08/22.
@@ -10,7 +10,7 @@ import Cocoa
 import AVKit
 import SystemConfiguration
 
-class Extensions {
+class Utils {
     
     static func isConnectedToInternet() -> Bool {
         return Reachability.isConnectedToNetwork()
@@ -74,21 +74,15 @@ class Extensions {
         let fileNames = nameOfElement.split(separator: ".")
         return "thumbnail_\(fileNames[0]).png"
     }
-}
-
-// MARK: - EnvironmentValues extension
-
-extension EnvironmentValues {
-    var isPreview: Bool {
-        ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
-    }
-}
-
-// MARK: - String extension
-
-extension String {
-    static func twoDecimal(number: Double) -> String {
-        String(format: "%.2fMB", number)
+    
+    
+    static func formatStorage(_ mb: Double) -> String {
+        guard mb > 1024 else {
+            return String.twoDecimalMB(number: mb)
+        }
+        let gb = mb/1024
+        
+        return String.twoDecimalGB(number: gb)
     }
 }
 
@@ -122,15 +116,4 @@ private class Reachability {
 
 // MARK: - View placeholder helper
 
-extension View {
-    func placeholder<Content: View>(
-        when shouldShow: Bool,
-        alignment: Alignment = .leading,
-        @ViewBuilder placeholder: () -> Content
-    ) -> some View {
-        ZStack(alignment: alignment) {
-            placeholder().opacity(shouldShow ? 1 : 0)
-            self
-        }
-    }
-}
+

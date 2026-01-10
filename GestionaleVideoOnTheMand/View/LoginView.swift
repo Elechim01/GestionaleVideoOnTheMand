@@ -22,7 +22,7 @@ struct LoginView: View {
             loginViewModel.alertMessage = "Il campo email è vuoto"
             return false
         }
-        if(!Extensions.isValidEmail(email)){
+        if(!Utils.isValidEmail(email)){
             loginViewModel.alertMessage = "L'email non è valida"
             return false
         }
@@ -30,7 +30,7 @@ struct LoginView: View {
             loginViewModel.alertMessage = "Il campo password è vuoto"
             return false
         }
-        if(!Extensions.isValidPassword(testStr: password)){
+        if(!Utils.isValidPassword(testStr: password)){
             loginViewModel.alertMessage = "la password non è valida, deve comprendere: Almeno una maiuscola, Almeno un numero, Almeno una minuscola, 8 caratteri in totale"
             return false
         }

@@ -3,21 +3,27 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C44112F42F01ADD30070B973 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = C44112F32F01ADD30070B973 /* CachedAsyncImage */; };
 		C443CD9F2A7BCE2100ED417F /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C443CD9E2A7BCE2100ED417F /* CustomView.swift */; };
 		C448E69E2A75B55E00A18EBE /* FilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C448E69D2A75B55E00A18EBE /* FilmView.swift */; };
 		C448E6A02A75B56F00A18EBE /* StorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C448E69F2A75B56F00A18EBE /* StorageView.swift */; };
 		C451081B2EE6E33C00C7DB35 /* WindowExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45108192EE6E33C00C7DB35 /* WindowExtension.swift */; };
-		C4711CA42F01A68B00F1F107 /* Services in Frameworks */ = {isa = PBXBuildFile; productRef = C4711CA32F01A68B00F1F107 /* Services */; };
+		C469157E2F12CE510028C9EE /* ExtensionEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C469157D2F12CE510028C9EE /* ExtensionEnvironment.swift */; };
+		C46915802F12CE690028C9EE /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C469157F2F12CE690028C9EE /* ExtensionString.swift */; };
+		C46915832F12CEE40028C9EE /* ExtensionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46915822F12CEE40028C9EE /* ExtensionView.swift */; };
 		C4880F1228B2A1230091B7C4 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = C4880F1128B2A1230091B7C4 /* GoogleSignIn */; };
 		C4880F1428B2A1230091B7C4 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C4880F1328B2A1230091B7C4 /* GoogleSignInSwift */; };
 		C4AB776B2961D13900BE9346 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AB776A2961D13900BE9346 /* Enum.swift */; };
 		C4B8D4C22A78100C008D3CEB /* InfoUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B8D4C12A78100C008D3CEB /* InfoUserView.swift */; };
 		C4BE732E2A757C8800175BF3 /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = C4BE732D2A757C8800175BF3 /* GRPC */; };
 		C4BE73302A757C8800175BF3 /* protoc-gen-grpc-swift in Frameworks */ = {isa = PBXBuildFile; productRef = C4BE732F2A757C8800175BF3 /* protoc-gen-grpc-swift */; };
+		C4C10B8D2F0705D80086A376 /* Services in Frameworks */ = {isa = PBXBuildFile; productRef = C4C10B8C2F0705D80086A376 /* Services */; };
+		C4C10B8F2F0D84000086A376 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C10B8E2F0D84000086A376 /* CustomButton.swift */; };
+		C4C10B912F0D86AC0086A376 /* SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C10B902F0D86AC0086A376 /* SimpleButton.swift */; };
 		C4C7A7D228A528EB001CB803 /* GestionaleVideoOnTheMandApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A7D128A528EB001CB803 /* GestionaleVideoOnTheMandApp.swift */; };
 		C4C7A7D428A528EB001CB803 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A7D328A528EB001CB803 /* ContentView.swift */; };
 		C4C7A7D628A528ED001CB803 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4C7A7D528A528ED001CB803 /* Assets.xcassets */; };
@@ -27,7 +33,7 @@
 		C4C7A7EA28A5A09E001CB803 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C4C7A7E928A5A09E001CB803 /* FirebaseAuth */; };
 		C4C7A7EC28A5A09E001CB803 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = C4C7A7EB28A5A09E001CB803 /* FirebaseFirestore */; };
 		C4C7A7F228A5A09E001CB803 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = C4C7A7F128A5A09E001CB803 /* FirebaseStorage */; };
-		C4C7A7FB28A65926001CB803 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A7F828A65926001CB803 /* Extensions.swift */; };
+		C4C7A7FB28A65926001CB803 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A7F828A65926001CB803 /* Utils.swift */; };
 		C4C7A7FC28A65926001CB803 /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A7F928A65926001CB803 /* Film.swift */; };
 		C4C7A7FD28A65926001CB803 /* Utente.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A7FA28A65926001CB803 /* Utente.swift */; };
 		C4C7A80628A902C9001CB803 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A80528A902C9001CB803 /* LoginViewModel.swift */; };
@@ -44,10 +50,15 @@
 		C448E69D2A75B55E00A18EBE /* FilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmView.swift; sourceTree = "<group>"; };
 		C448E69F2A75B56F00A18EBE /* StorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageView.swift; sourceTree = "<group>"; };
 		C45108192EE6E33C00C7DB35 /* WindowExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowExtension.swift; sourceTree = "<group>"; };
+		C469157D2F12CE510028C9EE /* ExtensionEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionEnvironment.swift; sourceTree = "<group>"; };
+		C469157F2F12CE690028C9EE /* ExtensionString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionString.swift; sourceTree = "<group>"; };
+		C46915822F12CEE40028C9EE /* ExtensionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionView.swift; sourceTree = "<group>"; };
 		C473578E2EDB5FBD00F1B9AF /* GestionaleVideoOnTheMandDev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GestionaleVideoOnTheMandDev.entitlements; sourceTree = "<group>"; };
 		C4880F1528B2A1480091B7C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C4AB776A2961D13900BE9346 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		C4B8D4C12A78100C008D3CEB /* InfoUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoUserView.swift; sourceTree = "<group>"; };
+		C4C10B8E2F0D84000086A376 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		C4C10B902F0D86AC0086A376 /* SimpleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleButton.swift; sourceTree = "<group>"; };
 		C4C7A7CE28A528EB001CB803 /* GestionaleVideoOnTheMand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GestionaleVideoOnTheMand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4C7A7D128A528EB001CB803 /* GestionaleVideoOnTheMandApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestionaleVideoOnTheMandApp.swift; sourceTree = "<group>"; };
 		C4C7A7D328A528EB001CB803 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -56,7 +67,7 @@
 		C4C7A7DA28A528ED001CB803 /* GestionaleVideoOnTheMand.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GestionaleVideoOnTheMand.entitlements; sourceTree = "<group>"; };
 		C4C7A7E028A575D6001CB803 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		C4C7A7E228A59FEE001CB803 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		C4C7A7F828A65926001CB803 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		C4C7A7F828A65926001CB803 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		C4C7A7F928A65926001CB803 /* Film.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
 		C4C7A7FA28A65926001CB803 /* Utente.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utente.swift; sourceTree = "<group>"; };
 		C4C7A80528A902C9001CB803 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -74,8 +85,9 @@
 				C4C7A7EC28A5A09E001CB803 /* FirebaseFirestore in Frameworks */,
 				C4C7A7EA28A5A09E001CB803 /* FirebaseAuth in Frameworks */,
 				C4880F1228B2A1230091B7C4 /* GoogleSignIn in Frameworks */,
+				C4C10B8D2F0705D80086A376 /* Services in Frameworks */,
+				C44112F42F01ADD30070B973 /* CachedAsyncImage in Frameworks */,
 				C4C7A7F228A5A09E001CB803 /* FirebaseStorage in Frameworks */,
-				C4711CA42F01A68B00F1F107 /* Services in Frameworks */,
 				C4BE732E2A757C8800175BF3 /* GRPC in Frameworks */,
 				C4BE73302A757C8800175BF3 /* protoc-gen-grpc-swift in Frameworks */,
 				C4880F1428B2A1230091B7C4 /* GoogleSignInSwift in Frameworks */,
@@ -88,9 +100,11 @@
 		C443CD9C2A7BCDFC00ED417F /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				C4C7A7F828A65926001CB803 /* Extensions.swift */,
-				C443CD9E2A7BCE2100ED417F /* CustomView.swift */,
+				C4C7A7F828A65926001CB803 /* Utils.swift */,
 				C45108192EE6E33C00C7DB35 /* WindowExtension.swift */,
+				C469157D2F12CE510028C9EE /* ExtensionEnvironment.swift */,
+				C469157F2F12CE690028C9EE /* ExtensionString.swift */,
+				C46915822F12CEE40028C9EE /* ExtensionView.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -105,6 +119,16 @@
 				C4B8D4C12A78100C008D3CEB /* InfoUserView.swift */,
 			);
 			path = NewView;
+			sourceTree = "<group>";
+		};
+		C46915812F12CEAD0028C9EE /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C443CD9E2A7BCE2100ED417F /* CustomView.swift */,
+				C4C10B8E2F0D84000086A376 /* CustomButton.swift */,
+				C4C10B902F0D86AC0086A376 /* SimpleButton.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		C4C7A7C528A528EB001CB803 = {
@@ -126,6 +150,7 @@
 		C4C7A7D028A528EB001CB803 /* GestionaleVideoOnTheMand */ = {
 			isa = PBXGroup;
 			children = (
+				C46915812F12CEAD0028C9EE /* Components */,
 				C443CD9C2A7BCDFC00ED417F /* Extension */,
 				C4880F1528B2A1480091B7C4 /* Info.plist */,
 				C4C7A7F728A65490001CB803 /* View */,
@@ -204,7 +229,8 @@
 				C4880F1328B2A1230091B7C4 /* GoogleSignInSwift */,
 				C4BE732D2A757C8800175BF3 /* GRPC */,
 				C4BE732F2A757C8800175BF3 /* protoc-gen-grpc-swift */,
-				C4711CA32F01A68B00F1F107 /* Services */,
+				C44112F32F01ADD30070B973 /* CachedAsyncImage */,
+				C4C10B8C2F0705D80086A376 /* Services */,
 			);
 			productName = GestionaleVideoOnTheMand;
 			productReference = C4C7A7CE28A528EB001CB803 /* GestionaleVideoOnTheMand.app */;
@@ -238,7 +264,8 @@
 				C4C7A7E428A5A09E001CB803 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				C4880F1028B2A1220091B7C4 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				C4BE732A2A757C8800175BF3 /* XCRemoteSwiftPackageReference "grpc-swift" */,
-				C4711CA22F01A68B00F1F107 /* XCRemoteSwiftPackageReference "ServicesVideoOnTheMand" */,
+				C44112F22F01ADD30070B973 /* XCLocalSwiftPackageReference "../CachedAsyncImage" */,
+				C4C10B8B2F0705D80086A376 /* XCLocalSwiftPackageReference "../Services" */,
 			);
 			productRefGroup = C4C7A7CF28A528EB001CB803 /* Products */;
 			projectDirPath = "";
@@ -270,11 +297,15 @@
 			files = (
 				C4C7A7FD28A65926001CB803 /* Utente.swift in Sources */,
 				C4C7A7FC28A65926001CB803 /* Film.swift in Sources */,
+				C4C10B8F2F0D84000086A376 /* CustomButton.swift in Sources */,
+				C469157E2F12CE510028C9EE /* ExtensionEnvironment.swift in Sources */,
 				C443CD9F2A7BCE2100ED417F /* CustomView.swift in Sources */,
+				C46915802F12CE690028C9EE /* ExtensionString.swift in Sources */,
 				C4B8D4C22A78100C008D3CEB /* InfoUserView.swift in Sources */,
 				C4C7A80828A9037A001CB803 /* LoginView.swift in Sources */,
 				C4AB776B2961D13900BE9346 /* Enum.swift in Sources */,
 				C4D634682A72A45900B54E1C /* UploadFilmView.swift in Sources */,
+				C4C10B912F0D86AC0086A376 /* SimpleButton.swift in Sources */,
 				C4F1FD1F2A730315000443AE /* HomeView.swift in Sources */,
 				C448E69E2A75B55E00A18EBE /* FilmView.swift in Sources */,
 				C4C7A7D428A528EB001CB803 /* ContentView.swift in Sources */,
@@ -282,8 +313,9 @@
 				C4C7A80628A902C9001CB803 /* LoginViewModel.swift in Sources */,
 				C4C7A7E128A575D6001CB803 /* ViewModel.swift in Sources */,
 				C448E6A02A75B56F00A18EBE /* StorageView.swift in Sources */,
+				C46915832F12CEE40028C9EE /* ExtensionView.swift in Sources */,
 				C4C7A7D228A528EB001CB803 /* GestionaleVideoOnTheMandApp.swift in Sources */,
-				C4C7A7FB28A65926001CB803 /* Extensions.swift in Sources */,
+				C4C7A7FB28A65926001CB803 /* Utils.swift in Sources */,
 				C4C7A80A28A90398001CB803 /* RegistrationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,7 +456,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 2.5;
 				OTHER_SWIFT_FLAGS = "-DPROD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MicheleManniello.GestionaleVideoOnTheMand;
@@ -458,7 +490,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 2.5;
 				OTHER_SWIFT_FLAGS = "-DPROD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MicheleManniello.GestionaleVideoOnTheMand;
@@ -495,15 +527,18 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		C4711CA22F01A68B00F1F107 /* XCRemoteSwiftPackageReference "ServicesVideoOnTheMand" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Elechim01/ServicesVideoOnTheMand";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
+/* Begin XCLocalSwiftPackageReference section */
+		C44112F22F01ADD30070B973 /* XCLocalSwiftPackageReference "../CachedAsyncImage" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../CachedAsyncImage;
 		};
+		C4C10B8B2F0705D80086A376 /* XCLocalSwiftPackageReference "../Services" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Services;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
 		C4880F1028B2A1220091B7C4 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
@@ -531,10 +566,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C4711CA32F01A68B00F1F107 /* Services */ = {
+		C44112F32F01ADD30070B973 /* CachedAsyncImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C4711CA22F01A68B00F1F107 /* XCRemoteSwiftPackageReference "ServicesVideoOnTheMand" */;
-			productName = Services;
+			productName = CachedAsyncImage;
 		};
 		C4880F1128B2A1230091B7C4 /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -555,6 +589,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C4BE732A2A757C8800175BF3 /* XCRemoteSwiftPackageReference "grpc-swift" */;
 			productName = "protoc-gen-grpc-swift";
+		};
+		C4C10B8C2F0705D80086A376 /* Services */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Services;
 		};
 		C4C7A7E928A5A09E001CB803 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

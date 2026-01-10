@@ -10,21 +10,14 @@ import AppKit
 import Cocoa
 import Firebase
 
-
-
-import SwiftUI
-import FirebaseCore
-import FirebaseFirestore
-
-// 1. Definisci un AppDelegate standard per macOS
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
-        // Configura qui. È il posto più sicuro in assoluto su macOS.
         setupFirebase()
     }
     
     func setupFirebase() {
         FirebaseApp.configure()
+        Firestore.firestore()
     }
 }
 
@@ -39,11 +32,19 @@ struct GestionaleVideoOnTheMandApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .frame(
+                    minWidth: 720,
+                    idealWidth: 1100,
+                    maxWidth: .infinity,
+                    minHeight: 520,
+                    idealHeight: 760,
+                    maxHeight: .infinity
+                )
                 .environmentObject(model)
                 .environmentObject(loginModel)
                 .onAppear {
                     Task {
-                       await loginModel.restoreSession()
+                        await loginModel.restoreSession()
                     }
                 }
         }

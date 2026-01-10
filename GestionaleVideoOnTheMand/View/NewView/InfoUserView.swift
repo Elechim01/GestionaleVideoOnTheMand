@@ -62,7 +62,7 @@ struct InfoUserView: View {
                     InfoElement(description: "Password", element: "*******")
                 }
             
-            CustomButton(falseColor: .clear, action: {
+            SimpleButton(color: .clear, action: {
                
                 if !showPassword {
                     model.authenticate { response in
