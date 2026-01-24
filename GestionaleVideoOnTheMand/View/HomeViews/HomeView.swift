@@ -13,7 +13,7 @@ struct HomeView: View {
     @EnvironmentObject var loginViewModel: LoginViewModel
     @State private var columsVisibility = NavigationSplitViewVisibility.all
     @Environment(\.openWindow) var openWindow
-    @State var homeSection: HomeSection = .spazio
+    @State var homeSection: HomeSection = .film
     @State var showLogoutConfirm: Bool = false
     
     var body: some View {
@@ -53,6 +53,13 @@ struct HomeView: View {
         .frame(minWidth: 300, idealWidth: 600, maxWidth: .infinity, minHeight: 400, idealHeight: 700, maxHeight: .infinity)
         .containerBackground(.ultraThinMaterial, for: .window)
         .navigationSplitViewStyle(.balanced)
+        
+        
+        .sheet(item: $homeViewModel.selectedFilmForInfo, content: { film in
+            FilmInfoSheet(film: film)
+                .environmentObject(homeViewModel)
+        })
+        
         .alert(homeViewModel.alertMessage, isPresented: $homeViewModel.showAlert, actions: {
             Button("OK",role: .cancel) {
                 homeViewModel.showAlert.toggle()

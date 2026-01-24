@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C4169F5B2F1BF82700BE22B0 /* LoadFilmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4169F5A2F1BF82700BE22B0 /* LoadFilmViewModel.swift */; };
+		C4169F5D2F1C002A00BE22B0 /* StepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4169F5C2F1C002A00BE22B0 /* StepView.swift */; };
 		C44112F42F01ADD30070B973 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = C44112F32F01ADD30070B973 /* CachedAsyncImage */; };
 		C443CD9F2A7BCE2100ED417F /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C443CD9E2A7BCE2100ED417F /* CustomView.swift */; };
 		C448E69E2A75B55E00A18EBE /* FilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C448E69D2A75B55E00A18EBE /* FilmView.swift */; };
@@ -15,6 +17,7 @@
 		C469157E2F12CE510028C9EE /* ExtensionEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C469157D2F12CE510028C9EE /* ExtensionEnvironment.swift */; };
 		C46915802F12CE690028C9EE /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C469157F2F12CE690028C9EE /* ExtensionString.swift */; };
 		C46915832F12CEE40028C9EE /* ExtensionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46915822F12CEE40028C9EE /* ExtensionView.swift */; };
+		C47815062F2525FE00E7536F /* FilmInfoSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47815052F2525FE00E7536F /* FilmInfoSheet.swift */; };
 		C4880F1228B2A1230091B7C4 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = C4880F1128B2A1230091B7C4 /* GoogleSignIn */; };
 		C4880F1428B2A1230091B7C4 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C4880F1328B2A1230091B7C4 /* GoogleSignInSwift */; };
 		C4AB776B2961D13900BE9346 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AB776A2961D13900BE9346 /* Enum.swift */; };
@@ -45,6 +48,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C4169F5A2F1BF82700BE22B0 /* LoadFilmViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadFilmViewModel.swift; sourceTree = "<group>"; };
+		C4169F5C2F1C002A00BE22B0 /* StepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepView.swift; sourceTree = "<group>"; };
 		C433B0682A72ADC700A0CA1E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C443CD9E2A7BCE2100ED417F /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		C448E69D2A75B55E00A18EBE /* FilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmView.swift; sourceTree = "<group>"; };
@@ -54,6 +59,7 @@
 		C469157F2F12CE690028C9EE /* ExtensionString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionString.swift; sourceTree = "<group>"; };
 		C46915822F12CEE40028C9EE /* ExtensionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionView.swift; sourceTree = "<group>"; };
 		C473578E2EDB5FBD00F1B9AF /* GestionaleVideoOnTheMandDev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GestionaleVideoOnTheMandDev.entitlements; sourceTree = "<group>"; };
+		C47815052F2525FE00E7536F /* FilmInfoSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmInfoSheet.swift; sourceTree = "<group>"; };
 		C4880F1528B2A1480091B7C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C4AB776A2961D13900BE9346 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		C4B8D4C12A78100C008D3CEB /* InfoUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoUserView.swift; sourceTree = "<group>"; };
@@ -109,16 +115,16 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		C448E69C2A75B54000A18EBE /* NewView */ = {
+		C448E69C2A75B54000A18EBE /* HomeViews */ = {
 			isa = PBXGroup;
 			children = (
-				C4D634672A72A45900B54E1C /* UploadFilmView.swift */,
 				C433B0682A72ADC700A0CA1E /* HomeView.swift */,
 				C448E69D2A75B55E00A18EBE /* FilmView.swift */,
 				C448E69F2A75B56F00A18EBE /* StorageView.swift */,
 				C4B8D4C12A78100C008D3CEB /* InfoUserView.swift */,
+				C47815052F2525FE00E7536F /* FilmInfoSheet.swift */,
 			);
-			path = NewView;
+			path = HomeViews;
 			sourceTree = "<group>";
 		};
 		C46915812F12CEAD0028C9EE /* Components */ = {
@@ -129,6 +135,15 @@
 				C4C10B902F0D86AC0086A376 /* SimpleButton.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		C47815022F1D400C00E7536F /* Upload */ = {
+			isa = PBXGroup;
+			children = (
+				C4D634672A72A45900B54E1C /* UploadFilmView.swift */,
+				C4169F5C2F1C002A00BE22B0 /* StepView.swift */,
+			);
+			path = Upload;
 			sourceTree = "<group>";
 		};
 		C4C7A7C528A528EB001CB803 = {
@@ -181,6 +196,7 @@
 			children = (
 				C4C7A7E028A575D6001CB803 /* ViewModel.swift */,
 				C4C7A80528A902C9001CB803 /* LoginViewModel.swift */,
+				C4169F5A2F1BF82700BE22B0 /* LoadFilmViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -198,7 +214,8 @@
 		C4C7A7F728A65490001CB803 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C448E69C2A75B54000A18EBE /* NewView */,
+				C47815022F1D400C00E7536F /* Upload */,
+				C448E69C2A75B54000A18EBE /* HomeViews */,
 				C4C7A80728A9037A001CB803 /* LoginView.swift */,
 				C4C7A80928A90398001CB803 /* RegistrationView.swift */,
 			);
@@ -303,6 +320,8 @@
 				C46915802F12CE690028C9EE /* ExtensionString.swift in Sources */,
 				C4B8D4C22A78100C008D3CEB /* InfoUserView.swift in Sources */,
 				C4C7A80828A9037A001CB803 /* LoginView.swift in Sources */,
+				C4169F5D2F1C002A00BE22B0 /* StepView.swift in Sources */,
+				C47815062F2525FE00E7536F /* FilmInfoSheet.swift in Sources */,
 				C4AB776B2961D13900BE9346 /* Enum.swift in Sources */,
 				C4D634682A72A45900B54E1C /* UploadFilmView.swift in Sources */,
 				C4C10B912F0D86AC0086A376 /* SimpleButton.swift in Sources */,
@@ -317,6 +336,7 @@
 				C4C7A7D228A528EB001CB803 /* GestionaleVideoOnTheMandApp.swift in Sources */,
 				C4C7A7FB28A65926001CB803 /* Utils.swift in Sources */,
 				C4C7A80A28A90398001CB803 /* RegistrationView.swift in Sources */,
+				C4169F5B2F1BF82700BE22B0 /* LoadFilmViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,6 +471,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GestionaleVideoOnTheMand/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -485,6 +506,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GestionaleVideoOnTheMand/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

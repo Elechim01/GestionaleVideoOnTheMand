@@ -20,8 +20,12 @@ struct FilmView: View {
                 GeometryReader { geo in
                     ScrollView(.vertical, showsIndicators: false) {
                         LazyVGrid(columns: rows(for: geo.size.width),alignment: .center,spacing: 0) {
-                            ForEach(isPreview ? filmsPreview : homeModel.films , id: \.id) { film in
+                            ForEach(isPreview ? filmsPreview : homeModel.films.sorted(by: { $0.data ?? .now > $1.data ?? .now
+                            }) , id: \.id) { film in
                                cardView(film: film)
+                                    .onTapGesture {
+                                        homeModel.selectedFilmForInfo = film
+                                    }
                             }
                         }
                     }
@@ -70,6 +74,7 @@ struct FilmView: View {
                     .glassEffect()
             }
 
+            Text("\(film.data ?? .now)")
             
             Text(Utils.formatStorage(film.size))
                 .font(.subheadline)

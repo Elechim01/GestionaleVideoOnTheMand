@@ -11,31 +11,19 @@ import LocalAuthentication
 
 @MainActor
 class ViewModel: ObservableObject {
-    @Published var fileName = ""
-    var file : URL = URL(fileURLWithPath: "")
-    internal var listOfUrl : [URL] = []
-    internal var files : [URL: String] =  [:]
-    internal var filesDimensionMB: [URL: Double] = [:]
-    @Published var urlFileUplodato : String = ""
-    @Published var urlThumbnail: URL = URL(fileURLWithPath: "")
-    @Published var progress: Double = 0
+   
     @Published var films : [Film] = []
     @Published var localUser: Utente?
     @Published var urlFileLocale: String = ""
-    @Published var stato: UploadStatus = .loadFilm
-//    @Published var elencoFilm : [String] = []
-//    Memorizzo la password, l'email e l'id 
+    @Published var selectedFilmForInfo: Film?
     @AppStorage("IDUser") internal var idUser = ""
-   @Published var thumbnail : NSImage?
-    var  indexListOfUrl = 0
-    
+ 
+
 //    MARK: Alert
     @Published var showAlert: Bool = false
     @Published var alertMessage: String = ""
     @Published var isLoading = false
     
-    var localFileName: String = ""
-    var localThumbnailName: String = ""
     
     public var totalSizeFilm: Double {
         var size = 0.0
@@ -43,213 +31,12 @@ class ViewModel: ObservableObject {
         return size 
     }
     
-    public let totalSize = 5000.0
-    
-    
+    public let totalSize = 10000.0
     
     init(){
         #if DEV
         idUser = "zglR4HvR0sP3KEqaRGL8Ma5cx5t2"
         #endif
-    }
-    
-    func uploadFileToDb(){
-//        se l'utente cancella l'upload faccio fermare tutto e svuto ogni cosa
-//        MARK: seleziono il file
-        selectfile()
-        
-        if(files == [:]){
-            return
-        }
-//      MARK: creo la migniatura dell'immagine
-        
-        for (url,_) in self.files {
-            self.listOfUrl.append(url)
-        }
-        
-        self.file = listOfUrl.first!
-        self.fileName = files[listOfUrl.first!]!
-        
-        thumbnailAndUploadFile()
-    }
-    
-    func thumbnailAndUploadFile() {
-       
-        
-        if(Utils.isConnectedToInternet()){
-            // Upload Film
-            Task {
-                do {
-                    stato = .createThumnail
-                    thumbnail = await Utils.createThumbnail(url: file)
-                    if(thumbnail == nil){
-                        self.alertMessage = "Impossibile creare migniatura"
-                        self.showAlert = true
-                        return
-                    }
-                    stato = .uploadFilm
-                    //        MARK: Carico il film
-                    
-                    let filmsResponse = try await upload(file: file) {[weak self] progress in
-                        guard let self = self else { return }
-                        print(progress)
-                        self.progress = progress
-                    }
-                    await MainActor.run {[weak self] in
-                        guard let self = self else { return }
-                        self.urlFileUplodato = filmsResponse.completeURL
-                        localFileName = filmsResponse.fileName
-                        self.stato = .uploadThumbnail
-                        withAnimation(.linear(duration: 0.2)) {
-                            self.progress = 0
-                        }
-                        
-                        print(progress)
-                        
-                    }
-                    
-                    guard let thumbnail = self.thumbnail else { return }
-                    let fileURLThumbnail = createTempFile(from: thumbnail)
-                    let thumbResponse = try await upload(file: fileURLThumbnail) {[weak self] progress in
-                        guard let self = self else { return }
-                        self.progress = progress
-                    }
-                    await MainActor.run {[weak self] in
-                        guard let self = self else { return }
-                        if let responseURl = URL(string: thumbResponse.completeURL) {
-                            self.urlThumbnail = responseURl
-                        }
-                        localThumbnailName = thumbResponse.fileName
-                        self.stato = .addFilmToDB
-                        
-                    }
-                    
-                    try await saveFilm()
-                    
-                    self.stato = .succes
-                    
-                    print("Success")
-                    
-                    await MainActor.run { [weak self] in
-                        guard let self = self else { return }
-                        self.stato = .succes
-                        resetCurrentUpload()
-                        multipleSection()
-                        
-                    }
-                } catch {
-                    showError(from: error)
-                }
-            }
-            
-        }else{
-            alertMessage = CustomError.connectionError.description
-            showAlert = true
-        }
-    }
-
-    private func saveFilm() async throws {
-        guard let localUser = self.localUser else { throw CustomError.genericError }
-    
-        let film = Film(id: UUID().uuidString,
-                idUtente: localUser.id,
-                nome: self.fileName,
-                url: self.urlFileUplodato,
-                thmbnail: self.urlThumbnail.absoluteString,
-                size: self.filesDimensionMB[self.file] ?? 0,
-                fileName: localFileName,
-                thumbnailName: localThumbnailName
-            )
-        
-        try await FirebaseUtils.shared.addFilm(film: film)
-    }
-    
-    private func upload(file: URL, onProgress: @escaping (Double) -> Void) async throws -> UploadFilmResponse {
-        
-        for await  update in  UploadFilmRequest(file: file).uploadFilmAsync() {
-            if let progress = update.progress {
-                await MainActor.run {
-                    onProgress(progress)
-                }
-            }
-            if let response = update.response {
-                return response
-            }
-            if let error = update.error {
-                throw error
-            }
-        }
-        throw CustomError.genericError
-    }
-    
-    private func resetCurrentUpload() {
-        self.fileName = ""
-        self.urlFileUplodato = ""
-        self.urlThumbnail = URL(fileURLWithPath: "")
-        self.thumbnail = nil
-        self.progress = 0.0
-    }
-    
-    private func multipleSection() {
-        self.indexListOfUrl += 1
-        if(self.indexListOfUrl < self.listOfUrl.count){
-            self.file = self.listOfUrl[self.indexListOfUrl]
-            guard  let file =  self.files[self.listOfUrl[self.indexListOfUrl]] else  {
-                self.listOfUrl = []
-                self.files = [:]
-                self.indexListOfUrl = 0
-                return
-            }
-            self.fileName = file
-            self.thumbnailAndUploadFile()
-            
-        } else {
-            self.listOfUrl = []
-            self.files = [:]
-            self.indexListOfUrl = 0
-        }
-    }
-    
-    
-    
-    
-    
-    
-    private func createTempFile(from image: NSImage) -> URL {
-        let tempUrl = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("thumbnail.png")
-        if let tiffData = image.tiffRepresentation,
-           let bitmap = NSBitmapImageRep(data: tiffData),
-           let pngData = bitmap.representation(using: .png, properties: [:]) {
-            try? pngData.write(to: tempUrl)
-        }
-        return tempUrl
-    }
-    
-    func selectfile(){
-        let pannell = NSOpenPanel()
-        pannell.allowedContentTypes = [.movie]
-        pannell.allowsMultipleSelection = true
-        pannell.canChooseDirectories = false
-        if pannell.runModal() == .OK {
-            print(pannell.urls)
-            for url in pannell.urls {
-                do {
-                    let attr = try FileManager.default.attributesOfItem(atPath: url.path)
-                    let fileSize = attr[FileAttributeKey.size] as? UInt64
-                    if let fileSize {
-                        let result = ByteCountFormatter.string(fromByteCount: Int64(fileSize), countStyle: .file).components(separatedBy: " ")
-                        if  let dimensionsMB = Double(result[0].replacingOccurrences(of: ",", with: ".")) {
-                            self.files.updateValue(url.lastPathComponent, forKey: url)
-                            self.filesDimensionMB.updateValue(dimensionsMB, forKey: url)
-                        } else {
-                            throw CustomError.fileError
-                        }
-                    }
-                } catch {
-                    showError(from: error)
-                }
-            }
-        }
     }
     
 // MARK: Firebase Storage
@@ -316,7 +103,7 @@ class ViewModel: ObservableObject {
             }
           let _ = try await DeleteRequest(fileName: film.fileName).performAsync()
           let _ = try await DeleteRequest(fileName: film.thumbnailName).performAsync()
-            guard let filmToRemove = films.first(where: { filmRead in
+            guard let _ = films.first(where: { filmRead in
                 let value = filmRead.nome
                 return value == film.nome
           }) else {
@@ -381,14 +168,14 @@ class ViewModel: ObservableObject {
     func authenticate(response: @escaping (Bool) -> ()) {
         let contex = LAContext()
         var error: NSError?
-        if contex.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometricsOrWatch, error: &error) {
+        if contex.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometricsOrCompanion, error: &error) {
             let reason = "Dacci i tuoi dati stronzo!:)"
-            contex.evaluatePolicy(.deviceOwnerAuthenticationWithBiometricsOrWatch, localizedReason: reason) { [ weak self] value, error in
-                guard let self = self else { return }
-                if let error = error {
+            contex.evaluatePolicy(.deviceOwnerAuthenticationWithBiometricsOrCompanion, localizedReason: reason) { value, error in
+               // guard let _ = self else { return }
+               // if let error = error {
                     //self.alertMessage = error.localizedDescription
                    // self.showAlert.toggle()
-                }
+               // }
                 response(value)
 //                if succes {
 //                   succes?()
@@ -402,6 +189,5 @@ class ViewModel: ObservableObject {
             self.showAlert.toggle()
         }
     }
-    
     
 }

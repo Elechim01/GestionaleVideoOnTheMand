@@ -22,21 +22,17 @@ struct SimpleButton<Label: View>: View {
         
         Button(action: {
             action()
-        }, label: {
+        }) {
             label
                 .frame(maxWidth: .infinity)
                 .frame(height: 30)
-        })
-        .buttonStyle(.plain)
-        .glassEffect(.regular.tint(color).interactive())
-        .background {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(color)
+                .padding(.vertical, 8) // Un po' di respiro interno
         }
-        
-        .clipShape(RoundedRectangle(cornerRadius: 10))
-        .padding(.horizontal,5)
-        .padding(.top,5)
+        .buttonStyle(.plain)
+        .glassEffect(.regular.tint(color.opacity(0.3)).interactive())
+        .clipShape(RoundedRectangle(cornerRadius: 15))
+        .padding(.horizontal, 5)
+        .padding(.top, 5)
         
         
     }

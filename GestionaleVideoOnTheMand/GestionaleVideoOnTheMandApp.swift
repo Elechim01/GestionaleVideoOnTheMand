@@ -28,6 +28,7 @@ struct GestionaleVideoOnTheMandApp: App {
     
     @StateObject var model = ViewModel()
     @StateObject var loginModel = LoginViewModel()
+    @StateObject var loadFilmViewModel = LoadFilmViewModel()
     
     var body: some Scene {
         WindowGroup {
@@ -60,14 +61,20 @@ struct GestionaleVideoOnTheMandApp: App {
         
         Window("UploadfFilm", id: "uploadFilm") {
             UploadFilmView()
+                .frame(maxWidth: .infinity,maxHeight: .infinity)
+                .background(Color("Blue").opacity(0.3).ignoresSafeArea())
                 .environmentObject(model)
+                .environmentObject(loadFilmViewModel)
                 .alwaysOnTop()
+            
             // Quando carico i film
         }
         .windowStyle(HiddenTitleBarWindowStyle())
         
         Window("InfoUser", id:"infoUser") {
             InfoUserView()
+                .frame(maxWidth: .infinity,maxHeight: .infinity)
+                .background(Color("Green").opacity(0.3).ignoresSafeArea())
                 .alwaysOnTop()
                 .environmentObject(model)
         }

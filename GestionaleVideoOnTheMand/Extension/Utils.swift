@@ -27,15 +27,30 @@ class Utils {
     static func createThumbnail(url: URL) async -> NSImage? {
         do {
             let asset = AVURLAsset(url: url, options: nil)
+            guard asset.tracks(withMediaType: .video).first != nil else {
+                print("☠️ No video track found")
+                return nil
+            }
+            
+            
             let imageGenerator = AVAssetImageGenerator(asset: asset)
             imageGenerator.appliesPreferredTrackTransform = true
+            imageGenerator.maximumSize = CGSize(width: 200, height: 200)
+            imageGenerator.requestedTimeToleranceBefore = .zero
+            imageGenerator.requestedTimeToleranceAfter = .zero
             
             // Load the duration using the modern async API.
-            let duration: CMTime = try await asset.load(.duration)
+            let duration: CMTime
+                        if let loadedDuration = try? await asset.load(.duration) {
+                            duration = loadedDuration
+                        } else {
+                            duration = CMTime(seconds: 1, preferredTimescale: 600)
+                        }
             let seconds = min(10, duration.seconds / 2)
+            let time  = CMTime(seconds: seconds, preferredTimescale: 600)
             
             let cgImage = try imageGenerator.copyCGImage(
-                at: CMTime(seconds: seconds, preferredTimescale: 600),
+                at: time,
                 actualTime: nil
             )
             let thumbnail = NSImage(cgImage: cgImage,
@@ -49,6 +64,16 @@ class Utils {
     
     static func stringToDouble(value: Double) -> String {
         return String(format: "%.2f", value)
+    }
+    
+    static func stringToDate(date: Date, dateFormat: String = "dd.MM.yyyy") -> String {
+        let formatter =  DateFormatter()
+        formatter.dateFormat = dateFormat
+        formatter.dateStyle = .long
+        formatter.locale = Locale(identifier: "IT_it")
+        
+        return formatter.string(from: date)
+        
     }
     
     static func isValidEmail(_ email: String) -> Bool {

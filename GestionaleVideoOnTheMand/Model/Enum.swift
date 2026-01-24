@@ -20,7 +20,8 @@ enum HomeSection {
     case spazio
 }
 
-enum UploadStatus: String {
+
+enum UploadStatus: String, CaseIterable {
     case cancel = "Cancellato"
     case uploadFilm = "Carico il Film"
     case addFilmToDB = "Carico il film a db"
@@ -29,4 +30,12 @@ enum UploadStatus: String {
     case succes = "Completato con successo"
     case error = "Errore nel caricamento"
     case loadFilm = "Carica Film"
+    case end = "Fine"
+    
+   static var steps: [Self] {
+        [.createThumnail, .uploadFilm,.uploadThumbnail,.addFilmToDB]
+    }
+    
+    
+    
 }
