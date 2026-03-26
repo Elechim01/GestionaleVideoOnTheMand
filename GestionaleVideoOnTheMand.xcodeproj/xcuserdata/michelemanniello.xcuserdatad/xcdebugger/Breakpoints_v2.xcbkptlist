@@ -87,22 +87,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "64A06A63-7486-4166-A514-C8C8E4A72BAE"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GestionaleVideoOnTheMand/ViewModel/ViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
-            landmarkName = "thumbnailAndUploadFile()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "54840F60-3C96-45A4-BD35-43E984DC5117"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -113,22 +97,6 @@
             startingLineNumber = "257"
             endingLineNumber = "257"
             landmarkName = "showError(from:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D34F0A98-26F1-44F8-9215-29593DBBFFCB"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../Services/Sources/Services/API/Core/ApiRequest.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "perform(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -162,50 +130,6 @@
             endingLineNumber = "64"
             landmarkName = "login(email:password:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "25387E2E-7039-4D5D-8629-86B79809480D - d57f86b741c55248"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(5) suspend resume partial function for GestionaleVideoOnTheMand.LoginViewModel.login(email: Swift.String, password: Swift.String) async -&gt; ()"
-                  moduleName = "GestionaleVideoOnTheMand"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/michelemanniello/Documents/Sviluppo/Swift/GestionaleVideoOnTheMand/GestionaleVideoOnTheMand/ViewModel/LoginViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "64"
-                  endingLineNumber = "64">
-               </Location>
-               <Location
-                  uuid = "25387E2E-7039-4D5D-8629-86B79809480D - 449cf5acf60fb73f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(6) await resume partial function for GestionaleVideoOnTheMand.LoginViewModel.login(email: Swift.String, password: Swift.String) async -&gt; ()"
-                  moduleName = "GestionaleVideoOnTheMand"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/michelemanniello/Documents/Sviluppo/Swift/GestionaleVideoOnTheMand/GestionaleVideoOnTheMand/ViewModel/LoginViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "64"
-                  endingLineNumber = "64">
-               </Location>
-               <Location
-                  uuid = "25387E2E-7039-4D5D-8629-86B79809480D - 6cae9de0206cd982"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(13) suspend resume partial function for GestionaleVideoOnTheMand.LoginViewModel.login(email: Swift.String, password: Swift.String) async -&gt; ()"
-                  moduleName = "GestionaleVideoOnTheMand"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/michelemanniello/Documents/Sviluppo/Swift/GestionaleVideoOnTheMand/GestionaleVideoOnTheMand/ViewModel/LoginViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "64"
-                  endingLineNumber = "64">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -237,6 +161,86 @@
             startingLineNumber = "254"
             endingLineNumber = "254"
             landmarkName = "showError(from:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FDAA4D2F-3851-47EB-A755-F75E38929676"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GestionaleVideoOnTheMand/ViewModel/LoginViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "login(email:password:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A5F921A4-299C-49FB-A3F6-F32C4A421107"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Services/Sources/Services/API/Request/TokenRequest.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "performAsync()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "78145BA8-277C-493D-BD0B-C2FC6EEB9B0C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GestionaleVideoOnTheMand/ViewModel/LoadFilmViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "uploadFileToDb(localUser:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7EA6225A-26BE-4174-8852-5C1276CDB8A6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GestionaleVideoOnTheMand/ViewModel/LoadFilmViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "uploadFileToDb(localUser:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "66F72F49-C618-449D-B58A-3F534DA5EBDB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GestionaleVideoOnTheMand/Domain/UseCases/RestoreSessionUseCase.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "execute()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
