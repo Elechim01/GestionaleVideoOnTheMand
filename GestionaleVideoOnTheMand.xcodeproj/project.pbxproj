@@ -13,15 +13,35 @@
 		C443CD9F2A7BCE2100ED417F /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C443CD9E2A7BCE2100ED417F /* CustomView.swift */; };
 		C448E69E2A75B55E00A18EBE /* FilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C448E69D2A75B55E00A18EBE /* FilmView.swift */; };
 		C448E6A02A75B56F00A18EBE /* StorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C448E69F2A75B56F00A18EBE /* StorageView.swift */; };
-		C451081B2EE6E33C00C7DB35 /* WindowExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45108192EE6E33C00C7DB35 /* WindowExtension.swift */; };
-		C469157E2F12CE510028C9EE /* ExtensionEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C469157D2F12CE510028C9EE /* ExtensionEnvironment.swift */; };
-		C46915802F12CE690028C9EE /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C469157F2F12CE690028C9EE /* ExtensionString.swift */; };
-		C46915832F12CEE40028C9EE /* ExtensionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46915822F12CEE40028C9EE /* ExtensionView.swift */; };
+		C451081B2EE6E33C00C7DB35 /* Extension+Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45108192EE6E33C00C7DB35 /* Extension+Window.swift */; };
+		C4548C802F6F16C9009BA431 /* DependecyInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4548C7F2F6F16C9009BA431 /* DependecyInjection.swift */; };
+		C4548C822F6F174C009BA431 /* MovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4548C812F6F174C009BA431 /* MovieRepository.swift */; };
+		C4548C842F6F1C70009BA431 /* MockMovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4548C832F6F1C70009BA431 /* MockMovieRepository.swift */; };
+		C469157E2F12CE510028C9EE /* Extension+Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C469157D2F12CE510028C9EE /* Extension+Environment.swift */; };
+		C46915802F12CE690028C9EE /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C469157F2F12CE690028C9EE /* Extension+String.swift */; };
+		C46915832F12CEE40028C9EE /* Extension+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46915822F12CEE40028C9EE /* Extension+View.swift */; };
+		C46E72C42F72A83E007CA286 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46E72C32F72A83E007CA286 /* LoginUseCase.swift */; };
+		C46E72C62F72AF4A007CA286 /* RestoreSessionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46E72C52F72AF4A007CA286 /* RestoreSessionUseCase.swift */; };
 		C47815062F2525FE00E7536F /* FilmInfoSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47815052F2525FE00E7536F /* FilmInfoSheet.swift */; };
 		C4880F1228B2A1230091B7C4 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = C4880F1128B2A1230091B7C4 /* GoogleSignIn */; };
 		C4880F1428B2A1230091B7C4 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C4880F1328B2A1230091B7C4 /* GoogleSignInSwift */; };
+		C48DD23A2F73EABA00541862 /* LogoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48DD2392F73EABA00541862 /* LogoutUseCase.swift */; };
+		C48DD23C2F73EF0D00541862 /* Extension+NSApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48DD23B2F73EF0D00541862 /* Extension+NSApplication.swift */; };
+		C497F7462F6F116000039892 /* MovieRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497F7452F6F116000039892 /* MovieRepositoryProtocol.swift */; };
+		C497F7482F6F11EA00039892 /* DeleteMovieUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497F7472F6F11EA00039892 /* DeleteMovieUseCase.swift */; };
 		C4AB776B2961D13900BE9346 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AB776A2961D13900BE9346 /* Enum.swift */; };
 		C4B8D4C22A78100C008D3CEB /* InfoUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B8D4C12A78100C008D3CEB /* InfoUserView.swift */; };
+		C4B9FC302F70445100671331 /* FetchMovieUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B9FC2F2F70445100671331 /* FetchMovieUseCase.swift */; };
+		C4B9FC322F70458600671331 /* PreviewDependecyInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B9FC312F70458600671331 /* PreviewDependecyInjection.swift */; };
+		C4B9FC342F70532E00671331 /* AuthReposotoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B9FC332F70532E00671331 /* AuthReposotoryProtocol.swift */; };
+		C4B9FC362F7053AE00671331 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B9FC352F7053AE00671331 /* AuthRepository.swift */; };
+		C4B9FC382F70544700671331 /* GetCurrentUserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B9FC372F70544700671331 /* GetCurrentUserUseCase.swift */; };
+		C4B9FC3A2F7059FF00671331 /* StorageReposotoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B9FC392F7059FF00671331 /* StorageReposotoryProtocol.swift */; };
+		C4B9FC3C2F705AA600671331 /* StorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B9FC3B2F705AA600671331 /* StorageRepository.swift */; };
+		C4B9FC3E2F705B2500671331 /* UploadMovieUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B9FC3D2F705B2500671331 /* UploadMovieUseCase.swift */; };
+		C4B9FC402F715B7800671331 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B9FC3F2F715B7800671331 /* FileHelper.swift */; };
+		C4B9FC422F71768A00671331 /* Steps.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B9FC412F71768A00671331 /* Steps.swift */; };
+		C4B9FC442F7177F100671331 /* UploadItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B9FC432F7177F100671331 /* UploadItem.swift */; };
 		C4BE732E2A757C8800175BF3 /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = C4BE732D2A757C8800175BF3 /* GRPC */; };
 		C4BE73302A757C8800175BF3 /* protoc-gen-grpc-swift in Frameworks */ = {isa = PBXBuildFile; productRef = C4BE732F2A757C8800175BF3 /* protoc-gen-grpc-swift */; };
 		C4C10B8D2F0705D80086A376 /* Services in Frameworks */ = {isa = PBXBuildFile; productRef = C4C10B8C2F0705D80086A376 /* Services */; };
@@ -54,15 +74,35 @@
 		C443CD9E2A7BCE2100ED417F /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		C448E69D2A75B55E00A18EBE /* FilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmView.swift; sourceTree = "<group>"; };
 		C448E69F2A75B56F00A18EBE /* StorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageView.swift; sourceTree = "<group>"; };
-		C45108192EE6E33C00C7DB35 /* WindowExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowExtension.swift; sourceTree = "<group>"; };
-		C469157D2F12CE510028C9EE /* ExtensionEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionEnvironment.swift; sourceTree = "<group>"; };
-		C469157F2F12CE690028C9EE /* ExtensionString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionString.swift; sourceTree = "<group>"; };
-		C46915822F12CEE40028C9EE /* ExtensionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionView.swift; sourceTree = "<group>"; };
+		C45108192EE6E33C00C7DB35 /* Extension+Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Window.swift"; sourceTree = "<group>"; };
+		C4548C7F2F6F16C9009BA431 /* DependecyInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependecyInjection.swift; sourceTree = "<group>"; };
+		C4548C812F6F174C009BA431 /* MovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepository.swift; sourceTree = "<group>"; };
+		C4548C832F6F1C70009BA431 /* MockMovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMovieRepository.swift; sourceTree = "<group>"; };
+		C469157D2F12CE510028C9EE /* Extension+Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Environment.swift"; sourceTree = "<group>"; };
+		C469157F2F12CE690028C9EE /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
+		C46915822F12CEE40028C9EE /* Extension+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+View.swift"; sourceTree = "<group>"; };
+		C46E72C32F72A83E007CA286 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		C46E72C52F72AF4A007CA286 /* RestoreSessionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreSessionUseCase.swift; sourceTree = "<group>"; };
 		C473578E2EDB5FBD00F1B9AF /* GestionaleVideoOnTheMandDev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GestionaleVideoOnTheMandDev.entitlements; sourceTree = "<group>"; };
 		C47815052F2525FE00E7536F /* FilmInfoSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmInfoSheet.swift; sourceTree = "<group>"; };
-		C4880F1528B2A1480091B7C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C4880F1528B2A1480091B7C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C48DD2392F73EABA00541862 /* LogoutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutUseCase.swift; sourceTree = "<group>"; };
+		C48DD23B2F73EF0D00541862 /* Extension+NSApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+NSApplication.swift"; sourceTree = "<group>"; };
+		C497F7452F6F116000039892 /* MovieRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepositoryProtocol.swift; sourceTree = "<group>"; };
+		C497F7472F6F11EA00039892 /* DeleteMovieUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteMovieUseCase.swift; sourceTree = "<group>"; };
 		C4AB776A2961D13900BE9346 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		C4B8D4C12A78100C008D3CEB /* InfoUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoUserView.swift; sourceTree = "<group>"; };
+		C4B9FC2F2F70445100671331 /* FetchMovieUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMovieUseCase.swift; sourceTree = "<group>"; };
+		C4B9FC312F70458600671331 /* PreviewDependecyInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PreviewDependecyInjection.swift; path = GestionaleVideoOnTheMand/Domain/UseCases/PreviewDependecyInjection.swift; sourceTree = SOURCE_ROOT; };
+		C4B9FC332F70532E00671331 /* AuthReposotoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthReposotoryProtocol.swift; sourceTree = "<group>"; };
+		C4B9FC352F7053AE00671331 /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
+		C4B9FC372F70544700671331 /* GetCurrentUserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GetCurrentUserUseCase.swift; path = GestionaleVideoOnTheMand/Data/Repositories/GetCurrentUserUseCase.swift; sourceTree = SOURCE_ROOT; };
+		C4B9FC392F7059FF00671331 /* StorageReposotoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageReposotoryProtocol.swift; sourceTree = "<group>"; };
+		C4B9FC3B2F705AA600671331 /* StorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRepository.swift; sourceTree = "<group>"; };
+		C4B9FC3D2F705B2500671331 /* UploadMovieUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UploadMovieUseCase.swift; path = GestionaleVideoOnTheMand/Data/Repositories/UploadMovieUseCase.swift; sourceTree = SOURCE_ROOT; };
+		C4B9FC3F2F715B7800671331 /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
+		C4B9FC412F71768A00671331 /* Steps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Steps.swift; sourceTree = "<group>"; };
+		C4B9FC432F7177F100671331 /* UploadItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItem.swift; sourceTree = "<group>"; };
 		C4C10B8E2F0D84000086A376 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		C4C10B902F0D86AC0086A376 /* SimpleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleButton.swift; sourceTree = "<group>"; };
 		C4C7A7CE28A528EB001CB803 /* GestionaleVideoOnTheMand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GestionaleVideoOnTheMand.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,11 +146,11 @@
 		C443CD9C2A7BCDFC00ED417F /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				C4C7A7F828A65926001CB803 /* Utils.swift */,
-				C45108192EE6E33C00C7DB35 /* WindowExtension.swift */,
-				C469157D2F12CE510028C9EE /* ExtensionEnvironment.swift */,
-				C469157F2F12CE690028C9EE /* ExtensionString.swift */,
-				C46915822F12CEE40028C9EE /* ExtensionView.swift */,
+				C45108192EE6E33C00C7DB35 /* Extension+Window.swift */,
+				C469157D2F12CE510028C9EE /* Extension+Environment.swift */,
+				C469157F2F12CE690028C9EE /* Extension+String.swift */,
+				C46915822F12CEE40028C9EE /* Extension+View.swift */,
+				C48DD23B2F73EF0D00541862 /* Extension+NSApplication.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -125,6 +165,15 @@
 				C47815052F2525FE00E7536F /* FilmInfoSheet.swift */,
 			);
 			path = HomeViews;
+			sourceTree = "<group>";
+		};
+		C4548C7E2F6F16A4009BA431 /* DependecyInjection */ = {
+			isa = PBXGroup;
+			children = (
+				C4548C7F2F6F16C9009BA431 /* DependecyInjection.swift */,
+				C4B9FC312F70458600671331 /* PreviewDependecyInjection.swift */,
+			);
+			path = DependecyInjection;
 			sourceTree = "<group>";
 		};
 		C46915812F12CEAD0028C9EE /* Components */ = {
@@ -146,6 +195,125 @@
 			path = Upload;
 			sourceTree = "<group>";
 		};
+		C497F7392F6F0E3900039892 /* RepositoryProtocols */ = {
+			isa = PBXGroup;
+			children = (
+				C497F7452F6F116000039892 /* MovieRepositoryProtocol.swift */,
+				C4B9FC332F70532E00671331 /* AuthReposotoryProtocol.swift */,
+				C4B9FC392F7059FF00671331 /* StorageReposotoryProtocol.swift */,
+			);
+			path = RepositoryProtocols;
+			sourceTree = "<group>";
+		};
+		C497F73A2F6F0EF500039892 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C4548C7E2F6F16A4009BA431 /* DependecyInjection */,
+				C4C7A7D128A528EB001CB803 /* GestionaleVideoOnTheMandApp.swift */,
+				C4C7A7D328A528EB001CB803 /* ContentView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		C497F73B2F6F0F1300039892 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				C497F7392F6F0E3900039892 /* RepositoryProtocols */,
+				C497F73D2F6F0F4000039892 /* UseCases */,
+				C497F73C2F6F0F2000039892 /* Entities */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		C497F73C2F6F0F2000039892 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				C4C7A7F928A65926001CB803 /* Film.swift */,
+				C4C7A7FA28A65926001CB803 /* Utente.swift */,
+				C4AB776A2961D13900BE9346 /* Enum.swift */,
+				C4B9FC412F71768A00671331 /* Steps.swift */,
+				C4B9FC432F7177F100671331 /* UploadItem.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		C497F73D2F6F0F4000039892 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				C497F7472F6F11EA00039892 /* DeleteMovieUseCase.swift */,
+				C4B9FC2F2F70445100671331 /* FetchMovieUseCase.swift */,
+				C4B9FC372F70544700671331 /* GetCurrentUserUseCase.swift */,
+				C4B9FC3D2F705B2500671331 /* UploadMovieUseCase.swift */,
+				C46E72C32F72A83E007CA286 /* LoginUseCase.swift */,
+				C46E72C52F72AF4A007CA286 /* RestoreSessionUseCase.swift */,
+				C48DD2392F73EABA00541862 /* LogoutUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		C497F73E2F6F0F7000039892 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				C497F7412F6F0FA000039892 /* Mappings */,
+				C497F7402F6F0F9000039892 /* DataSources */,
+				C497F73F2F6F0F8200039892 /* Repositories */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		C497F73F2F6F0F8200039892 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				C4548C832F6F1C70009BA431 /* MockMovieRepository.swift */,
+				C4548C812F6F174C009BA431 /* MovieRepository.swift */,
+				C4B9FC352F7053AE00671331 /* AuthRepository.swift */,
+				C4B9FC3B2F705AA600671331 /* StorageRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		C497F7402F6F0F9000039892 /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
+		C497F7412F6F0FA000039892 /* Mappings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Mappings;
+			sourceTree = "<group>";
+		};
+		C497F7422F6F0FAA00039892 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				C46915812F12CEAD0028C9EE /* Components */,
+				C4C7A7F528A6546D001CB803 /* ViewModel */,
+				C4C7A7F728A65490001CB803 /* Views */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		C497F7432F6F109900039892 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				C497F7442F6F10B100039892 /* Utils */,
+				C443CD9C2A7BCDFC00ED417F /* Extension */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		C497F7442F6F10B100039892 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C4C7A7F828A65926001CB803 /* Utils.swift */,
+				C4B9FC3F2F715B7800671331 /* FileHelper.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		C4C7A7C528A528EB001CB803 = {
 			isa = PBXGroup;
 			children = (
@@ -165,20 +333,18 @@
 		C4C7A7D028A528EB001CB803 /* GestionaleVideoOnTheMand */ = {
 			isa = PBXGroup;
 			children = (
-				C46915812F12CEAD0028C9EE /* Components */,
-				C443CD9C2A7BCDFC00ED417F /* Extension */,
+				C497F7432F6F109900039892 /* Infrastructure */,
+				C497F7422F6F0FAA00039892 /* Presentation */,
+				C497F73E2F6F0F7000039892 /* Data */,
+				C497F73B2F6F0F1300039892 /* Domain */,
+				C497F73A2F6F0EF500039892 /* App */,
+				C4C7A7D728A528ED001CB803 /* Preview Content */,
+				C473578E2EDB5FBD00F1B9AF /* GestionaleVideoOnTheMandDev.entitlements */,
+				C4C7A7DA28A528ED001CB803 /* GestionaleVideoOnTheMand.entitlements */,
 				C4880F1528B2A1480091B7C4 /* Info.plist */,
-				C4C7A7F728A65490001CB803 /* View */,
-				C4C7A7F628A65488001CB803 /* Model */,
-				C4C7A7F528A6546D001CB803 /* ViewModel */,
-				C4C7A7D128A528EB001CB803 /* GestionaleVideoOnTheMandApp.swift */,
-				C4C7A7D328A528EB001CB803 /* ContentView.swift */,
 				C4D0ABB82A81136800478531 /* GestionaleVideoOnTheMand.icns */,
 				C4C7A7D528A528ED001CB803 /* Assets.xcassets */,
-				C4C7A7DA28A528ED001CB803 /* GestionaleVideoOnTheMand.entitlements */,
-				C473578E2EDB5FBD00F1B9AF /* GestionaleVideoOnTheMandDev.entitlements */,
 				C4C7A7E228A59FEE001CB803 /* GoogleService-Info.plist */,
-				C4C7A7D728A528ED001CB803 /* Preview Content */,
 			);
 			path = GestionaleVideoOnTheMand;
 			sourceTree = "<group>";
@@ -201,17 +367,7 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		C4C7A7F628A65488001CB803 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				C4C7A7F928A65926001CB803 /* Film.swift */,
-				C4C7A7FA28A65926001CB803 /* Utente.swift */,
-				C4AB776A2961D13900BE9346 /* Enum.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		C4C7A7F728A65490001CB803 /* View */ = {
+		C4C7A7F728A65490001CB803 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				C47815022F1D400C00E7536F /* Upload */,
@@ -219,7 +375,7 @@
 				C4C7A80728A9037A001CB803 /* LoginView.swift */,
 				C4C7A80928A90398001CB803 /* RegistrationView.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,27 +468,47 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4B9FC442F7177F100671331 /* UploadItem.swift in Sources */,
+				C48DD23A2F73EABA00541862 /* LogoutUseCase.swift in Sources */,
+				C497F7462F6F116000039892 /* MovieRepositoryProtocol.swift in Sources */,
 				C4C7A7FD28A65926001CB803 /* Utente.swift in Sources */,
+				C46E72C62F72AF4A007CA286 /* RestoreSessionUseCase.swift in Sources */,
 				C4C7A7FC28A65926001CB803 /* Film.swift in Sources */,
 				C4C10B8F2F0D84000086A376 /* CustomButton.swift in Sources */,
-				C469157E2F12CE510028C9EE /* ExtensionEnvironment.swift in Sources */,
+				C469157E2F12CE510028C9EE /* Extension+Environment.swift in Sources */,
+				C4B9FC3E2F705B2500671331 /* UploadMovieUseCase.swift in Sources */,
 				C443CD9F2A7BCE2100ED417F /* CustomView.swift in Sources */,
-				C46915802F12CE690028C9EE /* ExtensionString.swift in Sources */,
+				C497F7482F6F11EA00039892 /* DeleteMovieUseCase.swift in Sources */,
+				C4548C822F6F174C009BA431 /* MovieRepository.swift in Sources */,
+				C46915802F12CE690028C9EE /* Extension+String.swift in Sources */,
+				C46E72C42F72A83E007CA286 /* LoginUseCase.swift in Sources */,
+				C4B9FC3C2F705AA600671331 /* StorageRepository.swift in Sources */,
+				C4B9FC382F70544700671331 /* GetCurrentUserUseCase.swift in Sources */,
 				C4B8D4C22A78100C008D3CEB /* InfoUserView.swift in Sources */,
 				C4C7A80828A9037A001CB803 /* LoginView.swift in Sources */,
 				C4169F5D2F1C002A00BE22B0 /* StepView.swift in Sources */,
+				C48DD23C2F73EF0D00541862 /* Extension+NSApplication.swift in Sources */,
+				C4B9FC342F70532E00671331 /* AuthReposotoryProtocol.swift in Sources */,
+				C4B9FC362F7053AE00671331 /* AuthRepository.swift in Sources */,
+				C4B9FC402F715B7800671331 /* FileHelper.swift in Sources */,
 				C47815062F2525FE00E7536F /* FilmInfoSheet.swift in Sources */,
 				C4AB776B2961D13900BE9346 /* Enum.swift in Sources */,
 				C4D634682A72A45900B54E1C /* UploadFilmView.swift in Sources */,
+				C4B9FC422F71768A00671331 /* Steps.swift in Sources */,
 				C4C10B912F0D86AC0086A376 /* SimpleButton.swift in Sources */,
+				C4B9FC3A2F7059FF00671331 /* StorageReposotoryProtocol.swift in Sources */,
+				C4B9FC322F70458600671331 /* PreviewDependecyInjection.swift in Sources */,
 				C4F1FD1F2A730315000443AE /* HomeView.swift in Sources */,
 				C448E69E2A75B55E00A18EBE /* FilmView.swift in Sources */,
+				C4548C842F6F1C70009BA431 /* MockMovieRepository.swift in Sources */,
 				C4C7A7D428A528EB001CB803 /* ContentView.swift in Sources */,
-				C451081B2EE6E33C00C7DB35 /* WindowExtension.swift in Sources */,
+				C451081B2EE6E33C00C7DB35 /* Extension+Window.swift in Sources */,
+				C4548C802F6F16C9009BA431 /* DependecyInjection.swift in Sources */,
 				C4C7A80628A902C9001CB803 /* LoginViewModel.swift in Sources */,
+				C4B9FC302F70445100671331 /* FetchMovieUseCase.swift in Sources */,
 				C4C7A7E128A575D6001CB803 /* ViewModel.swift in Sources */,
 				C448E6A02A75B56F00A18EBE /* StorageView.swift in Sources */,
-				C46915832F12CEE40028C9EE /* ExtensionView.swift in Sources */,
+				C46915832F12CEE40028C9EE /* Extension+View.swift in Sources */,
 				C4C7A7D228A528EB001CB803 /* GestionaleVideoOnTheMandApp.swift in Sources */,
 				C4C7A7FB28A65926001CB803 /* Utils.swift in Sources */,
 				C4C7A80A28A90398001CB803 /* RegistrationView.swift in Sources */,
@@ -464,7 +640,7 @@
 				CODE_SIGN_ENTITLEMENTS = GestionaleVideoOnTheMand/GestionaleVideoOnTheMand.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"GestionaleVideoOnTheMand/Preview Content\"";
 				DEVELOPMENT_TEAM = G7DSPSWXXC;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -499,7 +675,7 @@
 				CODE_SIGN_ENTITLEMENTS = GestionaleVideoOnTheMand/GestionaleVideoOnTheMand.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"GestionaleVideoOnTheMand/Preview Content\"";
 				DEVELOPMENT_TEAM = G7DSPSWXXC;
 				ENABLE_HARDENED_RUNTIME = YES;
