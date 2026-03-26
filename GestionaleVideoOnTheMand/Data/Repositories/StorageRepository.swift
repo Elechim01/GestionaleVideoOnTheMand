@@ -10,7 +10,7 @@ import Services
 
 class StorageRepository: StorageReposotoryProtocol {
     func upload(file: URL, onProgress: @escaping (Double) -> Void) async throws -> UploadFilmResponse {
-        for await  update in  UploadFilmRequest(file: file).uploadFilmAsync() {
+        for await  update in await UploadFilmRequest(file: file).uploadFilmAsync() {
             if let progress = update.progress {
                 onProgress(progress)
             }
