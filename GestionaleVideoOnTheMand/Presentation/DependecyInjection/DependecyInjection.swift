@@ -29,7 +29,7 @@ class DependencyContainer {
        return UploadMovieUseCase(storageRepo: storageReposotory)
     }()
     
-    private lazy var authRepository: AuthReposotoryProtocol = {
+    private lazy var authRepository: AuthRepositoryProtocol = {
         return AuthRepository()
     }()
     
@@ -49,20 +49,28 @@ class DependencyContainer {
        return LogoutUseCase(repository: authRepository)
     }()
     
-    @MainActor func makeViewModel() -> ViewModel {
-        return ViewModel(deleteUseCase: deleteUseCase,
+    private lazy var registrationUseCase: RegistrationUseCase = {
+        return RegistrationUseCase(repository: authRepository)
+    }()
+    
+    @MainActor func makeHomeViewModel() -> HomeViewModel {
+        return HomeViewModel(deleteUseCase: deleteUseCase,
                          fetchMovieUseCase: fetchMovieUseCase,
                          getCurrentUserUseCase: getCurrentUserUseCase)
     }
     
-    @MainActor func makeLoadViewModel () -> LoadFilmViewModel {
-        return LoadFilmViewModel(uploadMovieUseCase: uploadMovieUseCase)
+    @MainActor func makeLoadHomeViewModel () -> LoadFilmHomeViewModel {
+        return LoadFilmHomeViewModel(uploadMovieUseCase: uploadMovieUseCase)
     }
     
-    @MainActor func makeLoginViewModel() -> LoginViewModel {
-        return LoginViewModel(loginUseCase: loginUseCase,
+    @MainActor func makeLoginHomeViewModel() -> LoginHomeViewModel {
+        return LoginHomeViewModel(loginUseCase: loginUseCase,
                               restoreSessionUseCase: restoreSessionUseCase,
                               logoutUseCase: logoutUseCase)
+    }
+    
+    @MainActor func makeRegistrationHomeViewModel() -> RegistrationHomeViewModel {
+        return RegistrationHomeViewModel(registrationUseCase: registrationUseCase)
     }
     
 }

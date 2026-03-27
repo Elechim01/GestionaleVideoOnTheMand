@@ -8,9 +8,9 @@
 import Foundation
 
 class LogoutUseCase {
-    private let repository: AuthReposotoryProtocol
+    private let repository: AuthRepositoryProtocol
     
-    init(repository: AuthReposotoryProtocol) {
+    init(repository: AuthRepositoryProtocol) {
         self.repository = repository
     }
     

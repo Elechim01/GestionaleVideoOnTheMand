@@ -7,9 +7,10 @@
 
 import SwiftUI
 import Charts
+import ElechimCore
 
 struct StorageView: View {
-    @EnvironmentObject var homeModel: ViewModel
+    @EnvironmentObject var homeModel: HomeViewModel
     @Environment(\.isPreview) var isPreview
     var body: some View {
         VStack {
@@ -67,7 +68,7 @@ struct StorageView: View {
 struct StorageView_Previews: PreviewProvider {
     static var previews: some View {
         StorageView()
-            .environmentObject(PreviewDependecyInjection.shared.makeViewModel())
+            .environmentObject(PreviewDependecyInjection.shared.makeHomeViewModel())
             .frame(width: 500, height: 400)
     }
 }

@@ -10,7 +10,7 @@ import LocalAuthentication
 
 struct InfoUserView: View {
     
-    @EnvironmentObject var model: ViewModel
+    @EnvironmentObject var model: HomeViewModel
     @Environment(\.isPreview) var isPreview
     @State var showPassword: Bool = false
     
@@ -90,6 +90,6 @@ struct InfoUserView: View {
 struct InfoUserView_Previews: PreviewProvider {
     static var previews: some View {
         InfoUserView()
-            .environmentObject(PreviewDependecyInjection.shared.makeViewModel())
+            .environmentObject(PreviewDependecyInjection.shared.makeHomeViewModel())
     }
 }

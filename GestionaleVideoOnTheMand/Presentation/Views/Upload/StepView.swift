@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StepView: View {
-   @EnvironmentObject var loadFilmViewModel: LoadFilmViewModel
+   @EnvironmentObject var loadFilmHomeViewModel: LoadFilmHomeViewModel
 
     
     var body: some View {
@@ -21,8 +21,8 @@ struct StepView: View {
                     .foregroundStyle(.secondary)
                     .foregroundStyle(.green)
                 
-                ForEach(0..<loadFilmViewModel.steps.count, id:\.self) { index in
-                    let step = loadFilmViewModel.steps[index]
+                ForEach(0..<loadFilmHomeViewModel.steps.count, id:\.self) { index in
+                    let step = loadFilmHomeViewModel.steps[index]
                     
                     ProgressView(value: step.progress, total: 100)
                         .frame(width: 60)
@@ -32,11 +32,11 @@ struct StepView: View {
             
             
             HStack {
-                Text(loadFilmViewModel.stato.rawValue)
+                Text(loadFilmHomeViewModel.stato.rawValue)
                     .font(.title2)
                  
                 
-                Text("\(Int(loadFilmViewModel.progress)) %")
+                Text("\(Int(loadFilmHomeViewModel.progress)) %")
                     .font(.title2)
                     .padding(.leading,10)
             }
@@ -73,7 +73,7 @@ struct StepView: View {
 
 #Preview {
     StepView()
-        .environmentObject(PreviewDependecyInjection.shared.makeLoadFilmViewModel())
+        .environmentObject(PreviewDependecyInjection.shared.makeLoadFilmHomeViewModel())
         .frame(width: 500, height: 400)
 }
 

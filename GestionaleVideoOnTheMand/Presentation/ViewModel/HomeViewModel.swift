@@ -1,5 +1,5 @@
 //
-//  ViewModel.swift
+//  HomeViewModel.swift
 //  GestionaleVideoOnTheMand
 //
 //  Created by Michele Manniello on 11/08/22.
@@ -8,9 +8,10 @@
 import SwiftUI
 import Services
 import LocalAuthentication
+import ElechimCore
 
 @MainActor
-class ViewModel: ObservableObject {
+class HomeViewModel: ObservableObject {
    
     @Published var films : [Film] = []
     @Published var localUser: Utente?
@@ -36,7 +37,7 @@ class ViewModel: ObservableObject {
         return size 
     }
     
-    public let totalSize = 10000.0
+    public let totalSize = 10240.0
     
     init(deleteUseCase: DeleteMovieUseCase,
          fetchMovieUseCase: FetchMovieUseCase,
@@ -52,7 +53,9 @@ class ViewModel: ObservableObject {
     
     func deleteFile(film: Film) async {
         isLoading = true
-        defer { isLoading = false }
+        defer {
+            isLoading = false
+        }
         do {
             try await deleteUseCase.execute(film: film)
         } catch  {
@@ -62,7 +65,9 @@ class ViewModel: ObservableObject {
     
     func start() async {
         await loadUser()
-        await loadFilm()
+        Task {
+            await loadFilm()
+        }
     }
     
     private func loadUser() async {
@@ -87,13 +92,14 @@ class ViewModel: ObservableObject {
         do {
             guard let localUserId = localUser?.id else {
                 //MARK: Error on Account
-                throw CustomError.genericError
+                throw CustomError.noUser
             }
             
             let stream = try await  fetchMovieUseCase.execute(localUserId: localUserId)
             for await film in stream  {
                 // TODO: CHANGE SORTED BY DATA
                 self.films = film.sorted(by:{ $0.nome.compare($1.nome,options: .caseInsensitive) == .orderedDescending })
+                self.isLoading = false
             }
             
         } catch  {
@@ -109,6 +115,25 @@ class ViewModel: ObservableObject {
             alertMessage = error.localizedDescription
         }
         self.showAlert.toggle()
+    }
+    
+    func clearData() {
+        // 1. Resettiamo le liste e l'utente
+        self.films = []
+        self.localUser = nil
+        
+        // 2. Puliamo eventuali selezioni o URL temporanei
+        self.selectedFilmForInfo = nil
+        self.urlFileLocale = ""
+        
+        // 3. Resettiamo lo stato della UI
+        self.isLoading = false
+        self.showAlert = false
+        self.alertMessage = ""
+        
+        // NOTA: idUser essendo un AppStorage potrebbe essere resettato qui
+        // o lasciato gestire al LoginHomeViewModel durante il logout.
+        // Se vuoi pulirlo: self.idUser = ""
     }
 
 

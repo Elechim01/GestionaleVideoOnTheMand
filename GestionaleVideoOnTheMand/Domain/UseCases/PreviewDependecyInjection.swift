@@ -31,7 +31,7 @@ class PreviewDependecyInjection {
         return UploadMovieUseCase(storageRepo: MockStorageRepository())
     }()
     
-    private lazy var authRepository: AuthReposotoryProtocol = {
+    private lazy var authRepository: AuthRepositoryProtocol = {
        return AuthRepositoryMock()
     }()
     
@@ -46,18 +46,18 @@ class PreviewDependecyInjection {
        return LogoutUseCase(repository: authRepository)
     }()
     
-    @MainActor func makeViewModel() -> ViewModel {
-        return ViewModel(deleteUseCase: deleteUseCase,
+    @MainActor func makeHomeViewModel() -> HomeViewModel {
+        return HomeViewModel(deleteUseCase: deleteUseCase,
                          fetchMovieUseCase: fetchMovieUseCase,
                          getCurrentUserUseCase: getCurrentUserUseCase)
     }
     
-    @MainActor func makeLoadFilmViewModel() -> LoadFilmViewModel {
-        return LoadFilmViewModel(uploadMovieUseCase: uploadMovieUseCase)
+    @MainActor func makeLoadFilmHomeViewModel() -> LoadFilmHomeViewModel {
+        return LoadFilmHomeViewModel(uploadMovieUseCase: uploadMovieUseCase)
     }
     
-    @MainActor func makeLoginViewModel() -> LoginViewModel {
-        return LoginViewModel(loginUseCase: loginUseCase,
+    @MainActor func makeLoginHomeViewModel() -> LoginHomeViewModel {
+        return LoginHomeViewModel(loginUseCase: loginUseCase,
                               restoreSessionUseCase: restoreSessionUseCase,
                               logoutUseCase: logoutUseCase)
     }

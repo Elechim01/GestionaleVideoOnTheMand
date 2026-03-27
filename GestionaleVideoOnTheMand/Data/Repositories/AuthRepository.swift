@@ -8,16 +8,22 @@
 import Foundation
 import Services
 import FirebaseAuth
+import ElechimCore
 
-class AuthRepository: AuthReposotoryProtocol {
+class AuthRepository: AuthRepositoryProtocol {
    
     func signIn(email: String, password: String) async throws -> String {
         let authResult = try await FirebaseUtils.shared.signIn(email: email, password: password)
         
-        AuthKeyChain.shared.setCredential(email: email, password: password)
+      
         
         return authResult.user.uid
     }
+    
+    func saveCredential(email: String, password: String) async throws {
+        AuthKeyChain.shared.setCredential(email: email, password: password)
+    }
+    
     
     func token(username: String, password: String) async throws {
         try await TokenRequest(tokenBody: TokenBodyRequest(username: username, password: password)).performRequestAsync()
@@ -28,11 +34,11 @@ class AuthRepository: AuthReposotoryProtocol {
         guard let email = credential.email,
               let password = credential.password else {
             // TODO: CHANGE ERROR TYPE
-            throw CustomError.genericError
+            throw CustomError.noCredential
         }
         
         guard  let user: Utente = try await FirebaseUtils.shared.recuperoUtente(email: email, password: password, id: idUser) else {
-            throw CustomError.genericError
+            throw CustomError.noUser
         }
         return user
     }
@@ -56,14 +62,33 @@ class AuthRepository: AuthReposotoryProtocol {
         try firebase.signOut()
         AuthKeyChain.shared.delete()
     }
+    
+    func createUser(user: Utente) async throws -> String {
+        let id =  try await FirebaseUtils.shared.createUser(email: user.email,
+                                                            password: user.password)
+        var copyUser = user
+        copyUser.id = id
+        
+        do {
+            try await FirebaseUtils.shared.addUtente(utente: copyUser)
+        } catch  {
+            try? await FirebaseUtils.shared.deleteUser()
+            throw error
+        }
+        return id
+    }
 }
 
-class AuthRepositoryMock: AuthReposotoryProtocol {
+class AuthRepositoryMock: AuthRepositoryProtocol {
     func signIn(email: String, password: String)  async throws -> String {
        ""
     }
     
     func token(username: String, password: String)async throws {
+        
+    }
+    
+    func saveCredential(email: String, password: String) async throws {
         
     }
     
@@ -84,5 +109,8 @@ class AuthRepositoryMock: AuthReposotoryProtocol {
     
     func logOut() throws {
         
+    }
+    func createUser(user: Utente) async throws -> String {
+        ""
     }
 }

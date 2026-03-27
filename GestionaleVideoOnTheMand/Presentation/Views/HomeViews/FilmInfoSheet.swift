@@ -1,9 +1,10 @@
 import SwiftUI
+import ElechimCore
 
 /// A macOS sheet that shows detailed information about a `Film`.
 struct FilmInfoSheet: View {
     // MARK: - Dependencies
-    @EnvironmentObject private var homeViewModel: ViewModel
+    @EnvironmentObject private var homeViewModel: HomeViewModel
     let film: Film
     
     // MARK: - Body
@@ -77,5 +78,5 @@ struct FilmInfoSheet: View {
 // MARK: - Preview
 #Preview {
     FilmInfoSheet(film: filmsPreview[0])
-        .environmentObject(PreviewDependecyInjection.shared.makeViewModel())
+        .environmentObject(PreviewDependecyInjection.shared.makeHomeViewModel())
 }

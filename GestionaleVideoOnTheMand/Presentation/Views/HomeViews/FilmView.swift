@@ -7,9 +7,10 @@
 
 import SwiftUI
 import CachedAsyncImage
+import ElechimCore
 
 struct FilmView: View {
-    @EnvironmentObject var homeModel: ViewModel
+    @EnvironmentObject var homeModel: HomeViewModel
     @Environment(\.isPreview) var isPreview
     @Environment(\.openWindow) var openWindow
     
@@ -17,19 +18,24 @@ struct FilmView: View {
     var body: some View {
         VStack{
             ZStack(alignment: .center){
-                GeometryReader { geo in
-                    ScrollView(.vertical, showsIndicators: false) {
-                        LazyVGrid(columns: rows(for: geo.size.width),alignment: .center,spacing: 0) {
-                            ForEach(isPreview ? filmsPreview : homeModel.films.sorted(by: { $0.data ?? .now > $1.data ?? .now
-                            }) , id: \.id) { film in
-                               cardView(film: film)
-                                    .onTapGesture {
-                                        homeModel.selectedFilmForInfo = film
-                                    }
+                if !homeModel.films.isEmpty {
+                    GeometryReader { geo in
+                        ScrollView(.vertical, showsIndicators: false) {
+                            LazyVGrid(columns: rows(for: geo.size.width),alignment: .center,spacing: 0) {
+                                ForEach(isPreview ? filmsPreview : homeModel.films.sorted(by: { $0.data ?? .now > $1.data ?? .now
+                                }) , id: \.id) { film in
+                                    cardView(film: film)
+                                        .onTapGesture {
+                                            homeModel.selectedFilmForInfo = film
+                                        }
+                                }
                             }
                         }
+                        .padding(.horizontal,5)
                     }
-                    .padding(.horizontal,5)
+                } else {
+                    Text("Nessn film presente, aggiungi i film ")
+                        .font(.title)
                 }
             }
         }
@@ -123,7 +129,7 @@ struct FilmView: View {
 struct FilmView_Previews: PreviewProvider {
     static var previews: some View {
         FilmView()
-            .environmentObject(PreviewDependecyInjection.shared.makeViewModel())
+            .environmentObject(PreviewDependecyInjection.shared.makeHomeViewModel())
             .frame(width: 900, height: 700)
     }
 }

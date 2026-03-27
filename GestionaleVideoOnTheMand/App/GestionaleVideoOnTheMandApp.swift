@@ -27,21 +27,12 @@ struct GestionaleVideoOnTheMandApp: App {
     
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
-    private static let container = DependencyContainer()
+    // Il Coordinator è l'unico StateObject.
+    // Gestisce lui la creazione di tutti i HomeViewModel tramite il Container.
+    @StateObject private var coordinator = Coordinator()
     
-    @StateObject var model: ViewModel
-    @StateObject var loginViewModel: LoginViewModel
-    @StateObject var loadFilmViewModel: LoadFilmViewModel
-    
-    
-    init() {
-        _model = StateObject(wrappedValue: Self.container.makeViewModel())
-        _loadFilmViewModel = StateObject(wrappedValue: Self.container.makeLoadViewModel())
-        _loginViewModel = StateObject(wrappedValue: Self.container.makeLoginViewModel())
-        
-    }
-
     var body: some Scene {
+        // --- FINESTRA PRINCIPALE ---
         WindowGroup {
             ContentView()
                 .frame(
@@ -52,48 +43,60 @@ struct GestionaleVideoOnTheMandApp: App {
                     idealHeight: 760,
                     maxHeight: .infinity
                 )
-                .environmentObject(model)
-                .environmentObject(loginViewModel)
+                .environmentObject(coordinator) // Passiamo il coordinatore a cascata
                 .onAppear {
                     Task {
-                        await loginViewModel.restoreSession()
+                        // Ripristina la sessione all'avvio: decide lui se andare in Login o Home
+                        await coordinator.restoreSession()
                     }
                 }
         }
-        .windowStyle(HiddenTitleBarWindowStyle())
+        .windowStyle(.hiddenTitleBar)
         .commands {
-            CommandGroup(replacing: .appSettings) {
-                Button("Impostazioni") {
-                    print("Impostazioni")
-                }
-                .keyboardShortcut(",", modifiers: .command)
+            appCommands
+        }
+        
+        // --- FINESTRA UPLOAD ---
+        Window("UploadFilm", id: "uploadFilm") {
+            UploadFilmView()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color("Blue").opacity(0.3).ignoresSafeArea())
+                .environmentObject(coordinator) // Passiamo il coordinator per coerenza
+                .environmentObject(coordinator.homeViewModel)
+                .environmentObject(coordinator.loadFilmHomeViewModel)
+                .alwaysOnTop()
+        }
+        .windowStyle(.hiddenTitleBar)
+        
+        // --- FINESTRA INFO UTENTE ---
+        Window("InfoUser", id: "infoUser") {
+            InfoUserView()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color("Green").opacity(0.3).ignoresSafeArea())
+                .environmentObject(coordinator)
+                .environmentObject(coordinator.homeViewModel)
+                .alwaysOnTop()
+        }
+        .windowStyle(.hiddenTitleBar)
+    }
+    
+    // MARK: - Menu Commands
+    @CommandsBuilder
+    private var appCommands: some Commands {
+        CommandGroup(replacing: .appSettings) {
+            Button("Impostazioni") {
+                print("Apertura impostazioni...")
+            }
+            .keyboardShortcut(",", modifiers: .command)
+        }
+        
+        CommandGroup(replacing: .help) {
+            Button("Logout") {
+                coordinator.logout()
             }
         }
-        
-        Window("UploadfFilm", id: "uploadFilm") {
-            UploadFilmView()
-                .frame(maxWidth: .infinity,maxHeight: .infinity)
-                .background(Color("Blue").opacity(0.3).ignoresSafeArea())
-                .environmentObject(model)
-                .environmentObject(loadFilmViewModel)
-                .alwaysOnTop()
-            
-            // Quando carico i film
-        }
-        .windowStyle(HiddenTitleBarWindowStyle())
-        
-        Window("InfoUser", id:"infoUser") {
-            InfoUserView()
-                .frame(maxWidth: .infinity,maxHeight: .infinity)
-                .background(Color("Green").opacity(0.3).ignoresSafeArea())
-                .alwaysOnTop()
-                .environmentObject(model)
-        }
-        .windowStyle(HiddenTitleBarWindowStyle())
     }
 }
-
-
 
 
 extension NSTextField{

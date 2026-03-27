@@ -7,6 +7,7 @@
 
 import Foundation
 import Services
+import ElechimCore
 
 class StorageRepository: StorageReposotoryProtocol {
     func upload(file: URL, onProgress: @escaping (Double) -> Void) async throws -> UploadFilmResponse {

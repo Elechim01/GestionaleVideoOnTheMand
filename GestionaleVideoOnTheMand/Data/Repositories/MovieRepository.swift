@@ -15,9 +15,9 @@ class MovieRepository: MovieRepositoryProtocol {
     
     
     func deleteMovie(fileName: String,thumbnailName: String, docId: String) async throws {
-         try await DeleteRequest(fileName: fileName).performAsync()
-         try await DeleteRequest(fileName: thumbnailName).performAsync()
-         try await  FirebaseUtils.shared.removeDocument(filmId: docId)
+        let _ = try await DeleteRequest(fileName: fileName).performAsync()
+        let _ = try await DeleteRequest(fileName: thumbnailName).performAsync()
+        let _ = try await  FirebaseUtils.shared.removeDocument(filmId: docId)
         
     }
     

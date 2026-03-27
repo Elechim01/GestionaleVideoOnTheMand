@@ -1,5 +1,5 @@
 //
-//  LoginViewModel.swift
+//  LoginHomeViewModel.swift
 //  GestionaleVideoOnTheMand
 //
 //  Created by Michele Manniello on 14/08/22.
@@ -7,38 +7,44 @@
 
 import SwiftUI
 import Services
-import Firebase
-import AuthenticationServices
 import GoogleSignIn
 import CryptoKit
+import ElechimCore
 
 @MainActor
-class LoginViewModel: ObservableObject {
+class LoginHomeViewModel: ObservableObject {
     
-    //    Page: 0 -> Login, 1->Registration ,2 -> Home
-    @AppStorage("Pagina") internal var  page : Int = 0
     @Published var showAlert : Bool = false
     @Published var alertMessage : String = ""
     //    Memorizzo la password e l'email
     @AppStorage("IDUser") internal var idUser = ""
     @Published var nonce: String = ""
-    
-    var pagina: Page {
-        switch page {
-        case 0:
-            return .Login
-        case 1:
-            return .Registration
-        case 2:
-            return .Home
-        default:
-            return .Login
-        }
-    }
+    @Published var email: String = ""
+    @Published var password : String = ""
     
     private let loginUseCase: LoginUseCase
     private let restoreSessionUseCase: RestoreSessionUseCase
     private let logoutUseCase: LogoutUseCase
+    
+    var getCheck: Bool{
+        if(email.isEmpty){
+            alertMessage = "Il campo email è vuoto"
+            return false
+        }
+        if(!Utils.isValidEmail(email)){
+            alertMessage = "L'email non è valida"
+            return false
+        }
+        if(password.isEmpty){
+           alertMessage = "Il campo password è vuoto"
+            return false
+        }
+        if(!Utils.isValidPassword(testStr: password)){
+            alertMessage = "la password non è valida, deve comprendere: Almeno una maiuscola, Almeno un numero, Almeno una minuscola, 8 caratteri in totale"
+            return false
+        }
+        return true
+    }
     
     init(loginUseCase: LoginUseCase,
          restoreSessionUseCase: RestoreSessionUseCase,
@@ -50,52 +56,51 @@ class LoginViewModel: ObservableObject {
     
     
     //    Funzioni di Login e Logout
-    func login(email: String, password: String) async {
-        guard Utils.isConnectedToInternet() else {
-            alertMessage = "Impossibile effettuare il login in assenza di connessione internet"
-            showAlert.toggle()
-            return
-        }
+    func login() async  -> Bool {
         do {
+            guard getCheck else  {
+                self.showAlert.toggle()
+                return false
+            }
+            
+            guard Utils.isConnectedToInternet() else {
+                throw CustomError.connectionError
+            }
             let id = try await loginUseCase.execute(email: email, password: password)
             self.idUser = id
-            self.page = 2
+            return true
         } catch {
-            
             self.showError(from: error)
+            return false
         }
     }
     
-    func restoreSession() async {
-        self.page = 0
+    func restoreSession() async -> Bool {        
         do {
             guard  Utils.isConnectedToInternet()  else {
-                return  // TODO: CHANGE ERROR TYPE
+                throw CustomError.connectionError
             }
-            let isSessionRestored = try await restoreSessionUseCase.execute()
+            return  try await restoreSessionUseCase.execute()
             
-            if isSessionRestored {
-                self.page = 2
-            } else {
-                self.page = 0
-            }
         } catch {
             print(error.localizedDescription)
             showError(from: error)
-            self.page = 0
+            return false
         }
     }
     
-    func logOut(){
+    func logOut() -> Bool{
         do {
             try logoutUseCase.execute()
             self.idUser = ""
-            page = 0
+            return true
             
         } catch  {
             showError(from: error)
+            return false
         }
     }
+    
     
     private func showError(from error: Error) {
         if let custom = error as? CustomError {
@@ -109,36 +114,8 @@ class LoginViewModel: ObservableObject {
     }
 }
 
-
-extension LoginViewModel {
-    #warning("Move to Async/Await")
-    //    Funzione di Registrazione
-    func registration(email:String, password: String,completion: @escaping (String) ->()){
-        if(!Utils.isConnectedToInternet()){
-            alertMessage = "Impossibile effettuare il login in assenza di connessione internet"
-            showAlert.toggle()
-            return
-        }
-        Auth.auth().createUser(withEmail: email, password: password){[weak self] authResult,error in
-            guard let self = self else { return }
-            if let error = error{
-                print(error.localizedDescription)
-                self.alertMessage = error.localizedDescription
-                self.showAlert.toggle()
-                completion("")
-                return
-            }else{
-                guard let authResult = authResult else {
-                    return
-                }
-                print(authResult.user.uid)
-                //  Salvo i valori per renderli permanenti
-                self.idUser = authResult.user.uid
-                completion(authResult.user.uid)
-                return
-            }
-        }
-    }
+/*
+extension LoginHomeViewModel {
     
     //    MARK: Apple Sign in API
     func appleAuthenticate(credential: ASAuthorizationAppleIDCredential){
@@ -232,4 +209,4 @@ extension LoginViewModel {
         return result
     }
 }
-
+*/
