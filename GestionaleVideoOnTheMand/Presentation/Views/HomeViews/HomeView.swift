@@ -53,8 +53,6 @@ struct HomeView: View {
         .frame(minWidth: 300, idealWidth: 600, maxWidth: .infinity, minHeight: 400, idealHeight: 700, maxHeight: .infinity)
         .containerBackground(.ultraThinMaterial, for: .window)
         .navigationSplitViewStyle(.balanced)
-        
-        
         .sheet(item: $homeViewModel.selectedFilmForInfo, content: { film in
             FilmInfoSheet(film: film)
                 .environmentObject(homeViewModel)

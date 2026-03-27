@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Firebase
-
+#warning("Add coordinator")
 struct ContentView: View {
     
     @EnvironmentObject var homeModel: ViewModel
