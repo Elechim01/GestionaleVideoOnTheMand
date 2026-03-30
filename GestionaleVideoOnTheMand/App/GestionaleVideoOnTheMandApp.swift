@@ -57,7 +57,7 @@ struct GestionaleVideoOnTheMandApp: App {
         }
         
         // --- FINESTRA UPLOAD ---
-        Window("UploadFilm", id: "uploadFilm") {
+        Window("window.upload.film", id: "uploadFilm") {
             UploadFilmView()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color("Blue").opacity(0.3).ignoresSafeArea())
@@ -69,7 +69,7 @@ struct GestionaleVideoOnTheMandApp: App {
         .windowStyle(.hiddenTitleBar)
         
         // --- FINESTRA INFO UTENTE ---
-        Window("InfoUser", id: "infoUser") {
+        Window("window.info.user", id: "infoUser") {
             InfoUserView()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color("Green").opacity(0.3).ignoresSafeArea())
@@ -84,14 +84,7 @@ struct GestionaleVideoOnTheMandApp: App {
     @CommandsBuilder
     private var appCommands: some Commands {
         CommandGroup(replacing: .appSettings) {
-            Button("Impostazioni") {
-                print("Apertura impostazioni...")
-            }
-            .keyboardShortcut(",", modifiers: .command)
-        }
-        
-        CommandGroup(replacing: .help) {
-            Button("Logout") {
+            Button("system.button.logout") {
                 coordinator.logout()
             }
         }

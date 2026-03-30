@@ -23,22 +23,22 @@ struct LoginView: View {
     
     var body: some View {
         VStack {
-            Text("Benvenuto in app.")
+            Text("system.welcome.to.app")
                 .font(.title)
                 .padding()
             
-            Text("Effettua l'accesso")
+            Text("system.load.access")
                 .padding()
             
             TextField("", text: $loginHomeViewModel.email)
                 .placeholder(when: loginHomeViewModel.email.isEmpty) {
-                    Text("Email").foregroundColor(.black)
+                    Text("system.email").foregroundColor(.black)
                 }
                 .modifier(LoginTextFieldStyle())
             
             SecureField("", text: $loginHomeViewModel.password)
                 .placeholder(when: loginHomeViewModel.password.isEmpty) {
-                    Text("Password").foregroundColor(.black)
+                    Text("system.password").foregroundColor(.black)
                 }
                 .modifier(LoginTextFieldStyle())
             
@@ -52,7 +52,7 @@ struct LoginView: View {
                         await coordinator.login()
                     }
                 } label: {
-                    Text("Login")
+                    Text("system.login.button")
                 }
                 .modifier(LoginButtonStyle(color: .green))
                 
@@ -63,7 +63,7 @@ struct LoginView: View {
                     coordinator.goToRegistration()
                 } label: {
                     HStack {
-                        Text("Sign In")
+                        Text("system.singIn.button")
                         Image(systemName: "arrow.right")
                     }
                 }
@@ -81,7 +81,7 @@ struct LoginView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         // ALERT collegati ai HomeViewModel nel Coordinator
         .alert(loginHomeViewModel.alertMessage, isPresented: $loginHomeViewModel.showAlert) {
-            Button("OK") { loginHomeViewModel.showAlert = false }
+            Button("system.alert.ok") { loginHomeViewModel.showAlert = false }
         }
     }
     

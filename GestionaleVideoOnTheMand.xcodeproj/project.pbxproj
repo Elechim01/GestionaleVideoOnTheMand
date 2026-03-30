@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C402DBDC2F77430100DC29E5 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C402DBDB2F77430100DC29E5 /* Localizable.xcstrings */; };
 		C4169F5B2F1BF82700BE22B0 /* LoadFilmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4169F5A2F1BF82700BE22B0 /* LoadFilmViewModel.swift */; };
 		C4169F5D2F1C002A00BE22B0 /* StepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4169F5C2F1C002A00BE22B0 /* StepView.swift */; };
 		C44112F42F01ADD30070B973 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = C44112F32F01ADD30070B973 /* CachedAsyncImage */; };
@@ -66,6 +67,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C402DBDB2F77430100DC29E5 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		C4169F5A2F1BF82700BE22B0 /* LoadFilmViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadFilmViewModel.swift; sourceTree = "<group>"; };
 		C4169F5C2F1C002A00BE22B0 /* StepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepView.swift; sourceTree = "<group>"; };
 		C433B0682A72ADC700A0CA1E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				C497F7442F6F10B100039892 /* Utils */,
+				C402DBDB2F77430100DC29E5 /* Localizable.xcstrings */,
 			);
 			path = Infrastructure;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 			knownRegions = (
 				en,
 				Base,
+				it,
 			);
 			mainGroup = C4C7A7C528A528EB001CB803;
 			packageReferences = (
@@ -466,6 +470,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4D0ABB92A81136800478531 /* GestionaleVideoOnTheMand.icns in Resources */,
+				C402DBDC2F77430100DC29E5 /* Localizable.xcstrings in Resources */,
 				C4C7A7E328A59FEE001CB803 /* GoogleService-Info.plist in Resources */,
 				C4C7A7D928A528ED001CB803 /* Preview Assets.xcassets in Resources */,
 				C4C7A7D628A528ED001CB803 /* Assets.xcassets in Resources */,
@@ -583,6 +588,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -636,6 +642,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;

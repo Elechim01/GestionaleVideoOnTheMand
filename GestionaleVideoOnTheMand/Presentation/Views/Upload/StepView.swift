@@ -10,7 +10,6 @@ import SwiftUI
 struct StepView: View {
    @EnvironmentObject var loadFilmHomeViewModel: LoadFilmHomeViewModel
 
-    
     var body: some View {
         VStack {
             HStack(spacing: 10) {
@@ -21,15 +20,12 @@ struct StepView: View {
                     .foregroundStyle(.secondary)
                     .foregroundStyle(.green)
                 
-                ForEach(0..<loadFilmHomeViewModel.steps.count, id:\.self) { index in
-                    let step = loadFilmHomeViewModel.steps[index]
-                    
+                ForEach(loadFilmHomeViewModel.steps, id:\.id) { step in
                     ProgressView(value: step.progress, total: 100)
                         .frame(width: 60)
                     stepCircle(done: step.isComplete)
                 }
             }
-            
             
             HStack {
                 Text(loadFilmHomeViewModel.stato.rawValue)
@@ -41,13 +37,9 @@ struct StepView: View {
                     .padding(.leading,10)
             }
             .padding()
-           
-            
-            
-            
+  
         }
     }
-    
     
     private  func stepCircle(done: Bool) -> some View {
         
@@ -64,7 +56,7 @@ struct StepView: View {
                         lineCap: .round
                     )
                 )
-                .rotationEffect(.degrees(270))
+                .rotationEffect(.degrees(-90))
                 .animation(.easeInOut(duration: 0.8), value: done)
         }
         .frame(width: 30, height: 30)

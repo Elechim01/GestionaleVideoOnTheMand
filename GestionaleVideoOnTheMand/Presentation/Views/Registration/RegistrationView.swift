@@ -20,7 +20,7 @@ struct RegistrationView: View {
     var body: some View {
         VStack{
            
-            Text("Registrati...")
+            Text("system.singIn.title")
                 .font(.title)
             
             customTextfield(title: "Nome",
@@ -40,7 +40,7 @@ struct RegistrationView: View {
                 Button {
                     coordinator.goToLogin()
                 } label: {
-                    Text("Login")
+                    Text("system.login.button")
                 }
                 .buttonStyle(PlainButtonStyle())
                 .frame(width: 100, height: 40)
@@ -54,7 +54,7 @@ struct RegistrationView: View {
                         await coordinator.registration()
                     }
                 } label: {
-                    Text("Registrati")
+                    Text("system.singIn.button")
                 }
                 .buttonStyle(PlainButtonStyle())
                 .frame(width: 100, height: 40)
@@ -72,7 +72,7 @@ struct RegistrationView: View {
             Button {
                 registrationHomeViewModel.showAlert.toggle()
             } label: {
-                Text("OK")
+                Text("system.alert.ok")
             }
         }
     }

@@ -18,6 +18,7 @@ struct HomeView: View {
     
     init(coordinator: Coordinator) {
         homeViewModel = coordinator.homeViewModel
+       
     }
     
     var body: some View {
@@ -27,8 +28,8 @@ struct HomeView: View {
                 // Info Utente (Dati presi dal HomeViewModel nel Coordinator)
                 InfoUser(name: coordinator.homeViewModel.localUser?.nome ?? "Utente")
                 
-                ListButton(text: "Film", imageName: "film", section: .film)
-                ListButton(text: "Spazio", imageName: "opticaldiscdrive", section: .spazio)
+                ListButton(text: "video.count".localized(), imageName: "film", section: .film)
+                ListButton(text: "server.space".localized(), imageName: "opticaldiscdrive", section: .spazio)
                 
                 Spacer()
             }
@@ -47,7 +48,8 @@ struct HomeView: View {
                 }
                 
                 if coordinator.homeViewModel.isLoading {
-                    ProgressView("Aggiornamento dati...")
+                    //Aggiornamento dati...
+                    ProgressView("server.progress.upload.data")
                         .background(.ultraThinMaterial)
                         .cornerRadius(10)
                         .padding()
@@ -64,18 +66,18 @@ struct HomeView: View {
         }
         // Alert per errori dal HomeViewModel della Home
         .alert(homeViewModel.alertMessage, isPresented: $homeViewModel.showAlert) {
-            Button("OK", role: .cancel) {
+            Button("system.alert.ok", role: .cancel) {
                homeViewModel.showAlert = false
             }
         }
         // Alert di conferma Logout
-        .alert("Logout", isPresented: $showLogoutConfirm) {
-            Button("Annulla", role: .cancel) { }
-            Button("Conferma", role: .destructive) {
+        .alert("system.logout", isPresented: $showLogoutConfirm) {
+            Button("system.cancel", role: .cancel) { }
+            Button("system.confirm", role: .destructive) {
                 coordinator.logout()
             }
         } message: {
-            Text("Sei sicuro di voler uscire?")
+            Text("system.request.logout")
         }
     }
     
@@ -121,7 +123,7 @@ struct HomeView: View {
                 HStack {
                     Image(systemName: "power")
                         .padding(.leading, 15)
-                    Text("Logout")
+                    Text("system.logout")
                     Spacer()
                 }
                 .foregroundColor(.red)

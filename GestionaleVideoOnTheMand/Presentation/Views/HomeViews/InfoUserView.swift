@@ -16,21 +16,21 @@ struct InfoUserView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Info Utente:")
+            Text("info.user")
                 .font(.title)
                 .fontWeight(.bold)
                 .padding(.horizontal,3)
-            InfoElement(description: "Nome", element: model.localUser?.nome)
-            InfoElement(description: "Cognome", element: model.localUser?.cognome)
-            InfoElement(description: "Cellulare", element: model.localUser?.cellulare)
-            InfoElement(description: "E-mail", element: model.localUser?.email)
+            InfoElement(description: "user.name".localized(), element: model.localUser?.nome)
+            InfoElement(description: "user.surname".localized(), element: model.localUser?.cognome)
+            InfoElement(description: "user.cell".localized(), element: model.localUser?.cellulare)
+            InfoElement(description: "user.email".localized(), element: model.localUser?.email)
             PasswordElement()
             
             Spacer()
         }
         .frame(maxWidth: 250, maxHeight: 250)
         .alert(model.alertMessage, isPresented: $model.showAlert, actions: {
-            Button("OK",role: .cancel) {
+            Button("system.alert.ok",role: .cancel) {
                 model.showAlert.toggle()
             }
         })
@@ -57,9 +57,9 @@ struct InfoUserView: View {
     func PasswordElement() -> some View {
         HStack(alignment: .center) {
                 if showPassword {
-                    InfoElement(description: "Password", element: model.localUser?.password ?? "")
+                    InfoElement(description: "user.password".localized( ), element: model.localUser?.password ?? "")
                 } else {
-                    InfoElement(description: "Password", element: "*******")
+                    InfoElement(description: "user.password".localized(), element: "*******")
                 }
             
             SimpleButton(color: .clear, action: {

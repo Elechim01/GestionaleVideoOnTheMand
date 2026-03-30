@@ -16,11 +16,11 @@ struct StorageView: View {
         VStack {
                 Chart(isPreview ? filmsPreview : homeModel.films) { film in
                     BarMark(
-                        x: .value("Size", film.size),
-                        y: .value("Film", film.nome)
+                        x: .value("film.info.size", film.size),
+                        y: .value("video.count", film.nome)
                     )
                     .cornerRadius(4)
-                    .foregroundStyle(by: .value("Film", film.nome))
+                    .foregroundStyle(by: .value("video.count", film.nome))
                     .annotation(position: .overlay, alignment: .trailing) {
                             Text("\(film.size, format: .number.precision(.fractionLength(1)))")
                                 .font(.caption2)
@@ -44,14 +44,14 @@ struct StorageView: View {
                 .chartYScale()
                 .frame(minHeight: 220)
                 
-            Text("Size \(Utils.formatStorage(homeModel.totalSize)) / \( Utils.formatStorage(homeModel.totalSizeFilm)) ")
+            Text("film.info.size \(Utils.formatStorage(homeModel.totalSize)) / \( Utils.formatStorage(homeModel.totalSizeFilm)) ")
                     .padding()
                     .glassEffect()
             
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text("Storage")
+                Text("server.info.storage")
                     .font(.title)
                     .padding()
             }

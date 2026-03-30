@@ -21,9 +21,8 @@ struct UploadFilmView: View {
             if loadFilmHomeViewModel.stato == .loadFilm {
                 SimpleButton(color:  .green.opacity(0.4), action: {
                     loadFilmHomeViewModel.startUploadProcess(localUser: homeViewModel.localUser)
-
                 }, label: {
-                    Text("Seleziona i  film da caricare")
+                    Text("system.button.select.film.to.upload")
                         .padding()
                         .font(.title)
                 })
@@ -37,7 +36,7 @@ struct UploadFilmView: View {
                     SimpleButton(color:  .green.opacity(0.4), action: {
                         loadFilmHomeViewModel.stato = .loadFilm
                     }, label: {
-                        Text("Carica Film")
+                        Text("system.button.upload.film")
                             .padding()
                             .font(.title)
                     })
@@ -49,7 +48,7 @@ struct UploadFilmView: View {
                         Image(nsImage: loadFilmHomeViewModel.thumbnail!)
                     }
                     
-                    Text("File: \(loadFilmHomeViewModel.fileName)")
+                    Text("info.file.name \(loadFilmHomeViewModel.fileName)")
                         .padding()
                     
                     
@@ -64,7 +63,7 @@ struct UploadFilmView: View {
                            // loadFilmHomeViewModel.re
                             loadFilmHomeViewModel.stato = .loadFilm
                         }, label: {
-                            Text("Carica film")
+                            Text("info.end.button")
                         })
                     }
                 }
@@ -72,7 +71,7 @@ struct UploadFilmView: View {
             
         }
         .alert(loadFilmHomeViewModel.alertMessage, isPresented: $loadFilmHomeViewModel.showAlert, actions: {
-            Button("OK",role: .cancel) {
+            Button("system.alert.ok",role: .cancel) {
                 loadFilmHomeViewModel.showAlert.toggle()
             }
         })
