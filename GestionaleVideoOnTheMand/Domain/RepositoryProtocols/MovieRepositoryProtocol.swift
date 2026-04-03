@@ -10,5 +10,5 @@ import Services
 
 protocol MovieRepositoryProtocol {
     func deleteMovie(fileName: String,thumbnailName: String, docId: String) async throws
-    func loadFilm(localUserId: String) async throws  -> AsyncStream<[Film]>
+    func loadFilm(localUserId: String) async  -> AsyncThrowingStream<[Film],Error>
 }

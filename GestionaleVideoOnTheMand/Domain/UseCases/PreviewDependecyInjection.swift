@@ -9,12 +9,22 @@ import Foundation
 
 class PreviewDependecyInjection {
     
-    static let shared = PreviewDependecyInjection()
-    
+   static let shared = PreviewDependecyInjection()
+   
+   // MARK: REPOSITORY PROTOCOL
    private lazy var movieRepository: MovieRepositoryProtocol = {
         return MockMovieRepository()
     }()
     
+    private lazy var authRepository: AuthRepositoryProtocol = {
+       return AuthRepositoryMock()
+    }()
+    
+    private lazy var credentialRepository: CredentialRepositoryProtocol = {
+       return CredentialRepository()
+    }()
+    
+    // MARK: USE CASE
    private  lazy var deleteUseCase: DeleteMovieUseCase  = {
         return DeleteMovieUseCase(repository: movieRepository)
     }()
@@ -24,28 +34,28 @@ class PreviewDependecyInjection {
     }()
     
     private lazy var getCurrentUserUseCase: GetCurrentUserUseCase = {
-        return GetCurrentUserUseCase(authRepository: AuthRepositoryMock())
+        return GetCurrentUserUseCase(authRepository: authRepository,
+                                     credentialRepository: credentialRepository)
     }()
     
     private lazy var uploadMovieUseCase: UploadMovieUseCase = {
         return UploadMovieUseCase(storageRepo: MockStorageRepository())
     }()
     
-    private lazy var authRepository: AuthRepositoryProtocol = {
-       return AuthRepositoryMock()
-    }()
-    
     private lazy var loginUseCase: LoginUseCase = {
-       return LoginUseCase(authRepository: authRepository)
+       return LoginUseCase(authRepository: authRepository,
+                           credentialRepository: credentialRepository)
     }()
     
     private lazy var restoreSessionUseCase: RestoreSessionUseCase = {
-       return RestoreSessionUseCase(authRepository: authRepository)
+       return RestoreSessionUseCase(authRepository: authRepository,
+                                    credentialRepository: credentialRepository)
     }()
     private lazy var logoutUseCase: LogoutUseCase = {
        return LogoutUseCase(repository: authRepository)
     }()
     
+    // MARK: VIEW MODEL
     @MainActor func makeHomeViewModel() -> HomeViewModel {
         return HomeViewModel(deleteUseCase: deleteUseCase,
                          fetchMovieUseCase: fetchMovieUseCase,

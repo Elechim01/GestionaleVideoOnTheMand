@@ -95,8 +95,8 @@ class HomeViewModel: ObservableObject {
                 throw CustomError.noUser
             }
             
-            let stream = try await  fetchMovieUseCase.execute(localUserId: localUserId)
-            for await film in stream  {
+            let stream = await  fetchMovieUseCase.execute(localUserId: localUserId)
+            for try await film in stream  {
                 // TODO: CHANGE SORTED BY DATA
                 self.films = film.sorted(by:{ $0.nome.compare($1.nome,options: .caseInsensitive) == .orderedDescending })
                 self.isLoading = false

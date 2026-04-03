@@ -8,9 +8,9 @@
 import Foundation
 import Services
 
-class MovieRepository: MovieRepositoryProtocol {
-    func loadFilm(localUserId: String)  async throws -> AsyncStream<[Film]>  {
-       return  await  FirebaseUtils.shared.recuperoFilm(localUserId: localUserId)
+final class MovieRepository: MovieRepositoryProtocol {
+    func loadFilm(localUserId: String)  async -> AsyncThrowingStream<[Film],Error>  {
+       return await FirebaseUtils.shared.recuperoFilm(localUserId: localUserId)
     }
     
     

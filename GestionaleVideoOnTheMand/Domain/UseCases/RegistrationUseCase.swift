@@ -9,10 +9,13 @@ import Foundation
 
 final class RegistrationUseCase {
 
-    private let repository: AuthRepositoryProtocol
+    private let authRepository: AuthRepositoryProtocol
+    private let credentialRepository: CredentialRepositoryProtocol
 
-    init(repository: AuthRepositoryProtocol) {
-        self.repository = repository
+    init(authRepository: AuthRepositoryProtocol,
+         credentialRepository: CredentialRepositoryProtocol) {
+        self.authRepository = authRepository
+        self.credentialRepository = credentialRepository
     }
     
     func execute(nome:String,
@@ -26,9 +29,9 @@ final class RegistrationUseCase {
                             email: email,
                             password: password,
                             cellulare:cellulare)
-        let id =  try await repository.createUser(user: utente)
-        try await repository.saveCredential(email: email, password: password)
-        return id 
+        let id =  try await authRepository.createUser(user: utente)
+        try credentialRepository.saveCredential(email: email, password: password)
+        return id
     }
     
 }

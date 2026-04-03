@@ -9,10 +9,29 @@ import Foundation
 
 class DependencyContainer {
     
+    // MARK: REPOSITORY
    private  lazy var movieRepository: MovieRepositoryProtocol = {
         return MovieRepository()
     }()
     
+    private lazy var storageReposotory: StorageReposotoryProtocol = {
+        return StorageRepository()
+    }()
+    
+    private lazy var authRepository: AuthRepositoryProtocol = {
+        return AuthRepository()
+    }()
+    
+    private lazy var credentialRepository: CredentialRepositoryProtocol = {
+       return CredentialRepository()
+    }()
+    
+    private lazy var chronologyRepository: ChronologyRepositoryProtocol = {
+       return ChronologyRepository()
+    }()
+    
+    
+    //MARK: USE CASE
     private lazy var deleteUseCase: DeleteMovieUseCase  = {
         return DeleteMovieUseCase(repository: movieRepository)
     }()
@@ -21,28 +40,20 @@ class DependencyContainer {
        return FetchMovieUseCase(movieRepository: movieRepository)
     }()
     
-    private lazy var storageReposotory: StorageReposotoryProtocol = {
-        return StorageRepository()
-    }()
-    
     private lazy var uploadMovieUseCase: UploadMovieUseCase = {
        return UploadMovieUseCase(storageRepo: storageReposotory)
     }()
     
-    private lazy var authRepository: AuthRepositoryProtocol = {
-        return AuthRepository()
-    }()
-    
     private lazy var getCurrentUserUseCase: GetCurrentUserUseCase = {
-        return GetCurrentUserUseCase(authRepository: authRepository)
+        return GetCurrentUserUseCase(authRepository: authRepository, credentialRepository: credentialRepository)
     }()
     
     private lazy var loginUseCase: LoginUseCase = {
-       return LoginUseCase(authRepository: authRepository)
+       return LoginUseCase(authRepository: authRepository,credentialRepository: credentialRepository)
     }()
     
     private lazy var restoreSessionUseCase: RestoreSessionUseCase = {
-       return RestoreSessionUseCase(authRepository: authRepository)
+        return RestoreSessionUseCase(authRepository: authRepository, credentialRepository: credentialRepository)
     }()
     
     private lazy var logoutUseCase: LogoutUseCase = {
@@ -50,9 +61,15 @@ class DependencyContainer {
     }()
     
     private lazy var registrationUseCase: RegistrationUseCase = {
-        return RegistrationUseCase(repository: authRepository)
+        return RegistrationUseCase(authRepository: authRepository,credentialRepository: credentialRepository)
     }()
     
+    private lazy var fetchChronologyUseCase: FetchChronologyUseCase = {
+       return FetchChronologyUseCase(chronologyRepository: chronologyRepository)
+    }()
+    
+    
+    // MARK: VIEW MODEL
     @MainActor func makeHomeViewModel() -> HomeViewModel {
         return HomeViewModel(deleteUseCase: deleteUseCase,
                          fetchMovieUseCase: fetchMovieUseCase,

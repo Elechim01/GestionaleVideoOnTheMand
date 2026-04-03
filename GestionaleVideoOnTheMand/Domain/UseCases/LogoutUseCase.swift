@@ -7,7 +7,7 @@
 
 import Foundation
 
-class LogoutUseCase {
+final class LogoutUseCase {
     private let repository: AuthRepositoryProtocol
     
     init(repository: AuthRepositoryProtocol) {
