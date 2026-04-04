@@ -7,41 +7,28 @@
 
 import SwiftUI
 import Firebase
-#warning("Add coordinator")
+
 struct ContentView: View {
-    
-    @EnvironmentObject var homeModel: ViewModel
-    @EnvironmentObject var login: LoginViewModel
+    @EnvironmentObject var coordinator: Coordinator
     
     var body: some View {
         Group {
-            if login.pagina == .Login {
-                LoginView()
-            } else if login.pagina == .Registration {
-                RegistrationView()
-            } else if login.pagina == .Home {
-                HomeView()
-            } else {
-                Text("Page not found")
+            switch coordinator.currentPage {
+            case .Login:
+                LoginView(coordinator: coordinator)
+            case .Registration:
+                RegistrationView(coordinator: coordinator)
+            case .Home:
+                HomeView(coordinator: coordinator)
             }
         }
-        .environmentObject(login)
-        .environmentObject(homeModel)
-        .onChange(of: login.pagina) { newPagina in
-            if newPagina == .Home {
-                Task {
-                    await homeModel.start()
-                }
-            }
-        }
-        
+        .environmentObject(coordinator)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {       
         ContentView()
-            .environmentObject(PreviewDependecyInjection.shared.makeViewModel())
-            .environmentObject(PreviewDependecyInjection.shared.makeLoginViewModel())
+            .environmentObject(Coordinator())
     }
 }

@@ -7,8 +7,9 @@
 
 import Foundation
 import Services
+import ElechimCore
 
-class DeleteMovieUseCase {
+final class DeleteMovieUseCase {
     let repository: MovieRepositoryProtocol
     
     init(repository: MovieRepositoryProtocol) {
@@ -16,7 +17,9 @@ class DeleteMovieUseCase {
     }
     
     func execute(film: Film) async throws {
-        guard let documentId = film.documentId else { throw CustomError.genericError }
+        guard let documentId = film.documentId else {
+            throw CustomError.errorFilm
+        }
         try await repository.deleteMovie(
             fileName: film.fileName,
             thumbnailName: film.thumbnailName,

@@ -10,15 +10,6 @@ import AVKit
 import Cocoa
 
 class FileHelper {
-    static func createTempFile(from image: NSImage, nameFile: String = "thumbnail", fileExtension:String = "png") -> URL {
-        let tempUrl = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(nameFile).\(fileExtension)")
-        if let tiffData = image.tiffRepresentation,
-           let bitmap = NSBitmapImageRep(data: tiffData),
-           let pngData = bitmap.representation(using: .png, properties: [:]) {
-            try? pngData.write(to: tempUrl)
-        }
-        return tempUrl
-    }
     
     @MainActor
     static func selectMovies() -> [UploadItem] {
@@ -36,9 +27,6 @@ class FileHelper {
                     selectedMetadata.append(UploadItem(url: url,
                                                        name: url.lastPathComponent,
                                                        size: dimensionsMB))
-                    //selectedMetadata[url] = (url.lastPathComponent,dimensionsMB)
-                    
-                    
                 }
             }
             return selectedMetadata

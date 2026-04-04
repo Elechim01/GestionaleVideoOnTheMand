@@ -9,12 +9,26 @@ import Foundation
 
 class PreviewDependecyInjection {
     
-    static let shared = PreviewDependecyInjection()
-    
+   static let shared = PreviewDependecyInjection()
+   
+   // MARK: REPOSITORY PROTOCOL
    private lazy var movieRepository: MovieRepositoryProtocol = {
         return MockMovieRepository()
     }()
     
+    private lazy var authRepository: AuthRepositoryProtocol = {
+       return AuthRepositoryMock()
+    }()
+    
+    private lazy var credentialRepository: CredentialRepositoryProtocol = {
+       return CredentialRepository()
+    }()
+    
+    private lazy var chronologyRepository: ChronologyRepositoryProtocol = {
+       return ChronologyRepositoryMock()
+    }()
+    
+    // MARK: USE CASE
    private  lazy var deleteUseCase: DeleteMovieUseCase  = {
         return DeleteMovieUseCase(repository: movieRepository)
     }()
@@ -24,41 +38,49 @@ class PreviewDependecyInjection {
     }()
     
     private lazy var getCurrentUserUseCase: GetCurrentUserUseCase = {
-        return GetCurrentUserUseCase(authRepository: AuthRepositoryMock())
+        return GetCurrentUserUseCase(authRepository: authRepository,
+                                     credentialRepository: credentialRepository)
     }()
     
     private lazy var uploadMovieUseCase: UploadMovieUseCase = {
         return UploadMovieUseCase(storageRepo: MockStorageRepository())
     }()
     
-    private lazy var authRepository: AuthReposotoryProtocol = {
-       return AuthRepositoryMock()
-    }()
-    
     private lazy var loginUseCase: LoginUseCase = {
-       return LoginUseCase(authRepository: authRepository)
+       return LoginUseCase(authRepository: authRepository,
+                           credentialRepository: credentialRepository)
     }()
     
     private lazy var restoreSessionUseCase: RestoreSessionUseCase = {
-       return RestoreSessionUseCase(authRepository: authRepository)
+       return RestoreSessionUseCase(authRepository: authRepository,
+                                    credentialRepository: credentialRepository)
     }()
     private lazy var logoutUseCase: LogoutUseCase = {
        return LogoutUseCase(repository: authRepository)
     }()
     
-    @MainActor func makeViewModel() -> ViewModel {
-        return ViewModel(deleteUseCase: deleteUseCase,
+    private lazy var fetchChronologyUseCase: FetchChronologyUseCase = {
+       return FetchChronologyUseCase(chronologyRepository: chronologyRepository)
+    }()
+    
+    // MARK: VIEW MODEL
+    @MainActor func makeHomeViewModel() -> HomeViewModel {
+        return HomeViewModel(deleteUseCase: deleteUseCase,
                          fetchMovieUseCase: fetchMovieUseCase,
                          getCurrentUserUseCase: getCurrentUserUseCase)
     }
     
-    @MainActor func makeLoadFilmViewModel() -> LoadFilmViewModel {
-        return LoadFilmViewModel(uploadMovieUseCase: uploadMovieUseCase)
+    @MainActor func makeLoadFilmHomeViewModel() -> LoadFilmHomeViewModel {
+        return LoadFilmHomeViewModel(uploadMovieUseCase: uploadMovieUseCase)
     }
     
-    @MainActor func makeLoginViewModel() -> LoginViewModel {
-        return LoginViewModel(loginUseCase: loginUseCase,
+    @MainActor func makeLoginHomeViewModel() -> LoginHomeViewModel {
+        return LoginHomeViewModel(loginUseCase: loginUseCase,
                               restoreSessionUseCase: restoreSessionUseCase,
                               logoutUseCase: logoutUseCase)
+    }
+    @MainActor
+    func makeChronologyViewModel() -> ChronologyViewModel {
+        return ChronologyViewModel(fetchChronologyUseCase: fetchChronologyUseCase)
     }
 }

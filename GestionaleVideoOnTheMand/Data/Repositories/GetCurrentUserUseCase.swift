@@ -7,15 +7,19 @@
 
 import Foundation
 
-class GetCurrentUserUseCase {
-    private let authRepository: AuthReposotoryProtocol
+final class GetCurrentUserUseCase {
     
-    init(authRepository: AuthReposotoryProtocol) {
+    private let authRepository: AuthRepositoryProtocol
+    private let credentialRepository: CredentialRepositoryProtocol
+    
+    init(authRepository: AuthRepositoryProtocol,
+         credentialRepository: CredentialRepositoryProtocol) {
         self.authRepository = authRepository
+        self.credentialRepository = credentialRepository
     }
     
     func execute(idUser: String) async throws -> Utente {
-       
-        return try await  authRepository.getCurrentUser(idUser: idUser)
+       let credential =  try credentialRepository.readCredential()
+        return try await  authRepository.getCurrentUser(email: credential.email, password: credential.password, idUser: idUser)
     }
 }

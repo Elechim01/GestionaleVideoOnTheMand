@@ -7,8 +7,9 @@
 
 import Foundation
 import Services
+import ElechimCore
 
-class StorageRepository: StorageReposotoryProtocol {
+final class StorageRepository: StorageReposotoryProtocol {
     func upload(file: URL, onProgress: @escaping (Double) -> Void) async throws -> UploadFilmResponse {
         for await  update in await UploadFilmRequest(file: file).uploadFilmAsync() {
             if let progress = update.progress {

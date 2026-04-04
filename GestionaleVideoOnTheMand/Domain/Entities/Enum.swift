@@ -18,6 +18,7 @@ enum Page: Int, Equatable {
 enum HomeSection {
     case film
     case spazio
+    case chronology
 }
 
 
