@@ -8,139 +8,143 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject var coordinator: Coordinator
     
-    @EnvironmentObject var homeViewModel: ViewModel
-    @EnvironmentObject var loginViewModel: LoginViewModel
-    @State private var columsVisibility = NavigationSplitViewVisibility.all
+    @ObservedObject var homeViewModel: HomeViewModel
+    @State private var columnVisibility = NavigationSplitViewVisibility.all
     @Environment(\.openWindow) var openWindow
-    @State var homeSection: HomeSection = .film
-    @State var showLogoutConfirm: Bool = false
+    @State private var homeSection: HomeSection = .film
+    @State private var showLogoutConfirm: Bool = false
+    
+    init(coordinator: Coordinator) {
+        homeViewModel = coordinator.homeViewModel
+       
+    }
     
     var body: some View {
-        
-        NavigationSplitView(columnVisibility: $columsVisibility) {
-            
+        NavigationSplitView(columnVisibility: $columnVisibility) {
+            // --- SIDEBAR ---
             VStack(alignment: .leading) {
+                // Info Utente (Dati presi dal HomeViewModel nel Coordinator)
+                InfoUser(name: coordinator.homeViewModel.localUser?.nome ?? "Utente")
                 
-                InfoUser(name: homeViewModel.localUser?.nome ?? "TEST")
-                
-                ListButton(text: "Film", imageName: "film",section: .film, onTap: nil)
-                
-                
-                ListButton(text: "Spazio", imageName: "opticaldiscdrive",section: .spazio, onTap: nil)
+                ListButton(text: "video.count".localized(), imageName: "film", section: .film)
+                ListButton(text: "server.space".localized(), imageName: "opticaldiscdrive", section: .spazio)
+                ListButton(text: "chronologia", imageName: "clock.arrow.trianglehead.counterclockwise.rotate.90", section: .chronology)
                 
                 Spacer()
             }
-            .padding(.horizontal,5)
+            .padding(.horizontal, 5)
             
         } detail: {
-            ZStack(alignment: .center) {
+            // --- DETAIL VIEW ---
+            ZStack {
                 switch homeSection {
                 case .film:
                     FilmView()
-                        .environmentObject(homeViewModel)
+                        .environmentObject(coordinator.homeViewModel)
                 case .spazio:
                     StorageView()
-                        .environmentObject(homeViewModel)
+                        .environmentObject(coordinator.homeViewModel)
+                case .chronology:
+                    ChronologyView()
+                        .environmentObject(coordinator.chronologyViewModel)
                 }
                 
-                if homeViewModel.showAlert {
-                    ProgressView()
+                if coordinator.homeViewModel.isLoading {
+                    //Aggiornamento dati...
+                    ProgressView("server.progress.upload.data")
+                        .background(.ultraThinMaterial)
+                        .cornerRadius(10)
+                        .padding()
                 }
             }
-            
         }
         .frame(minWidth: 300, idealWidth: 600, maxWidth: .infinity, minHeight: 400, idealHeight: 700, maxHeight: .infinity)
         .containerBackground(.ultraThinMaterial, for: .window)
         .navigationSplitViewStyle(.balanced)
-        .sheet(item: $homeViewModel.selectedFilmForInfo, content: { film in
+        // Gestione schede dettaglio film
+        .sheet(item: $homeViewModel.selectedFilmForInfo) { film in
             FilmInfoSheet(film: film)
-                .environmentObject(homeViewModel)
-        })
-        
-        .alert(homeViewModel.alertMessage, isPresented: $homeViewModel.showAlert, actions: {
-            Button("OK",role: .cancel) {
-                homeViewModel.showAlert.toggle()
+                .environmentObject(coordinator.homeViewModel)
+        }
+        // Alert per errori dal HomeViewModel della Home
+        .alert(homeViewModel.alertMessage, isPresented: $homeViewModel.showAlert) {
+            Button("system.alert.ok", role: .cancel) {
+               homeViewModel.showAlert = false
             }
-        })
-        .alert("Sei sicuro di voler fare Logout", isPresented: $showLogoutConfirm,actions: {
-            Button("Annulla", role: .cancel) {
-                showLogoutConfirm.toggle()
+        }
+        // Alert di conferma Logout
+        .alert("system.logout", isPresented: $showLogoutConfirm) {
+            Button("system.cancel", role: .cancel) { }
+            Button("system.confirm", role: .destructive) {
+                coordinator.logout()
             }
-            Button("Conferma", role: .destructive) {
-
-                Task(priority: .background) {
-                    loginViewModel.logOut()
-                }
-                showLogoutConfirm.toggle()
-            }
-        })
+        } message: {
+            Text("system.request.logout")
+        }
     }
     
+    // MARK: - Componenti Helper (ViewBuilders)
+    
     @ViewBuilder
-    func ListButton(text: String,
-                    imageName: String,
-                    section: HomeSection,
-                    onTap: (()->())?
-    ) -> some View {
-        
-        CustomButton(isActive: homeSection == section ,
-                     trueColor: .blue,
-                     falseColor: .clear,
-                     action: {
-            homeSection = section
-            onTap?()
-        },label: {
-            HStack(alignment: .center) {
+    func ListButton(text: String, imageName: String, section: HomeSection) -> some View {
+        CustomButton(
+            isActive: homeSection == section,
+            trueColor: .blue,
+            falseColor: .clear,
+            action: { homeSection = section }
+        ) {
+            HStack(spacing: 10) {
                 Image(systemName: imageName)
-                    .padding(.leading,5)
+                    .frame(width: 20)
                 Text(text)
                 Spacer()
             }
-        })
+            .padding(.leading, 5)
+        }
     }
     
     @ViewBuilder
     func InfoUser(name: String) -> some View {
-        SimpleButton(color: .green.opacity(0.6), action: {
-            openWindow(id:"infoUser")
-        }, label: {
-            HStack {
-                Image(systemName: "person")
-                    .foregroundColor(.black)
-                    .padding(.leading,5)
-                Text("\(name)")
-                    .foregroundColor(.black)
-                Spacer()
+        VStack(spacing: 5) {
+            SimpleButton(color: .green.opacity(0.2)) {
+                openWindow(id: "infoUser")
+            } label: {
+                HStack {
+                    Image(systemName: "person.circle.fill")
+                        .padding(.leading,15)
+                    Text(name)
+                        .fontWeight(.medium)
+                    Spacer()
+                }
+                .foregroundColor(.primary)
             }
-        })
-        
-        SimpleButton(color: .white, action: {
-            showLogoutConfirm.toggle()
-        }, label: {
             
-            HStack {
-                Image(systemName: "escape")
-                    .foregroundColor(.black)
-                    .padding(.leading,5)
-                Text("Logout")
-                    .foregroundColor(.black)
-                Spacer()
+            SimpleButton(color: .red.opacity(0.1)) {
+                showLogoutConfirm.toggle()
+            } label: {
+                HStack {
+                    Image(systemName: "power")
+                        .padding(.leading, 15)
+                    Text("system.logout")
+                    Spacer()
+                }
+                .foregroundColor(.red)
             }
-        })
+        }
+        .padding(.vertical, 10)
         
         Divider()
-            .padding(.top)
+            .padding(.bottom, 10)
     }
-    
 }
 
 struct NewHome_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(coordinator: Coordinator())
             .frame(width: 900, height: 600)
-            .environmentObject(PreviewDependecyInjection.shared.makeViewModel())
-            .environmentObject(PreviewDependecyInjection.shared.makeLoginViewModel())
+            .environmentObject(Coordinator())
     }
 }
 

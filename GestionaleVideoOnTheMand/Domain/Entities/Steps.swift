@@ -6,7 +6,8 @@
 //
 
 import Foundation
-struct Steps {
+struct Steps: Identifiable {
+    var id: String = UUID().uuidString
     var type: UploadStatus
     var progress: Double
     var isComplete: Bool {

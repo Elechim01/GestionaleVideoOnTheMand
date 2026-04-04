@@ -7,15 +7,15 @@
 
 import Foundation
 
-class FetchMovieUseCase {
+final class FetchMovieUseCase {
     private let movieRepository: MovieRepositoryProtocol
    
     init(movieRepository: MovieRepositoryProtocol) {
         self.movieRepository = movieRepository
     }
     
-    func execute(localUserId: String) async throws -> AsyncStream<[Film]> {
-        return try await movieRepository.loadFilm(localUserId: localUserId)
+    func execute(localUserId: String) async -> AsyncThrowingStream<[Film],Error> {
+        return  await movieRepository.loadFilm(localUserId: localUserId)
     }
     
 }

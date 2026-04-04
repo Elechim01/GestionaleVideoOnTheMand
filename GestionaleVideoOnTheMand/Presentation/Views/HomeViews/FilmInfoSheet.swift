@@ -1,9 +1,10 @@
 import SwiftUI
+import ElechimCore
 
 /// A macOS sheet that shows detailed information about a `Film`.
 struct FilmInfoSheet: View {
     // MARK: - Dependencies
-    @EnvironmentObject private var homeViewModel: ViewModel
+    @EnvironmentObject private var homeViewModel: HomeViewModel
     let film: Film
     
     // MARK: - Body
@@ -20,12 +21,16 @@ struct FilmInfoSheet: View {
             
             // MARK: Card with details
             VStack(alignment: .leading, spacing: 12) {
-                infoRow(title: "URL", value: film.url)
-                infoRow(title: "Thumbnail", value: film.thumbnail)
-                infoRow(title: "Thumbnail Name", value: film.thumbnailName)
-                infoRow(title: "Size", value: Utils.formatStorage( film.size))
+                infoRow(title: "film.info.url",
+                        value: film.url)
+                infoRow(title: "film.info.thumbnail",
+                        value: film.thumbnail)
+                infoRow(title: "film.info.thumnail.name",
+                        value: film.thumbnailName)
+                infoRow(title: "film.info.size",
+                        value: Utils.formatStorage( film.size))
                 infoRow(
-                    title: "Date",
+                    title: "film.info.date",
                     value: Utils.stringToDate(date: film.data ?? .now)
                 )
             }
@@ -41,7 +46,7 @@ struct FilmInfoSheet: View {
             SimpleButton(color: .green.opacity(0.4), action: {
                 homeViewModel.selectedFilmForInfo = nil
             }, label:  {
-                Text("Close")
+                Text("system.text.close")
                     .font(.body.bold())
                     .frame(maxWidth: .infinity)
             })
@@ -76,6 +81,6 @@ struct FilmInfoSheet: View {
 
 // MARK: - Preview
 #Preview {
-    FilmInfoSheet(film: filmsPreview[0])
-        .environmentObject(PreviewDependecyInjection.shared.makeViewModel())
+    FilmInfoSheet(film: mockFilm[0])
+        .environmentObject(PreviewDependecyInjection.shared.makeHomeViewModel())
 }

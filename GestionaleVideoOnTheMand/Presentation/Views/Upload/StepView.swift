@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct StepView: View {
-   @EnvironmentObject var loadFilmViewModel: LoadFilmViewModel
+   @EnvironmentObject var loadFilmHomeViewModel: LoadFilmHomeViewModel
 
-    
     var body: some View {
         VStack {
             HStack(spacing: 10) {
@@ -21,33 +20,26 @@ struct StepView: View {
                     .foregroundStyle(.secondary)
                     .foregroundStyle(.green)
                 
-                ForEach(0..<loadFilmViewModel.steps.count, id:\.self) { index in
-                    let step = loadFilmViewModel.steps[index]
-                    
+                ForEach(loadFilmHomeViewModel.steps, id:\.id) { step in
                     ProgressView(value: step.progress, total: 100)
                         .frame(width: 60)
                     stepCircle(done: step.isComplete)
                 }
             }
             
-            
             HStack {
-                Text(loadFilmViewModel.stato.rawValue)
+                Text(loadFilmHomeViewModel.stato.rawValue)
                     .font(.title2)
                  
                 
-                Text("\(Int(loadFilmViewModel.progress)) %")
+                Text("\(Int(loadFilmHomeViewModel.progress)) %")
                     .font(.title2)
                     .padding(.leading,10)
             }
             .padding()
-           
-            
-            
-            
+  
         }
     }
-    
     
     private  func stepCircle(done: Bool) -> some View {
         
@@ -64,7 +56,7 @@ struct StepView: View {
                         lineCap: .round
                     )
                 )
-                .rotationEffect(.degrees(270))
+                .rotationEffect(.degrees(-90))
                 .animation(.easeInOut(duration: 0.8), value: done)
         }
         .frame(width: 30, height: 30)
@@ -73,7 +65,7 @@ struct StepView: View {
 
 #Preview {
     StepView()
-        .environmentObject(PreviewDependecyInjection.shared.makeLoadFilmViewModel())
+        .environmentObject(PreviewDependecyInjection.shared.makeLoadFilmHomeViewModel())
         .frame(width: 500, height: 400)
 }
 

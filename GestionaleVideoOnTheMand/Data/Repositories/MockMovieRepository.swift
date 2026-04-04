@@ -7,9 +7,9 @@
 
 import Foundation
 
-class MockMovieRepository: MovieRepositoryProtocol {
-    func loadFilm(localUserId: String) async throws -> AsyncStream<[Film]> {
-        return AsyncStream { _ in
+final class MockMovieRepository: MovieRepositoryProtocol {
+    func loadFilm(localUserId: String) async -> AsyncThrowingStream<[Film], any Error> {
+        return AsyncThrowingStream { _ in
             
         }
     }

@@ -7,9 +7,10 @@
 
 import SwiftUI
 import CachedAsyncImage
+import ElechimCore
 
 struct FilmView: View {
-    @EnvironmentObject var homeModel: ViewModel
+    @EnvironmentObject var homeViewModel: HomeViewModel
     @Environment(\.isPreview) var isPreview
     @Environment(\.openWindow) var openWindow
     
@@ -17,25 +18,31 @@ struct FilmView: View {
     var body: some View {
         VStack{
             ZStack(alignment: .center){
-                GeometryReader { geo in
-                    ScrollView(.vertical, showsIndicators: false) {
-                        LazyVGrid(columns: rows(for: geo.size.width),alignment: .center,spacing: 0) {
-                            ForEach(isPreview ? filmsPreview : homeModel.films.sorted(by: { $0.data ?? .now > $1.data ?? .now
-                            }) , id: \.id) { film in
-                               cardView(film: film)
-                                    .onTapGesture {
-                                        homeModel.selectedFilmForInfo = film
-                                    }
+                if !homeViewModel.films.isEmpty {
+                    GeometryReader { geo in
+                        ScrollView(.vertical, showsIndicators: false) {
+                            LazyVGrid(columns: rows(for: geo.size.width),alignment: .center,spacing: 0) {
+                                ForEach(isPreview ? mockFilm : homeViewModel.films.sorted(by: { $0.data ?? .now > $1.data ?? .now
+                                }) , id: \.id) { film in
+                                    cardView(film: film)
+                                        .onTapGesture {
+                                            homeViewModel.selectedFilmForInfo = film
+                                        }
+                                }
                             }
                         }
+                        .padding(.horizontal,5)
                     }
-                    .padding(.horizontal,5)
+                } else {
+                    // Nessn film presente, aggiungi i film
+                    Text("film.empty.state")
+                        .font(.title)
                 }
             }
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text("Films")
+                Text("video.count \(homeViewModel.films.count)")
                     .font(.title)
                     .padding()
             }
@@ -92,10 +99,10 @@ struct FilmView: View {
         .contextMenu {
             Button(action: {
                 Task {
-                    await homeModel.deleteFile(film: film)
+                    await homeViewModel.deleteFile(film: film)
                 }
             }, label: {
-                Text("Remove Element")
+                Text("system.button.remove.element")
             })
             .glassEffect()
         }
@@ -108,10 +115,9 @@ struct FilmView: View {
             }
         }
         
-        if(homeModel.films.isEmpty){ return [] }
+        if(homeViewModel.films.isEmpty){ return [] }
         
         let minLengh =  300
-        print("elenco elementi \(homeModel.films.count)")
         let count = max(Int(Int(width) / minLengh), 1)
         return Array(repeating: GridItem(.adaptive(minimum: 220), spacing: 16), count: count)
         
@@ -123,7 +129,7 @@ struct FilmView: View {
 struct FilmView_Previews: PreviewProvider {
     static var previews: some View {
         FilmView()
-            .environmentObject(PreviewDependecyInjection.shared.makeViewModel())
+            .environmentObject(PreviewDependecyInjection.shared.makeHomeViewModel())
             .frame(width: 900, height: 700)
     }
 }
