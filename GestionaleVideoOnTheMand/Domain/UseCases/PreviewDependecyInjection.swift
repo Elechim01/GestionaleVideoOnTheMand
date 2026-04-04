@@ -24,6 +24,10 @@ class PreviewDependecyInjection {
        return CredentialRepository()
     }()
     
+    private lazy var chronologyRepository: ChronologyRepositoryProtocol = {
+       return ChronologyRepositoryMock()
+    }()
+    
     // MARK: USE CASE
    private  lazy var deleteUseCase: DeleteMovieUseCase  = {
         return DeleteMovieUseCase(repository: movieRepository)
@@ -55,6 +59,10 @@ class PreviewDependecyInjection {
        return LogoutUseCase(repository: authRepository)
     }()
     
+    private lazy var fetchChronologyUseCase: FetchChronologyUseCase = {
+       return FetchChronologyUseCase(chronologyRepository: chronologyRepository)
+    }()
+    
     // MARK: VIEW MODEL
     @MainActor func makeHomeViewModel() -> HomeViewModel {
         return HomeViewModel(deleteUseCase: deleteUseCase,
@@ -70,5 +78,9 @@ class PreviewDependecyInjection {
         return LoginHomeViewModel(loginUseCase: loginUseCase,
                               restoreSessionUseCase: restoreSessionUseCase,
                               logoutUseCase: logoutUseCase)
+    }
+    @MainActor
+    func makeChronologyViewModel() -> ChronologyViewModel {
+        return ChronologyViewModel(fetchChronologyUseCase: fetchChronologyUseCase)
     }
 }

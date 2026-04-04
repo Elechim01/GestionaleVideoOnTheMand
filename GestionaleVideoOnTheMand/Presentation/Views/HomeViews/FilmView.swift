@@ -22,7 +22,7 @@ struct FilmView: View {
                     GeometryReader { geo in
                         ScrollView(.vertical, showsIndicators: false) {
                             LazyVGrid(columns: rows(for: geo.size.width),alignment: .center,spacing: 0) {
-                                ForEach(isPreview ? filmsPreview : homeViewModel.films.sorted(by: { $0.data ?? .now > $1.data ?? .now
+                                ForEach(isPreview ? mockFilm : homeViewModel.films.sorted(by: { $0.data ?? .now > $1.data ?? .now
                                 }) , id: \.id) { film in
                                     cardView(film: film)
                                         .onTapGesture {

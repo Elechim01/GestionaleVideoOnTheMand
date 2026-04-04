@@ -10,7 +10,6 @@ import Services
 import AppKit
 import ElechimCore
 
-// NOTA: CustomError, Film e UploadStatus ora sono nel Domain,
 final class UploadMovieUseCase {
     private let storageRepo: StorageReposotoryProtocol
     

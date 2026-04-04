@@ -30,6 +30,7 @@ struct HomeView: View {
                 
                 ListButton(text: "video.count".localized(), imageName: "film", section: .film)
                 ListButton(text: "server.space".localized(), imageName: "opticaldiscdrive", section: .spazio)
+                ListButton(text: "chronologia", imageName: "clock.arrow.trianglehead.counterclockwise.rotate.90", section: .chronology)
                 
                 Spacer()
             }
@@ -45,6 +46,9 @@ struct HomeView: View {
                 case .spazio:
                     StorageView()
                         .environmentObject(coordinator.homeViewModel)
+                case .chronology:
+                    ChronologyView()
+                        .environmentObject(coordinator.chronologyViewModel)
                 }
                 
                 if coordinator.homeViewModel.isLoading {

@@ -70,24 +70,32 @@ class DependencyContainer {
     
     
     // MARK: VIEW MODEL
-    @MainActor func makeHomeViewModel() -> HomeViewModel {
+    @MainActor
+    func makeHomeViewModel() -> HomeViewModel {
         return HomeViewModel(deleteUseCase: deleteUseCase,
                          fetchMovieUseCase: fetchMovieUseCase,
                          getCurrentUserUseCase: getCurrentUserUseCase)
     }
     
-    @MainActor func makeLoadHomeViewModel () -> LoadFilmHomeViewModel {
+    @MainActor
+    func makeLoadHomeViewModel () -> LoadFilmHomeViewModel {
         return LoadFilmHomeViewModel(uploadMovieUseCase: uploadMovieUseCase)
     }
     
-    @MainActor func makeLoginHomeViewModel() -> LoginHomeViewModel {
+    @MainActor
+    func makeLoginHomeViewModel() -> LoginHomeViewModel {
         return LoginHomeViewModel(loginUseCase: loginUseCase,
                               restoreSessionUseCase: restoreSessionUseCase,
                               logoutUseCase: logoutUseCase)
     }
     
-    @MainActor func makeRegistrationHomeViewModel() -> RegistrationHomeViewModel {
+    @MainActor
+    func makeRegistrationHomeViewModel() -> RegistrationHomeViewModel {
         return RegistrationHomeViewModel(registrationUseCase: registrationUseCase)
     }
     
+    @MainActor
+    func makeChronologyHomeViewModel() -> ChronologyViewModel {
+        return ChronologyViewModel(fetchChronologyUseCase: fetchChronologyUseCase)
+    }
 }

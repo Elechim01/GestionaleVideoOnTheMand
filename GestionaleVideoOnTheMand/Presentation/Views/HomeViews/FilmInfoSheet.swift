@@ -81,6 +81,6 @@ struct FilmInfoSheet: View {
 
 // MARK: - Preview
 #Preview {
-    FilmInfoSheet(film: filmsPreview[0])
+    FilmInfoSheet(film: mockFilm[0])
         .environmentObject(PreviewDependecyInjection.shared.makeHomeViewModel())
 }

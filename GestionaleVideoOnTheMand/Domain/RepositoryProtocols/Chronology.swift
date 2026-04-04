@@ -32,3 +32,7 @@ struct Chronology: Identifiable, Codable {
     }
     
 }
+
+var mockChronology: [Chronology] = mockFilm.map { film in
+    Chronology(film: film, localUsedId: "zglR4HvR0sP3KEqaRGL8Ma5cx5t2")
+}

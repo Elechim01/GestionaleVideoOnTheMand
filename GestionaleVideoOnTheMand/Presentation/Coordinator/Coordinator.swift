@@ -19,6 +19,7 @@ class Coordinator: ObservableObject {
     @Published var loginHomeViewModel: LoginHomeViewModel
     @Published var loadFilmHomeViewModel: LoadFilmHomeViewModel
     @Published var registrationHomeViewModel: RegistrationHomeViewModel
+    @Published var chronologyViewModel: ChronologyViewModel
     
     
     init() {
@@ -26,6 +27,7 @@ class Coordinator: ObservableObject {
         self.loadFilmHomeViewModel = Self.container.makeLoadHomeViewModel()
         self.loginHomeViewModel = Self.container.makeLoginHomeViewModel()
         self.registrationHomeViewModel = Self.container.makeRegistrationHomeViewModel()
+        self.chronologyViewModel = Self.container.makeChronologyHomeViewModel()
     }
     
     // --- LOGICA DI NAVIGAZIONE ---

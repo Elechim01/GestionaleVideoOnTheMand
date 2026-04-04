@@ -14,7 +14,7 @@ struct StorageView: View {
     @Environment(\.isPreview) var isPreview
     var body: some View {
         VStack {
-                Chart(isPreview ? filmsPreview : homeModel.films) { film in
+                Chart(isPreview ? mockFilm : homeModel.films) { film in
                     BarMark(
                         x: .value("film.info.size", film.size),
                         y: .value("video.count", film.nome)

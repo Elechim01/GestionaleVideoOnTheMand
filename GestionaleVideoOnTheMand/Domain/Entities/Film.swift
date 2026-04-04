@@ -80,7 +80,7 @@ struct Film: Identifiable, Codable,Sendable {
     
 }
 
-var filmsPreview: [Film] = [
+var mockFilm: [Film] = [
     .init(id: "1", idUtente: "", nome: "Huntik_-_2x02_-_La_torre_di_Nostradamus.mp4", url: "", thmbnail:"http://192.168.1.119:3000/media/1766767476424-thumbnail.png", size: 100, fileName: "", thumbnailName: ""),
     .init(id: "2", idUtente: "", nome: "OnePiece.mp4", url: "", thmbnail: "http://192.168.1.119:3000/media/1765994388682-thumbnail.png", size: 200, fileName: "", thumbnailName: ""),
     .init(id: "3", idUtente: "", nome: "OnePiece_Ep_1069_SUB_ITA.mp4", url: "", thmbnail:"http://192.168.1.119:3000/media/1766767476424-thumbnail.png", size: 300, fileName: "", thumbnailName: ""),

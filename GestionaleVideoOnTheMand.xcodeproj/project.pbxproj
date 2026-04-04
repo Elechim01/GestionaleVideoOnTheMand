@@ -26,6 +26,9 @@
 		C48105FE2F8004EA00EB65BE /* Chronology.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48105FD2F8004EA00EB65BE /* Chronology.swift */; };
 		C48106002F80051F00EB65BE /* ChronologyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48105FF2F80051F00EB65BE /* ChronologyRepository.swift */; };
 		C48106022F80058500EB65BE /* FetchChronologyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48106012F80058500EB65BE /* FetchChronologyUseCase.swift */; };
+		C48106052F8007CA00EB65BE /* ChronologyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48106042F8007CA00EB65BE /* ChronologyView.swift */; };
+		C48106072F80083600EB65BE /* ChronologyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48106062F80083600EB65BE /* ChronologyViewModel.swift */; };
+		C48106092F8019F700EB65BE /* ChronologyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48106082F8019F700EB65BE /* ChronologyCardView.swift */; };
 		C4880F1228B2A1230091B7C4 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = C4880F1128B2A1230091B7C4 /* GoogleSignIn */; };
 		C4880F1428B2A1230091B7C4 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C4880F1328B2A1230091B7C4 /* GoogleSignInSwift */; };
 		C48DD23A2F73EABA00541862 /* LogoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48DD2392F73EABA00541862 /* LogoutUseCase.swift */; };
@@ -91,6 +94,9 @@
 		C48105FD2F8004EA00EB65BE /* Chronology.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Chronology.swift; path = GestionaleVideoOnTheMand/Domain/RepositoryProtocols/Chronology.swift; sourceTree = SOURCE_ROOT; };
 		C48105FF2F80051F00EB65BE /* ChronologyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChronologyRepository.swift; path = GestionaleVideoOnTheMand/Domain/RepositoryProtocols/ChronologyRepository.swift; sourceTree = SOURCE_ROOT; };
 		C48106012F80058500EB65BE /* FetchChronologyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FetchChronologyUseCase.swift; path = GestionaleVideoOnTheMand/Domain/RepositoryProtocols/FetchChronologyUseCase.swift; sourceTree = SOURCE_ROOT; };
+		C48106042F8007CA00EB65BE /* ChronologyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChronologyView.swift; sourceTree = "<group>"; };
+		C48106062F80083600EB65BE /* ChronologyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChronologyViewModel.swift; sourceTree = "<group>"; };
+		C48106082F8019F700EB65BE /* ChronologyCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChronologyCardView.swift; sourceTree = "<group>"; };
 		C4880F1528B2A1480091B7C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C48DD2392F73EABA00541862 /* LogoutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutUseCase.swift; sourceTree = "<group>"; };
 		C497F7452F6F116000039892 /* MovieRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepositoryProtocol.swift; sourceTree = "<group>"; };
@@ -152,6 +158,7 @@
 		C448E69C2A75B54000A18EBE /* HomeViews */ = {
 			isa = PBXGroup;
 			children = (
+				C48106032F8007B300EB65BE /* Chronology */,
 				C433B0682A72ADC700A0CA1E /* HomeView.swift */,
 				C448E69D2A75B55E00A18EBE /* FilmView.swift */,
 				C448E69F2A75B56F00A18EBE /* StorageView.swift */,
@@ -187,6 +194,15 @@
 				C4169F5C2F1C002A00BE22B0 /* StepView.swift */,
 			);
 			path = Upload;
+			sourceTree = "<group>";
+		};
+		C48106032F8007B300EB65BE /* Chronology */ = {
+			isa = PBXGroup;
+			children = (
+				C48106042F8007CA00EB65BE /* ChronologyView.swift */,
+				C48106082F8019F700EB65BE /* ChronologyCardView.swift */,
+			);
+			path = Chronology;
 			sourceTree = "<group>";
 		};
 		C497F7392F6F0E3900039892 /* RepositoryProtocols */ = {
@@ -365,6 +381,7 @@
 				C4C7A80528A902C9001CB803 /* LoginViewModel.swift */,
 				C4169F5A2F1BF82700BE22B0 /* LoadFilmViewModel.swift */,
 				C4DBD0982F76A4F400E3A784 /* RegistrationViewModel.swift */,
+				C48106062F80083600EB65BE /* ChronologyViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -507,6 +524,7 @@
 				C4B9FC3E2F705B2500671331 /* UploadMovieUseCase.swift in Sources */,
 				C443CD9F2A7BCE2100ED417F /* CustomView.swift in Sources */,
 				C497F7482F6F11EA00039892 /* DeleteMovieUseCase.swift in Sources */,
+				C48106092F8019F700EB65BE /* ChronologyCardView.swift in Sources */,
 				C4548C822F6F174C009BA431 /* MovieRepository.swift in Sources */,
 				C46E72C42F72A83E007CA286 /* LoginUseCase.swift in Sources */,
 				C4B9FC3C2F705AA600671331 /* StorageRepository.swift in Sources */,
@@ -514,6 +532,7 @@
 				C4B9FC382F70544700671331 /* GetCurrentUserUseCase.swift in Sources */,
 				C48105FE2F8004EA00EB65BE /* Chronology.swift in Sources */,
 				C48105FC2F80049F00EB65BE /* ChronologyRepositoryProtocol.swift in Sources */,
+				C48106072F80083600EB65BE /* ChronologyViewModel.swift in Sources */,
 				C4B8D4C22A78100C008D3CEB /* InfoUserView.swift in Sources */,
 				C4C7A80828A9037A001CB803 /* LoginView.swift in Sources */,
 				C4169F5D2F1C002A00BE22B0 /* StepView.swift in Sources */,
@@ -536,6 +555,7 @@
 				C4C7A7D428A528EB001CB803 /* ContentView.swift in Sources */,
 				C4548C802F6F16C9009BA431 /* DependecyInjection.swift in Sources */,
 				C4C7A80628A902C9001CB803 /* LoginViewModel.swift in Sources */,
+				C48106052F8007CA00EB65BE /* ChronologyView.swift in Sources */,
 				C4B9FC302F70445100671331 /* FetchMovieUseCase.swift in Sources */,
 				C4C7A7E128A575D6001CB803 /* HomeViewModel.swift in Sources */,
 				C4DBD09B2F76C30200E3A784 /* RegistrationUseCase.swift in Sources */,
