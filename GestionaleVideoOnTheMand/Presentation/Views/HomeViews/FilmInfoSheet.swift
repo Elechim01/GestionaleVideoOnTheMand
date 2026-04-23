@@ -1,5 +1,6 @@
 import SwiftUI
 import ElechimCore
+import Services
 
 /// A macOS sheet that shows detailed information about a `Film`.
 struct FilmInfoSheet: View {
@@ -81,6 +82,6 @@ struct FilmInfoSheet: View {
 
 // MARK: - Preview
 #Preview {
-    FilmInfoSheet(film: mockFilm[0])
+    FilmInfoSheet(film: Mock.mockFilm[0])
         .environmentObject(PreviewDependecyInjection.shared.makeHomeViewModel())
 }

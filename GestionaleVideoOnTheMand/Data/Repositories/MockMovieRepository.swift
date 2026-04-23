@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Services
 
 final class MockMovieRepository: MovieRepositoryProtocol {
     func loadFilm(localUserId: String) async -> AsyncThrowingStream<[Film], any Error> {

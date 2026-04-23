@@ -13,14 +13,13 @@ struct UploadFilmView: View {
     @EnvironmentObject var loadFilmHomeViewModel: LoadFilmHomeViewModel
     
     #warning("Quando è completato chiudere la finestra")
-    #warning("Enumerare gli step e dare un valore totale")
 
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
             
             if loadFilmHomeViewModel.stato == .loadFilm {
                 SimpleButton(color:  .green.opacity(0.4), action: {
-                    loadFilmHomeViewModel.startUploadProcess(localUser: homeViewModel.localUser)
+                    loadFilmHomeViewModel.startUploadProcess()
                 }, label: {
                     Text("system.button.select.film.to.upload")
                         .padding()

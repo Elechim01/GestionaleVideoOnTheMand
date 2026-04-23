@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import ElechimCore
+import Services
 
 @MainActor
 final class ChronologyViewModel: ObservableObject {
@@ -17,13 +18,16 @@ final class ChronologyViewModel: ObservableObject {
     @Published var showAlert: Bool = false
     @Published var isLoading: Bool = false
     
-    #warning("Implement Session")
-    @AppStorage("IDUser") internal var idUser = ""
-    let fetchChronologyUseCase: FetchChronologyUseCase
+#warning("Implement Session")
+    private let fetchChronologyUseCase: FetchChronologyUseCase
+    private let sessionManager: SessionManager
     
     
-    init(fetchChronologyUseCase: FetchChronologyUseCase) {
+    init(fetchChronologyUseCase: FetchChronologyUseCase,
+         sessionManager: SessionManager
+    ) {
         self.fetchChronologyUseCase = fetchChronologyUseCase
+        self.sessionManager = sessionManager
     }
     
     func loadChronology() async {
@@ -32,17 +36,18 @@ final class ChronologyViewModel: ObservableObject {
             isLoading = false
         }
         do {
-            let stream = await fetchChronologyUseCase.execute(localUser: idUser)
+            let stream = await fetchChronologyUseCase.execute(localUser: sessionManager.currentUser?.id ?? "")
             for try await chronology in stream {
                 isLoading = false
                 chronologyList = chronology.sorted(by: { $0.date > $1.date })
-               
+                
             }
         } catch  {
             isLoading = false
+            CustomLog.error(category: .VM, "\(error.localizedDescription)")
             Utils.showError(alertMessage: &alertMessagge, showAlert: &showAlert, from: error)
         }
-      
+        
     }
     
 }

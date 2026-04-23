@@ -7,10 +7,11 @@
 
 import SwiftUI
 import LocalAuthentication
+import Services
 
 struct InfoUserView: View {
     
-    @EnvironmentObject var model: HomeViewModel
+    @EnvironmentObject var viewModel: HomeViewModel
     @Environment(\.isPreview) var isPreview
     @State var showPassword: Bool = false
     
@@ -20,23 +21,23 @@ struct InfoUserView: View {
                 .font(.title)
                 .fontWeight(.bold)
                 .padding(.horizontal,3)
-            InfoElement(description: "user.name".localized(), element: model.localUser?.nome)
-            InfoElement(description: "user.surname".localized(), element: model.localUser?.cognome)
-            InfoElement(description: "user.cell".localized(), element: model.localUser?.cellulare)
-            InfoElement(description: "user.email".localized(), element: model.localUser?.email)
+            InfoElement(description: "user.name".localized(), element: viewModel.sessionManager.currentUser?.nome)
+            InfoElement(description: "user.surname".localized(), element: viewModel.sessionManager.currentUser?.cognome)
+            InfoElement(description: "user.cell".localized(), element: viewModel.sessionManager.currentUser?.cellulare)
+            InfoElement(description: "user.email".localized(), element: viewModel.sessionManager.currentUser?.email)
             PasswordElement()
             
             Spacer()
         }
         .frame(maxWidth: 250, maxHeight: 250)
-        .alert(model.alertMessage, isPresented: $model.showAlert, actions: {
+        .alert(viewModel.alertMessage, isPresented: $viewModel.showAlert, actions: {
             Button("system.alert.ok",role: .cancel) {
-                model.showAlert.toggle()
+                viewModel.showAlert.toggle()
             }
         })
         .onAppear {
             if isPreview {
-                model.localUser = previewUser
+                viewModel.sessionManager.currentUser = Mock.previewUser
             }
         }
     }
@@ -57,7 +58,7 @@ struct InfoUserView: View {
     func PasswordElement() -> some View {
         HStack(alignment: .center) {
                 if showPassword {
-                    InfoElement(description: "user.password".localized( ), element: model.localUser?.password ?? "")
+                    InfoElement(description: "user.password".localized( ), element: viewModel.sessionManager.currentUser?.password ?? "")
                 } else {
                     InfoElement(description: "user.password".localized(), element: "*******")
                 }
@@ -65,7 +66,7 @@ struct InfoUserView: View {
             SimpleButton(color: .clear, action: {
                
                 if !showPassword {
-                    model.authenticate { response in
+                    viewModel.authenticate { response in
                         if response {
                             showPassword.toggle()
                         }

@@ -22,12 +22,15 @@ class RegistrationHomeViewModel: ObservableObject {
     @Published var showAlert : Bool = false
     @Published var alertMessage : String = ""
     
-    @AppStorage("IDUser") internal var idUser = ""
     
     private let registrationUseCase: RegistrationUseCase
+    private let sessionManager: SessionManager
     
-    init(registrationUseCase: RegistrationUseCase) {
+    init(registrationUseCase: RegistrationUseCase,
+         sessionManager: SessionManager
+    ) {
         self.registrationUseCase = registrationUseCase
+        self.sessionManager = sessionManager
     }
     
     var checkCampi: Bool{
@@ -84,7 +87,7 @@ class RegistrationHomeViewModel: ObservableObject {
                                             email: email,
                                             password: password,
                                             cellulare: cellulare)
-            self.idUser = idUser
+            self.sessionManager.saveSession(id: idUser)
             return true
         } catch  {
             self.showError(from: error)
@@ -93,13 +96,7 @@ class RegistrationHomeViewModel: ObservableObject {
     }
     
     private func showError(from error: Error) {
-        if let custom = error as? CustomError {
-            alertMessage = custom.description
-        } else if let apiError = error as? ApiError {
-            alertMessage = apiError.error.localizedDescription
-        } else {
-            alertMessage = "Generic Error"
-        }
-        self.showAlert.toggle()
+        CustomLog.error(category: .VM, "\(error.localizedDescription)")
+        Utils.showError(alertMessage: &alertMessage, showAlert: &showAlert, from: error)
     }
 }

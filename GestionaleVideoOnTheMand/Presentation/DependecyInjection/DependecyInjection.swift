@@ -68,34 +68,40 @@ class DependencyContainer {
        return FetchChronologyUseCase(chronologyRepository: chronologyRepository)
     }()
     
+    private let sessionManager = SessionManager()
     
     // MARK: VIEW MODEL
     @MainActor
     func makeHomeViewModel() -> HomeViewModel {
         return HomeViewModel(deleteUseCase: deleteUseCase,
                          fetchMovieUseCase: fetchMovieUseCase,
-                         getCurrentUserUseCase: getCurrentUserUseCase)
+                             getCurrentUserUseCase: getCurrentUserUseCase,
+                             sessionManager: sessionManager)
     }
     
     @MainActor
     func makeLoadHomeViewModel () -> LoadFilmHomeViewModel {
-        return LoadFilmHomeViewModel(uploadMovieUseCase: uploadMovieUseCase)
+        return LoadFilmHomeViewModel(uploadMovieUseCase: uploadMovieUseCase,
+                                     sessionManager: sessionManager)
     }
     
     @MainActor
     func makeLoginHomeViewModel() -> LoginHomeViewModel {
         return LoginHomeViewModel(loginUseCase: loginUseCase,
                               restoreSessionUseCase: restoreSessionUseCase,
-                              logoutUseCase: logoutUseCase)
+                              logoutUseCase: logoutUseCase,
+                                  sessionManager: sessionManager)
     }
     
     @MainActor
     func makeRegistrationHomeViewModel() -> RegistrationHomeViewModel {
-        return RegistrationHomeViewModel(registrationUseCase: registrationUseCase)
+        return RegistrationHomeViewModel(registrationUseCase: registrationUseCase,
+                                         sessionManager: sessionManager)
     }
     
     @MainActor
     func makeChronologyHomeViewModel() -> ChronologyViewModel {
-        return ChronologyViewModel(fetchChronologyUseCase: fetchChronologyUseCase)
+        return ChronologyViewModel(fetchChronologyUseCase: fetchChronologyUseCase,
+                                   sessionManager: sessionManager)
     }
 }

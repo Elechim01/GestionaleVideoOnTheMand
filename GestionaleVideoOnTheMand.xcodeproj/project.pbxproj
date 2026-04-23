@@ -17,13 +17,13 @@
 		C4548C802F6F16C9009BA431 /* DependecyInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4548C7F2F6F16C9009BA431 /* DependecyInjection.swift */; };
 		C4548C822F6F174C009BA431 /* MovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4548C812F6F174C009BA431 /* MovieRepository.swift */; };
 		C4548C842F6F1C70009BA431 /* MockMovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4548C832F6F1C70009BA431 /* MockMovieRepository.swift */; };
+		C45937D82F97B29500EF90DB /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45937D72F97B29500EF90DB /* SessionManager.swift */; };
 		C46E72C42F72A83E007CA286 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46E72C32F72A83E007CA286 /* LoginUseCase.swift */; };
 		C46E72C62F72AF4A007CA286 /* RestoreSessionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46E72C52F72AF4A007CA286 /* RestoreSessionUseCase.swift */; };
 		C47815062F2525FE00E7536F /* FilmInfoSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47815052F2525FE00E7536F /* FilmInfoSheet.swift */; };
 		C48105F82F7FF62B00EB65BE /* CredentialRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48105F72F7FF62B00EB65BE /* CredentialRepositoryProtocol.swift */; };
 		C48105FA2F7FF67300EB65BE /* CredentialRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48105F92F7FF67300EB65BE /* CredentialRepository.swift */; };
 		C48105FC2F80049F00EB65BE /* ChronologyRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48105FB2F80049F00EB65BE /* ChronologyRepositoryProtocol.swift */; };
-		C48105FE2F8004EA00EB65BE /* Chronology.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48105FD2F8004EA00EB65BE /* Chronology.swift */; };
 		C48106002F80051F00EB65BE /* ChronologyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48105FF2F80051F00EB65BE /* ChronologyRepository.swift */; };
 		C48106022F80058500EB65BE /* FetchChronologyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48106012F80058500EB65BE /* FetchChronologyUseCase.swift */; };
 		C48106052F8007CA00EB65BE /* ChronologyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48106042F8007CA00EB65BE /* ChronologyView.swift */; };
@@ -59,8 +59,6 @@
 		C4C7A7E128A575D6001CB803 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A7E028A575D6001CB803 /* HomeViewModel.swift */; };
 		C4C7A7E328A59FEE001CB803 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4C7A7E228A59FEE001CB803 /* GoogleService-Info.plist */; };
 		C4C7A7EA28A5A09E001CB803 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C4C7A7E928A5A09E001CB803 /* FirebaseAuth */; };
-		C4C7A7FC28A65926001CB803 /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A7F928A65926001CB803 /* Film.swift */; };
-		C4C7A7FD28A65926001CB803 /* Utente.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A7FA28A65926001CB803 /* Utente.swift */; };
 		C4C7A80628A902C9001CB803 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A80528A902C9001CB803 /* LoginViewModel.swift */; };
 		C4C7A80828A9037A001CB803 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A80728A9037A001CB803 /* LoginView.swift */; };
 		C4C7A80A28A90398001CB803 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A80928A90398001CB803 /* RegistrationView.swift */; };
@@ -84,6 +82,7 @@
 		C4548C7F2F6F16C9009BA431 /* DependecyInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependecyInjection.swift; sourceTree = "<group>"; };
 		C4548C812F6F174C009BA431 /* MovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepository.swift; sourceTree = "<group>"; };
 		C4548C832F6F1C70009BA431 /* MockMovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMovieRepository.swift; sourceTree = "<group>"; };
+		C45937D72F97B29500EF90DB /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		C46E72C32F72A83E007CA286 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		C46E72C52F72AF4A007CA286 /* RestoreSessionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreSessionUseCase.swift; sourceTree = "<group>"; };
 		C473578E2EDB5FBD00F1B9AF /* GestionaleVideoOnTheMandDev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GestionaleVideoOnTheMandDev.entitlements; sourceTree = "<group>"; };
@@ -91,7 +90,6 @@
 		C48105F72F7FF62B00EB65BE /* CredentialRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialRepositoryProtocol.swift; sourceTree = "<group>"; };
 		C48105F92F7FF67300EB65BE /* CredentialRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CredentialRepository.swift; path = GestionaleVideoOnTheMand/Domain/RepositoryProtocols/CredentialRepository.swift; sourceTree = SOURCE_ROOT; };
 		C48105FB2F80049F00EB65BE /* ChronologyRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChronologyRepositoryProtocol.swift; sourceTree = "<group>"; };
-		C48105FD2F8004EA00EB65BE /* Chronology.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Chronology.swift; path = GestionaleVideoOnTheMand/Domain/RepositoryProtocols/Chronology.swift; sourceTree = SOURCE_ROOT; };
 		C48105FF2F80051F00EB65BE /* ChronologyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChronologyRepository.swift; path = GestionaleVideoOnTheMand/Domain/RepositoryProtocols/ChronologyRepository.swift; sourceTree = SOURCE_ROOT; };
 		C48106012F80058500EB65BE /* FetchChronologyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FetchChronologyUseCase.swift; path = GestionaleVideoOnTheMand/Domain/RepositoryProtocols/FetchChronologyUseCase.swift; sourceTree = SOURCE_ROOT; };
 		C48106042F8007CA00EB65BE /* ChronologyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChronologyView.swift; sourceTree = "<group>"; };
@@ -124,8 +122,6 @@
 		C4C7A7DA28A528ED001CB803 /* GestionaleVideoOnTheMand.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GestionaleVideoOnTheMand.entitlements; sourceTree = "<group>"; };
 		C4C7A7E028A575D6001CB803 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		C4C7A7E228A59FEE001CB803 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		C4C7A7F928A65926001CB803 /* Film.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
-		C4C7A7FA28A65926001CB803 /* Utente.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utente.swift; sourceTree = "<group>"; };
 		C4C7A80528A902C9001CB803 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		C4C7A80728A9037A001CB803 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C4C7A80928A90398001CB803 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
@@ -232,6 +228,7 @@
 				C497F7392F6F0E3900039892 /* RepositoryProtocols */,
 				C497F73D2F6F0F4000039892 /* UseCases */,
 				C497F73C2F6F0F2000039892 /* Entities */,
+				C45937D72F97B29500EF90DB /* SessionManager.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -239,12 +236,9 @@
 		C497F73C2F6F0F2000039892 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				C4C7A7F928A65926001CB803 /* Film.swift */,
-				C4C7A7FA28A65926001CB803 /* Utente.swift */,
 				C4AB776A2961D13900BE9346 /* Enum.swift */,
 				C4B9FC412F71768A00671331 /* Steps.swift */,
 				C4B9FC432F7177F100671331 /* UploadItem.swift */,
-				C48105FD2F8004EA00EB65BE /* Chronology.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -351,9 +345,9 @@
 			isa = PBXGroup;
 			children = (
 				C497F7432F6F109900039892 /* Infrastructure */,
-				C497F7422F6F0FAA00039892 /* Presentation */,
 				C497F73E2F6F0F7000039892 /* Data */,
 				C497F73B2F6F0F1300039892 /* Domain */,
+				C497F7422F6F0FAA00039892 /* Presentation */,
 				C497F73A2F6F0EF500039892 /* App */,
 				C4C7A7D728A528ED001CB803 /* Preview Content */,
 				C473578E2EDB5FBD00F1B9AF /* GestionaleVideoOnTheMandDev.entitlements */,
@@ -517,9 +511,7 @@
 				C4B9FC442F7177F100671331 /* UploadItem.swift in Sources */,
 				C48DD23A2F73EABA00541862 /* LogoutUseCase.swift in Sources */,
 				C497F7462F6F116000039892 /* MovieRepositoryProtocol.swift in Sources */,
-				C4C7A7FD28A65926001CB803 /* Utente.swift in Sources */,
 				C46E72C62F72AF4A007CA286 /* RestoreSessionUseCase.swift in Sources */,
-				C4C7A7FC28A65926001CB803 /* Film.swift in Sources */,
 				C4C10B8F2F0D84000086A376 /* CustomButton.swift in Sources */,
 				C4B9FC3E2F705B2500671331 /* UploadMovieUseCase.swift in Sources */,
 				C443CD9F2A7BCE2100ED417F /* CustomView.swift in Sources */,
@@ -530,12 +522,12 @@
 				C4B9FC3C2F705AA600671331 /* StorageRepository.swift in Sources */,
 				C48106022F80058500EB65BE /* FetchChronologyUseCase.swift in Sources */,
 				C4B9FC382F70544700671331 /* GetCurrentUserUseCase.swift in Sources */,
-				C48105FE2F8004EA00EB65BE /* Chronology.swift in Sources */,
 				C48105FC2F80049F00EB65BE /* ChronologyRepositoryProtocol.swift in Sources */,
 				C48106072F80083600EB65BE /* ChronologyViewModel.swift in Sources */,
 				C4B8D4C22A78100C008D3CEB /* InfoUserView.swift in Sources */,
 				C4C7A80828A9037A001CB803 /* LoginView.swift in Sources */,
 				C4169F5D2F1C002A00BE22B0 /* StepView.swift in Sources */,
+				C45937D82F97B29500EF90DB /* SessionManager.swift in Sources */,
 				C48106002F80051F00EB65BE /* ChronologyRepository.swift in Sources */,
 				C4B9FC342F70532E00671331 /* AuthReposotoryProtocol.swift in Sources */,
 				C4B9FC362F7053AE00671331 /* AuthRepository.swift in Sources */,

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 struct Steps: Identifiable {
     var id: String = UUID().uuidString
     var type: UploadStatus

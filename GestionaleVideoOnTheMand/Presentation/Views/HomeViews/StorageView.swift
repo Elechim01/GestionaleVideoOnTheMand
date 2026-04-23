@@ -8,13 +8,14 @@
 import SwiftUI
 import Charts
 import ElechimCore
+import Services
 
 struct StorageView: View {
     @EnvironmentObject var homeModel: HomeViewModel
     @Environment(\.isPreview) var isPreview
     var body: some View {
         VStack {
-                Chart(isPreview ? mockFilm : homeModel.films) { film in
+            Chart(isPreview ? Mock.mockFilm : homeModel.films) { film in
                     BarMark(
                         x: .value("film.info.size", film.size),
                         y: .value("video.count", film.nome)

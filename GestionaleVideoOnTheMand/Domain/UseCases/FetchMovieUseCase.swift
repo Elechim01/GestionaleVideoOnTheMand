@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Services
 
 final class FetchMovieUseCase {
     private let movieRepository: MovieRepositoryProtocol

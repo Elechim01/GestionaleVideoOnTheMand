@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Services
 import ElechimCore
 
 struct ChronologyCardView: View {
@@ -33,16 +34,18 @@ struct ChronologyCardView: View {
                 Text(item.filmName)
                     .font(.system(size: 15, weight: .medium, design: .rounded))
                     .foregroundStyle(.primary)
-                    .lineLimit(1)
                 
-                Text(Utils.formatFullDate(item.date))
+                Text("Data visualizzazione: \(Utils.formatFullDate(item.date))\n")
+                    .font(.system(size: 11))
+                    .foregroundStyle(.secondary)
+                
+                Text("Data di cancellazione dell'elemento \(Utils.formatFullDate(item.expiryDate))" )
                     .font(.system(size: 11))
                     .foregroundStyle(.secondary)
             }
             
             Spacer()
             
-            // Icona di stato opzionale (es. visto)
             Image(systemName: "checkmark.circle.fill")
                 .font(.system(size: 16))
                 .foregroundStyle(Color.green.opacity(isHovering ? 0.9 : 0.4))
@@ -68,5 +71,5 @@ struct ChronologyCardView: View {
 }
 
 #Preview {
-    ChronologyCardView(item: mockChronology.first!)
+    ChronologyCardView(item: Mock.mockChronology.first!)
 }

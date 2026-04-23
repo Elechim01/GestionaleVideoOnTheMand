@@ -37,6 +37,12 @@
     "Cronologia" : {
 
     },
+    "Data di cancellazione dell'elemento %@" : {
+
+    },
+    "Data visualizzazione: %@\n" : {
+
+    },
     "film.empty.state" : {
       "localizations" : {
         "it" : {

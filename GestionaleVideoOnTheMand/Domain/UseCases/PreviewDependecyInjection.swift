@@ -62,25 +62,29 @@ class PreviewDependecyInjection {
     private lazy var fetchChronologyUseCase: FetchChronologyUseCase = {
        return FetchChronologyUseCase(chronologyRepository: chronologyRepository)
     }()
-    
+    let sessionManager = SessionManager()
     // MARK: VIEW MODEL
     @MainActor func makeHomeViewModel() -> HomeViewModel {
         return HomeViewModel(deleteUseCase: deleteUseCase,
                          fetchMovieUseCase: fetchMovieUseCase,
-                         getCurrentUserUseCase: getCurrentUserUseCase)
+                             getCurrentUserUseCase: getCurrentUserUseCase,
+                             sessionManager: sessionManager)
     }
     
     @MainActor func makeLoadFilmHomeViewModel() -> LoadFilmHomeViewModel {
-        return LoadFilmHomeViewModel(uploadMovieUseCase: uploadMovieUseCase)
+        return LoadFilmHomeViewModel(uploadMovieUseCase: uploadMovieUseCase,
+                                     sessionManager: sessionManager)
     }
     
     @MainActor func makeLoginHomeViewModel() -> LoginHomeViewModel {
         return LoginHomeViewModel(loginUseCase: loginUseCase,
                               restoreSessionUseCase: restoreSessionUseCase,
-                              logoutUseCase: logoutUseCase)
+                                  logoutUseCase: logoutUseCase,
+                                  sessionManager: sessionManager)
     }
     @MainActor
     func makeChronologyViewModel() -> ChronologyViewModel {
-        return ChronologyViewModel(fetchChronologyUseCase: fetchChronologyUseCase)
+        return ChronologyViewModel(fetchChronologyUseCase: fetchChronologyUseCase,
+                                   sessionManager: sessionManager)
     }
 }

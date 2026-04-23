@@ -14,10 +14,8 @@ import ElechimCore
 class HomeViewModel: ObservableObject {
    
     @Published var films : [Film] = []
-    @Published var localUser: Utente?
     @Published var urlFileLocale: String = ""
     @Published var selectedFilmForInfo: Film?
-    @AppStorage("IDUser") internal var idUser = ""
  
 
 //    MARK: Alert
@@ -28,6 +26,7 @@ class HomeViewModel: ObservableObject {
     private let deleteUseCase: DeleteMovieUseCase
     private let fetchMovieUseCase: FetchMovieUseCase
     private let getCurrentUserUseCase: GetCurrentUserUseCase
+    let sessionManager: SessionManager
     
     
     
@@ -41,11 +40,13 @@ class HomeViewModel: ObservableObject {
     
     init(deleteUseCase: DeleteMovieUseCase,
          fetchMovieUseCase: FetchMovieUseCase,
-         getCurrentUserUseCase: GetCurrentUserUseCase
+         getCurrentUserUseCase: GetCurrentUserUseCase,
+         sessionManager: SessionManager
     ){
         self.deleteUseCase = deleteUseCase
         self.fetchMovieUseCase = fetchMovieUseCase
         self.getCurrentUserUseCase = getCurrentUserUseCase
+        self.sessionManager = sessionManager
         #if DEV
         idUser = "zglR4HvR0sP3KEqaRGL8Ma5cx5t2"
         #endif
@@ -71,13 +72,14 @@ class HomeViewModel: ObservableObject {
     }
     
     private func loadUser() async {
+        guard sessionManager.currentUser == nil else { return }
         isLoading = true
         defer {
             isLoading = false
         }
         do {
-            let user = try await getCurrentUserUseCase.execute(idUser: self.idUser)
-            self.localUser = user
+            let user = try await getCurrentUserUseCase.execute(idUser: self.sessionManager.idUser)
+            self.sessionManager.currentUser = user
         } catch  {
             showError(from: error)
         }
@@ -90,7 +92,7 @@ class HomeViewModel: ObservableObject {
             isLoading = false
         }
         do {
-            guard let localUserId = localUser?.id else {
+            guard let localUserId =  self.sessionManager.currentUser?.id else {
                 //MARK: Error on Account
                 throw CustomError.noUser
             }
@@ -98,7 +100,7 @@ class HomeViewModel: ObservableObject {
             let stream = await  fetchMovieUseCase.execute(localUserId: localUserId)
             for try await film in stream  {
                 // TODO: CHANGE SORTED BY DATA
-                self.films = film.sorted(by:{ $0.nome.compare($1.nome,options: .caseInsensitive) == .orderedDescending })
+                self.films = film.sorted(by:{ $0.nome.compare($1.nome,options: String.CompareOptions.caseInsensitive) == .orderedDescending })
                 self.isLoading = false
             }
             
@@ -109,18 +111,14 @@ class HomeViewModel: ObservableObject {
     
     
     private func showError(from error: Error) {
-        if let custom = error as? CustomError {
-            alertMessage = custom.description
-        } else {
-            alertMessage = error.localizedDescription
-        }
-        self.showAlert.toggle()
+        CustomLog.error(category: .VM, "\(error.localizedDescription)")
+        Utils.showError(alertMessage: &alertMessage, showAlert: &showAlert, from: error)
     }
     
     func clearData() {
         // 1. Resettiamo le liste e l'utente
         self.films = []
-        self.localUser = nil
+        sessionManager.currentUser = nil
         
         // 2. Puliamo eventuali selezioni o URL temporanei
         self.selectedFilmForInfo = nil
@@ -144,17 +142,7 @@ class HomeViewModel: ObservableObject {
         if contex.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometricsOrCompanion, error: &error) {
             let reason = "Dacci i tuoi dati stronzo!:)"
             contex.evaluatePolicy(.deviceOwnerAuthenticationWithBiometricsOrCompanion, localizedReason: reason) { value, error in
-               // guard let _ = self else { return }
-               // if let error = error {
-                    //self.alertMessage = error.localizedDescription
-                   // self.showAlert.toggle()
-               // }
                 response(value)
-//                if succes {
-//                   succes?()
-//                } else {
-//                    print("NO Success")
-//                }
             }
         } else {
             guard let error = error else { return }
