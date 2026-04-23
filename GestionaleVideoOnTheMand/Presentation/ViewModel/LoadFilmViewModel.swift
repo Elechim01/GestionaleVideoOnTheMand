@@ -23,18 +23,19 @@ class LoadFilmHomeViewModel: ObservableObject {
     
     // Stato interno (Privato)
     private var uploadQueue: [UploadItem] = []
-    private var localUser: Utente?
     
     private let uploadMovieUseCase: UploadMovieUseCase
+    private let sessionManager: SessionManager
     
-    init(uploadMovieUseCase: UploadMovieUseCase) {
+    init(uploadMovieUseCase: UploadMovieUseCase,
+         sessionManager: SessionManager) {
         self.uploadMovieUseCase = uploadMovieUseCase
+        self.sessionManager = sessionManager
         generateSteps()
     }
     
-    func startUploadProcess(localUser: Utente?){
+    func startUploadProcess(){
 
-        self.localUser = localUser
         // Cuore Pulsante uso un dizionario chiave tupla così passo gli elementi all'esterno 
         let selection =  FileHelper.selectMovies()
         
@@ -57,7 +58,7 @@ class LoadFilmHomeViewModel: ObservableObject {
         // scalo l'elemento dall'array
         let metadata = uploadQueue.removeFirst()
         
-        guard let user = localUser else { return }
+        guard let user = sessionManager.currentUser else { return }
         self.resetCurrentUploadUI()
         self.fileName = metadata.name
         Task {
@@ -119,12 +120,8 @@ class LoadFilmHomeViewModel: ObservableObject {
     }
     
     private func showError(from error: Error) {
-        if let custom = error as? CustomError {
-            alertMessage = custom.description
-        } else {
-            alertMessage = error.localizedDescription
-        }
-        self.showAlert.toggle()
+        CustomLog.error(category: .VM, "\(error.localizedDescription)")
+        Utils.showError(alertMessage: &alertMessage, showAlert: &showAlert, from: error)
     }
     
 }

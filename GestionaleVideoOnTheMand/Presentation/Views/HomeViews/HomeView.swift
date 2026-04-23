@@ -26,7 +26,7 @@ struct HomeView: View {
             // --- SIDEBAR ---
             VStack(alignment: .leading) {
                 // Info Utente (Dati presi dal HomeViewModel nel Coordinator)
-                InfoUser(name: coordinator.homeViewModel.localUser?.nome ?? "Utente")
+                InfoUser(name: coordinator.homeViewModel.sessionManager.currentUser?.nome ?? "Utente")
                 
                 ListButton(text: "video.count".localized(), imageName: "film", section: .film)
                 ListButton(text: "server.space".localized(), imageName: "opticaldiscdrive", section: .spazio)

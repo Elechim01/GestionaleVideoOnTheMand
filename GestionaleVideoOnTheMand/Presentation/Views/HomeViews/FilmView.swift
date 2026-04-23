@@ -8,6 +8,7 @@
 import SwiftUI
 import CachedAsyncImage
 import ElechimCore
+import Services
 
 struct FilmView: View {
     @EnvironmentObject var homeViewModel: HomeViewModel
@@ -22,7 +23,7 @@ struct FilmView: View {
                     GeometryReader { geo in
                         ScrollView(.vertical, showsIndicators: false) {
                             LazyVGrid(columns: rows(for: geo.size.width),alignment: .center,spacing: 0) {
-                                ForEach(isPreview ? mockFilm : homeViewModel.films.sorted(by: { $0.data ?? .now > $1.data ?? .now
+                                ForEach(isPreview ? Mock.mockFilm : homeViewModel.films.sorted(by: { $0.data ?? .now > $1.data ?? .now
                                 }) , id: \.id) { film in
                                     cardView(film: film)
                                         .onTapGesture {
@@ -81,7 +82,7 @@ struct FilmView: View {
                     .glassEffect()
             }
 
-            Text("\(film.data ?? .now)")
+            Text("\(Utils.formatFullDate(film.data ?? .now) )")
             
             Text(Utils.formatStorage(film.size))
                 .font(.subheadline)

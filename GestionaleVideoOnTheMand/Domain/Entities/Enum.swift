@@ -13,8 +13,6 @@ enum Page: Int, Equatable {
     case Home = 2
 }
 
-
-
 enum HomeSection {
     case film
     case spazio

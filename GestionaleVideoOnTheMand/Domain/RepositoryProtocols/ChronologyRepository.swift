@@ -17,7 +17,7 @@ final class ChronologyRepository: ChronologyRepositoryProtocol {
 final class ChronologyRepositoryMock: ChronologyRepositoryProtocol {
     func loadChronology(localUser: String) async -> AsyncThrowingStream<[Chronology], any Error> {
         return AsyncThrowingStream { element in
-           element.yield(mockChronology)
+            element.yield(Mock.mockChronology)
         }
     }
 }
