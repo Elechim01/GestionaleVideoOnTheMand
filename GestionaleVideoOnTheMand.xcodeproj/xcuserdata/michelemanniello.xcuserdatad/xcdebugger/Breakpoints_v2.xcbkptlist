@@ -240,12 +240,12 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "7DA6A816-00CF-4F64-92FA-1FD8B629F037 - f18fa13e04f7fcd0"
+                  uuid = "7DA6A816-00CF-4F64-92FA-1FD8B629F037 - 65759e77b6817e03"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "(1) suspend resume partial function for GestionaleVideoOnTheMand.RegistrationViewModel.registration() async -&gt; Swift.Bool"
-                  moduleName = "GestionaleVideoOnTheMand.debug.dylib"
+                  moduleName = "GestionaleVideoOnTheMand"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/michelemanniello/Documents/Sviluppo/Swift/GestionaleVideoOnTheMand/GestionaleVideoOnTheMand/Presentation/ViewModel/RegistrationViewModel.swift"
                   startingColumnNumber = "9223372036854775807"
@@ -254,12 +254,12 @@
                   endingLineNumber = "95">
                </Location>
                <Location
-                  uuid = "7DA6A816-00CF-4F64-92FA-1FD8B629F037 - 8cff9ba69cb8d2"
+                  uuid = "7DA6A816-00CF-4F64-92FA-1FD8B629F037 - 76b093d72cce607"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for GestionaleVideoOnTheMand.RegistrationViewModel.registration() async -&gt; Swift.Bool"
-                  moduleName = "GestionaleVideoOnTheMand.debug.dylib"
+                  symbolName = "(5) suspend resume partial function for GestionaleVideoOnTheMand.RegistrationViewModel.registration() async -&gt; Swift.Bool"
+                  moduleName = "GestionaleVideoOnTheMand"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/michelemanniello/Documents/Sviluppo/Swift/GestionaleVideoOnTheMand/GestionaleVideoOnTheMand/Presentation/ViewModel/RegistrationViewModel.swift"
                   startingColumnNumber = "9223372036854775807"
@@ -268,12 +268,12 @@
                   endingLineNumber = "95">
                </Location>
                <Location
-                  uuid = "7DA6A816-00CF-4F64-92FA-1FD8B629F037 - 581392a91189dad3"
+                  uuid = "7DA6A816-00CF-4F64-92FA-1FD8B629F037 - 7fead64b01200406"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for GestionaleVideoOnTheMand.RegistrationViewModel.registration() async -&gt; Swift.Bool"
-                  moduleName = "GestionaleVideoOnTheMand.debug.dylib"
+                  symbolName = "(6) suspend resume partial function for GestionaleVideoOnTheMand.RegistrationViewModel.registration() async -&gt; Swift.Bool"
+                  moduleName = "GestionaleVideoOnTheMand"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/michelemanniello/Documents/Sviluppo/Swift/GestionaleVideoOnTheMand/GestionaleVideoOnTheMand/Presentation/ViewModel/RegistrationViewModel.swift"
                   startingColumnNumber = "9223372036854775807"
