@@ -9,8 +9,11 @@ import SwiftUI
 import AppKit
 import Cocoa
 import Firebase
+import UserNotifications
+import ElechimCore
 
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDelegate {
+    
     func applicationDidFinishLaunching(_ notification: Notification) {
         setupFirebase()
     }
@@ -26,44 +29,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 struct GestionaleVideoOnTheMandApp: App {
     
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
-    // Il Coordinator è l'unico StateObject.
-    // Gestisce lui la creazione di tutti i HomeViewModel tramite il Container.
     @StateObject private var coordinator = Coordinator()
-    
     var body: some Scene {
         // --- FINESTRA PRINCIPALE ---
         WindowGroup {
             ContentView()
-                .frame(
-                    minWidth: 720,
-                    idealWidth: 1100,
-                    maxWidth: .infinity,
-                    minHeight: 520,
-                    idealHeight: 760,
-                    maxHeight: .infinity
-                )
-                .environmentObject(coordinator) // Passiamo il coordinatore a cascata
+                .frame(minWidth: 720, idealWidth: 1100, maxWidth: .infinity, minHeight: 520, idealHeight: 760, maxHeight: .infinity)
+                .environmentObject(coordinator)
                 .onAppear {
                     Task {
-                        // Ripristina la sessione all'avvio: decide lui se andare in Login o Home
                         await coordinator.restoreSession()
                     }
                 }
         }
         .windowStyle(.hiddenTitleBar)
-        .commands {
-            appCommands
-        }
+        .commands { appCommands }
         
         // --- FINESTRA UPLOAD ---
         Window("window.upload.film", id: "uploadFilm") {
             UploadFilmView()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color("Blue").opacity(0.3).ignoresSafeArea())
-                .environmentObject(coordinator) // Passiamo il coordinator per coerenza
-                .environmentObject(coordinator.homeViewModel)
-                .environmentObject(coordinator.loadFilmHomeViewModel)
+                .environmentObject(coordinator.loadFilmViewModel)
                 .alwaysOnTop()
         }
         .windowStyle(.hiddenTitleBar)
@@ -73,9 +60,8 @@ struct GestionaleVideoOnTheMandApp: App {
             InfoUserView()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color("Green").opacity(0.3).ignoresSafeArea())
-                .environmentObject(coordinator)
-                .environmentObject(coordinator.homeViewModel)
-                .alwaysOnTop()
+                .environmentObject(Coordinator.container.sessionManager)
+               .alwaysOnTop()
         }
         .windowStyle(.hiddenTitleBar)
     }

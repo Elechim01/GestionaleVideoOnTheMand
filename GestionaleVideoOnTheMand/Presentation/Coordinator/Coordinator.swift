@@ -7,33 +7,35 @@
 
 import Foundation
 import SwiftUI
+import ElechimCore
 
 @MainActor
 class Coordinator: ObservableObject {
     // Salviamo direttamente il tipo Page
     @AppStorage("CurrentPage") var currentPage: Page = .Login
+    //  var dismissWindowAction: DismissWindowAction?
     
-    private static let container = DependencyContainer()
+    static let container = DependencyContainer()
     
     @Published var homeViewModel: HomeViewModel
-    @Published var loginHomeViewModel: LoginHomeViewModel
-    @Published var loadFilmHomeViewModel: LoadFilmHomeViewModel
-    @Published var registrationHomeViewModel: RegistrationHomeViewModel
+    @Published var loginViewModel: LoginViewModel
+    @Published var loadFilmViewModel: LoadFilmViewModel
+    @Published var registrationViewModel: RegistrationViewModel
     @Published var chronologyViewModel: ChronologyViewModel
     
     
     init() {
         self.homeViewModel = Self.container.makeHomeViewModel()
-        self.loadFilmHomeViewModel = Self.container.makeLoadHomeViewModel()
-        self.loginHomeViewModel = Self.container.makeLoginHomeViewModel()
-        self.registrationHomeViewModel = Self.container.makeRegistrationHomeViewModel()
+        self.loadFilmViewModel = Self.container.makeLoadHomeViewModel()
+        self.loginViewModel = Self.container.makeLoginHomeViewModel()
+        self.registrationViewModel = Self.container.makeRegistrationHomeViewModel()
         self.chronologyViewModel = Self.container.makeChronologyHomeViewModel()
     }
     
     // --- LOGICA DI NAVIGAZIONE ---
     
     func restoreSession() async {
-        let isSessionRestored = await loginHomeViewModel.restoreSession()
+        let isSessionRestored = await loginViewModel.restoreSession()
         if isSessionRestored {
             await startHome()
         } else {
@@ -42,14 +44,14 @@ class Coordinator: ObservableObject {
     }
     
     func login() async {
-        let success = await loginHomeViewModel.login()
+        let success = await loginViewModel.login()
         if success {
             await startHome()
         }
     }
     
     func registration() async {
-        let success = await registrationHomeViewModel.registration()
+        let success = await registrationViewModel.registration()
         if success {
             await startHome()
         }
@@ -66,13 +68,25 @@ class Coordinator: ObservableObject {
     func startHome() async {
         await homeViewModel.start()
         currentPage = .Home
-      
+        
     }
     
     func logout() {
-        if loginHomeViewModel.logOut() {
+        CustomLog.debug(category: .VM, "Inizio procedura logout...")
+        
+        // 1. Eseguiamo il logout del ViewModel
+        let hasLoggedOut = loginViewModel.logOut()
+        
+        // Se non stampa i log qui, il problema è DENTRO loginHomeViewModel.logOut()
+        if hasLoggedOut {
+            CustomLog.debug(category: .VM, "Logout eseguito con successo, pulizia dati...")
+            
             homeViewModel.clearData()
+            
+            // Infine cambiamo pagina
             currentPage = .Login
+        } else {
+            CustomLog.error(category: .VM, "Il loginHomeViewModel.logOut() ha restituito false!")
         }
     }
 }

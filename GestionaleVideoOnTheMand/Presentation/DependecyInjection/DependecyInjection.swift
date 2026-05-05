@@ -10,7 +10,7 @@ import Foundation
 class DependencyContainer {
     
     // MARK: REPOSITORY
-   private  lazy var movieRepository: MovieRepositoryProtocol = {
+    private  lazy var movieRepository: MovieRepositoryProtocol = {
         return MovieRepository()
     }()
     
@@ -23,11 +23,11 @@ class DependencyContainer {
     }()
     
     private lazy var credentialRepository: CredentialRepositoryProtocol = {
-       return CredentialRepository()
+        return CredentialRepository()
     }()
     
     private lazy var chronologyRepository: ChronologyRepositoryProtocol = {
-       return ChronologyRepository()
+        return ChronologyRepository()
     }()
     
     
@@ -37,11 +37,11 @@ class DependencyContainer {
     }()
     
     private lazy var fetchMovieUseCase: FetchMovieUseCase = {
-       return FetchMovieUseCase(movieRepository: movieRepository)
+        return FetchMovieUseCase(movieRepository: movieRepository)
     }()
     
     private lazy var uploadMovieUseCase: UploadMovieUseCase = {
-       return UploadMovieUseCase(storageRepo: storageReposotory)
+        return UploadMovieUseCase(storageRepo: storageReposotory)
     }()
     
     private lazy var getCurrentUserUseCase: GetCurrentUserUseCase = {
@@ -49,7 +49,7 @@ class DependencyContainer {
     }()
     
     private lazy var loginUseCase: LoginUseCase = {
-       return LoginUseCase(authRepository: authRepository,credentialRepository: credentialRepository)
+        return LoginUseCase(authRepository: authRepository,credentialRepository: credentialRepository)
     }()
     
     private lazy var restoreSessionUseCase: RestoreSessionUseCase = {
@@ -57,7 +57,7 @@ class DependencyContainer {
     }()
     
     private lazy var logoutUseCase: LogoutUseCase = {
-       return LogoutUseCase(repository: authRepository)
+        return LogoutUseCase(repository: authRepository)
     }()
     
     private lazy var registrationUseCase: RegistrationUseCase = {
@@ -65,38 +65,58 @@ class DependencyContainer {
     }()
     
     private lazy var fetchChronologyUseCase: FetchChronologyUseCase = {
-       return FetchChronologyUseCase(chronologyRepository: chronologyRepository)
+        return FetchChronologyUseCase(chronologyRepository: chronologyRepository)
     }()
     
-    private let sessionManager = SessionManager()
+    private lazy var getRememberedCredential: GetRememberedCredentialsUseCase = {
+        return GetRememberedCredentialsUseCase(repository: credentialRepository)
+    }()
+    
+    private lazy var deleteRememberedCredential: DeleteRememberedCredentialsUseCase = {
+        return DeleteRememberedCredentialsUseCase(repository: credentialRepository)
+    }()
+    
+    private lazy var existRememberedCredentialUseCase: ExistRememberedCredentialUseCase = {
+        return ExistRememberedCredentialUseCase(repository: credentialRepository)
+    }()
+    
+    private lazy var restorePasswordUseCase: RestorePasswordUseCase = {
+        return RestorePasswordUseCase(repository: authRepository)
+    }()
+    
+    let sessionManager = SessionManager()
     
     // MARK: VIEW MODEL
     @MainActor
     func makeHomeViewModel() -> HomeViewModel {
         return HomeViewModel(deleteUseCase: deleteUseCase,
-                         fetchMovieUseCase: fetchMovieUseCase,
+                             fetchMovieUseCase: fetchMovieUseCase,
                              getCurrentUserUseCase: getCurrentUserUseCase,
                              sessionManager: sessionManager)
     }
     
     @MainActor
-    func makeLoadHomeViewModel () -> LoadFilmHomeViewModel {
-        return LoadFilmHomeViewModel(uploadMovieUseCase: uploadMovieUseCase,
-                                     sessionManager: sessionManager)
+    func makeLoadHomeViewModel () -> LoadFilmViewModel {
+        return LoadFilmViewModel(uploadMovieUseCase: uploadMovieUseCase,
+                                 sessionManager: sessionManager)
     }
     
     @MainActor
-    func makeLoginHomeViewModel() -> LoginHomeViewModel {
-        return LoginHomeViewModel(loginUseCase: loginUseCase,
+    func makeLoginHomeViewModel() -> LoginViewModel {
+        return LoginViewModel(loginUseCase: loginUseCase,
                               restoreSessionUseCase: restoreSessionUseCase,
                               logoutUseCase: logoutUseCase,
-                                  sessionManager: sessionManager)
+                              getRememberedCredentialUseCase: getRememberedCredential,
+                              deleteRememberedCredentialUseCase: deleteRememberedCredential,
+                              existRememberedCredentialUseCase:existRememberedCredentialUseCase,
+                              restorePasswordUseCase: restorePasswordUseCase,
+                              sessionManager: sessionManager)
     }
     
     @MainActor
-    func makeRegistrationHomeViewModel() -> RegistrationHomeViewModel {
-        return RegistrationHomeViewModel(registrationUseCase: registrationUseCase,
-                                         sessionManager: sessionManager)
+    func makeRegistrationHomeViewModel() -> RegistrationViewModel {
+        return RegistrationViewModel(registrationUseCase: registrationUseCase,
+                                     sessionManager: sessionManager)
     }
     
     @MainActor

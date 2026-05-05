@@ -79,6 +79,7 @@ struct HomeView: View {
             Button("system.cancel", role: .cancel) { }
             Button("system.confirm", role: .destructive) {
                 coordinator.logout()
+               
             }
         } message: {
             Text("system.request.logout")

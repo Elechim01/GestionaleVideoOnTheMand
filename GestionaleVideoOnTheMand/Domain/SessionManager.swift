@@ -24,4 +24,13 @@ final class SessionManager: ObservableObject {
         currentUser = nil
         storeUserID = ""
     }
+    
+    func getSecureEmail() -> String? {
+        AuthKeyChain.shared.readEmail()
+    }
+    
+    func getSecurePassword() -> String? {
+        AuthKeyChain.shared.readPassword()
+    }
+    
 }

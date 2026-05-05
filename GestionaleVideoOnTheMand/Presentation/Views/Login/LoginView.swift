@@ -15,50 +15,84 @@ struct LoginView: View {
     
     @EnvironmentObject var coordinator: Coordinator
     
-    @ObservedObject var loginHomeViewModel: LoginHomeViewModel
+    @ObservedObject var loginViewModel: LoginViewModel
+    @State private var showDeleteRememberedCredential: Bool = false
+    @State private var isRestoreSheetPresented: Bool = false
     
     init(coordinator: Coordinator) {
-        self.loginHomeViewModel = coordinator.loginHomeViewModel
+        self.loginViewModel = coordinator.loginViewModel
     }
     
     var body: some View {
-        VStack {
-            Text("system.welcome.to.app")
-                .font(.title)
-                .padding()
+        VStack(spacing: 20) {
+            VStack(spacing: 8) {
+                Text("system.welcome.to.app")
+                    .font(.title)
+                    .bold()
+                
+                Text("system.load.access")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+            }
+            .padding(.top, 40)
             
-            Text("system.load.access")
-                .padding()
+            VStack(spacing: 15) {
+                TextField("system.email", text: $loginViewModel.email)
+                    .modifier(LoginTextFieldStyle())
+                    .textContentType(.username) // Aiuta il sistema
+                    .disableAutocorrection(true)
+                
+                SecureField("system.password", text: $loginViewModel.password)
+                    .modifier(LoginTextFieldStyle())
+                    .textContentType(.password)
+            }
+            .padding(.horizontal)
             
-            TextField("", text: $loginHomeViewModel.email)
-                .placeholder(when: loginHomeViewModel.email.isEmpty) {
-                    Text("system.email").foregroundColor(.black)
+            Button("Passowrd dimenticata ?") {
+                isRestoreSheetPresented = true
+            }
+            .font(.body)
+            .buttonStyle(.plain)
+            .foregroundColor(.secondary)
+            
+            
+            // Sezione Credenziali Ricordate
+            
+            HStack(spacing: 12) {
+                if loginViewModel.canShowAutoFill {
+                    Button {
+                        loginViewModel.loadRememberCredential()
+                    } label: {
+                        Label("Usa salvato", systemImage: "key.fill")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .modifier(LoginButtonStyle(color: .brown))
+                    .padding(.horizontal)
                 }
-                .modifier(LoginTextFieldStyle())
-            
-            SecureField("", text: $loginHomeViewModel.password)
-                .placeholder(when: loginHomeViewModel.password.isEmpty) {
-                    Text("system.password").foregroundColor(.black)
+                Button {
+                    showDeleteRememberedCredential.toggle()
+                } label: {
+                    Image(systemName: "trash")
+                        .padding(.horizontal, 10)
                 }
-                .modifier(LoginTextFieldStyle())
+                .modifier(LoginButtonStyle(color: .gray,width: 60))
+            }
+            .padding(.horizontal)
+            .transition(.opacity.combined(with: .move(edge: .top)))
+            
             
             Spacer()
             
-            HStack {
-                Spacer()
-                
+            // Footer Bottoni
+            HStack(spacing: 20) {
                 Button {
-                    Task {
-                        await coordinator.login()
-                    }
+                    Task { await coordinator.login() }
                 } label: {
                     Text("system.login.button")
+                        .frame(maxWidth: .infinity)
                 }
                 .modifier(LoginButtonStyle(color: .green))
                 
-                Spacer(minLength: 0)
-                
-                // BOTTONE REGISTRAZIONE
                 Button {
                     coordinator.goToRegistration()
                 } label: {
@@ -66,38 +100,52 @@ struct LoginView: View {
                         Text("system.singIn.button")
                         Image(systemName: "arrow.right")
                     }
+                    .frame(maxWidth: .infinity)
                 }
                 .modifier(LoginButtonStyle(color: .orange))
-                
-                Spacer()
             }
-            
-            // APPLE SIGN IN
-           // appleSignInSection
-            
-            Spacer()
+            .padding(.horizontal)
+            .padding(.bottom, 30)
         }
         .background(Color("Blue").ignoresSafeArea())
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        // ALERT collegati ai HomeViewModel nel Coordinator
-        .alert(loginHomeViewModel.alertMessage, isPresented: $loginHomeViewModel.showAlert) {
-            Button("system.alert.ok") { loginHomeViewModel.showAlert = false }
+        .onAppear {
+            loginViewModel.clear()
+            loginViewModel.checkStatus()
         }
+        // Alerts
+        .alert(loginViewModel.alertMessage,
+               isPresented: $loginViewModel.showAlert) {
+            Button("system.alert.ok", role: .cancel) { }
+        }
+        .alert("Rimuovi credenziali",
+               isPresented: $showDeleteRememberedCredential) {
+            Button("Annulla", role: .cancel) { }
+            Button("Elimina", role: .destructive) {
+                loginViewModel.deleteRememberCredential()
+            }
+        } message: {
+            Text("Le tue credenziali non verranno più inserite automaticamente al prossimo accesso.")
+        }
+        .sheet(isPresented: $isRestoreSheetPresented) {
+            RestorePassword()
+                .environmentObject(loginViewModel)
+        }
+        
     }
-    
+}
     // MARK: - Sottoviste per pulizia
     /*
     private var appleSignInSection: some View {
         HStack {
             SignInWithAppleButton { request in
-                loginHomeViewModel.nonce = loginHomeViewModel.randomNonceString()
+                loginViewModel.nonce = loginViewModel.randomNonceString()
                 request.requestedScopes = [.email, .fullName]
-                request.nonce = loginHomeViewModel.sha256(loginHomeViewModel.nonce)
+                request.nonce = loginViewModel.sha256(loginViewModel.nonce)
             } onCompletion: { result in
                 switch result {
                 case .success(let user):
                     guard let credential = user.credential as? ASAuthorizationAppleIDCredential else { return }
-                    loginHomeViewModel.appleAuthenticate(credential: credential)
+                    loginViewModel.appleAuthenticate(credential: credential)
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
@@ -109,7 +157,7 @@ struct LoginView: View {
         .padding(.top)
     }
      */
-}
+
 
 // MARK: - Helper per pulire la UI (facoltativo ma consigliato)
 struct LoginTextFieldStyle: ViewModifier {
@@ -128,10 +176,12 @@ struct LoginTextFieldStyle: ViewModifier {
 
 struct LoginButtonStyle: ViewModifier {
     var color: Color
+    var width: CGFloat = 100
+    var height: CGFloat = 40
     func body(content: Content) -> some View {
         content
             .buttonStyle(PlainButtonStyle())
-            .frame(width: 100, height: 40)
+            .frame(width: width, height: height)
             .background(color)
             .cornerRadius(10)
     }

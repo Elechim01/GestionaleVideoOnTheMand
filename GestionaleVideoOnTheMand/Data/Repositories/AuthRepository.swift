@@ -21,8 +21,8 @@ final class AuthRepository: AuthRepositoryProtocol {
         try await TokenRequest(tokenBody: TokenBodyRequest(username: username, password: password)).performRequestAsync()
     }
     
-    func getCurrentUser(email: String, password: String ,idUser: String) async throws -> Utente {        
-        guard  let user: Utente = try await FirebaseUtils.shared.recuperoUtente(email: email, password: password, id: idUser) else {
+    func getCurrentUser(idUser: String) async throws -> Utente {
+        guard  let user: Utente = try await FirebaseUtils.shared.recuperoUtente(id: idUser) else {
             throw CustomError.noUser
         }
         return user
@@ -38,9 +38,9 @@ final class AuthRepository: AuthRepositoryProtocol {
         AuthKeyChain.shared.delete()
     }
     
-    func createUser(user: Utente) async throws -> String {
-        let id =  try await FirebaseUtils.shared.createUser(email: user.email,
-                                                            password: user.password)
+    func createUser(user: Utente, email: String, password: String) async throws -> String {
+        let id =  try await FirebaseUtils.shared.createUser(email: email,
+                                                            password: password)
         var copyUser = user
         copyUser.id = id
         
@@ -52,20 +52,27 @@ final class AuthRepository: AuthRepositoryProtocol {
         }
         return id
     }
+    
+    func restorePassword(email: String) async throws {
+        try await FirebaseUtils.shared.restorePassword(email: email)
+    }
+    
 }
 
 class AuthRepositoryMock: AuthRepositoryProtocol {
-    func getCurrentUser(email: String, password: String, idUser: String) async throws -> Utente {
+    func restorePassword(email: String) async throws {
+        
+    }
+    
+    func getCurrentUser(idUser: String) async throws -> Utente {
         Utente(id: "",
                nome: "",
                cognome: "",
-               email: "",
-               password: "",
                cellulare: "")
     }
     
     func signIn(email: String, password: String)  async throws -> String {
-       ""
+        ""
     }
     
     func token(username: String, password: String)async throws {
@@ -75,12 +82,12 @@ class AuthRepositoryMock: AuthRepositoryProtocol {
     func currentUser() -> User? {
         nil
     }
-   
+    
     
     func logOut() throws {
         
     }
-    func createUser(user: Utente) async throws -> String {
+    func createUser(user: Utente, email: String, password: String) async throws -> String {
         ""
     }
 }

@@ -10,7 +10,7 @@ import Services
 
 final class FetchMovieUseCase {
     private let movieRepository: MovieRepositoryProtocol
-   
+    
     init(movieRepository: MovieRepositoryProtocol) {
         self.movieRepository = movieRepository
     }

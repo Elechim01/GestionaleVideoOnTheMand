@@ -10,7 +10,7 @@ import Services
 
 final class MovieRepository: MovieRepositoryProtocol {
     func loadFilm(localUserId: String)  async -> AsyncThrowingStream<[Film],Error>  {
-       return await FirebaseUtils.shared.recuperoFilm(localUserId: localUserId)
+        return await FirebaseUtils.shared.recuperoFilm(localUserId: localUserId)
     }
     
     

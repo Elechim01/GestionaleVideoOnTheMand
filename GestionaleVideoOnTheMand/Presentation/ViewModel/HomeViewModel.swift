@@ -27,7 +27,7 @@ class HomeViewModel: ObservableObject {
     private let fetchMovieUseCase: FetchMovieUseCase
     private let getCurrentUserUseCase: GetCurrentUserUseCase
     let sessionManager: SessionManager
-    
+    private var fetchFilmsTask: Task<Void, Never>?
     
     
     public var totalSizeFilm: Double {
@@ -53,6 +53,7 @@ class HomeViewModel: ObservableObject {
     }
     
     func deleteFile(film: Film) async {
+        CustomLog.debug(category: .VM, "\(#function)")
         isLoading = true
         defer {
             isLoading = false
@@ -65,13 +66,21 @@ class HomeViewModel: ObservableObject {
     }
     
     func start() async {
+        CustomLog.debug(category: .VM, "\(#function)")
         await loadUser()
-        Task {
+        fetchFilmsTask = Task {
             await loadFilm()
         }
     }
     
+    func stopFetching() {
+        CustomLog.debug(category: .VM, "Stopping Firestore stream...")
+        fetchFilmsTask?.cancel()
+        fetchFilmsTask = nil
+    }
+    
     private func loadUser() async {
+        CustomLog.debug(category: .VM, "\(#function)")
         guard sessionManager.currentUser == nil else { return }
         isLoading = true
         defer {
@@ -87,6 +96,7 @@ class HomeViewModel: ObservableObject {
     
     
     private func loadFilm() async  {
+        CustomLog.debug(category: .VM, "\(#function)")
         isLoading = true
         defer {
             isLoading = false
@@ -99,13 +109,18 @@ class HomeViewModel: ObservableObject {
             
             let stream = await  fetchMovieUseCase.execute(localUserId: localUserId)
             for try await film in stream  {
+                if Task.isCancelled { break }
                 // TODO: CHANGE SORTED BY DATA
                 self.films = film.sorted(by:{ $0.nome.compare($1.nome,options: String.CompareOptions.caseInsensitive) == .orderedDescending })
                 self.isLoading = false
             }
             
         } catch  {
-            showError(from: error)
+            if !(error is CancellationError) {
+                showError(from: error)
+            } else {
+                CustomLog.error(category: .VM, "Cancellazione errata. \(error.localizedDescription)")
+            }
         }
     }
     
@@ -116,6 +131,10 @@ class HomeViewModel: ObservableObject {
     }
     
     func clearData() {
+        CustomLog.debug(category: .VM, "\(#function)")
+        //0. ferma lo stream
+        self.stopFetching()
+        
         // 1. Resettiamo le liste e l'utente
         self.films = []
         sessionManager.currentUser = nil

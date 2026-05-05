@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
-
-    },
     ": %@" : {
       "localizations" : {
         "it" : {
@@ -34,6 +31,9 @@
         }
       }
     },
+    "Annulla" : {
+
+    },
     "Cronologia" : {
 
     },
@@ -41,6 +41,15 @@
 
     },
     "Data visualizzazione: %@\n" : {
+
+    },
+    "Elimina" : {
+
+    },
+    "Email" : {
+
+    },
+    "Email inserita non valida!" : {
 
     },
     "film.empty.state" : {
@@ -109,7 +118,25 @@
         }
       }
     },
+    "Inserisci l'email associata al tuo account per ricevere le istruzioni." : {
+
+    },
+    "Invia Email" : {
+
+    },
+    "Le tue credenziali non verranno più inserite automaticamente al prossimo accesso." : {
+
+    },
     "Nessun elemento ancora visto!!" : {
+
+    },
+    "Passowrd dimenticata ?" : {
+
+    },
+    "Rimuovi credenziali" : {
+
+    },
+    "Ripristina password" : {
 
     },
     "server.info.storage" : {
@@ -312,6 +339,9 @@
           }
         }
       }
+    },
+    "Usa salvato" : {
+
     },
     "user.cell" : {
       "extractionState" : "manual",

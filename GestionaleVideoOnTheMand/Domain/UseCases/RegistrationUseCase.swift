@@ -27,10 +27,8 @@ final class RegistrationUseCase {
         let utente = Utente(id: "",
                             nome: nome,
                             cognome: cognome,
-                            email: email,
-                            password: password,
                             cellulare:cellulare)
-        let id =  try await authRepository.createUser(user: utente)
+        let id =  try await authRepository.createUser(user: utente, email: email,password: password)
         try credentialRepository.saveCredential(email: email, password: password)
         return id
     }
