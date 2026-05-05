@@ -18,7 +18,6 @@ final class ChronologyViewModel: ObservableObject {
     @Published var showAlert: Bool = false
     @Published var isLoading: Bool = false
     
-#warning("Implement Session")
     private let fetchChronologyUseCase: FetchChronologyUseCase
     private let sessionManager: SessionManager
     

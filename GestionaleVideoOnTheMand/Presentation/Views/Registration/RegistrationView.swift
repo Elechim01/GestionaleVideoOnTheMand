@@ -11,10 +11,10 @@ import Services
 struct RegistrationView: View {
     @EnvironmentObject var coordinator: Coordinator
     
-    @ObservedObject var registrationHomeViewModel: RegistrationHomeViewModel
+    @ObservedObject var registrationViewModel: RegistrationViewModel
     
     init(coordinator: Coordinator) {
-        self.registrationHomeViewModel = coordinator.registrationHomeViewModel
+        self.registrationViewModel = coordinator.registrationViewModel
     }
     
     var body: some View {
@@ -24,16 +24,16 @@ struct RegistrationView: View {
                 .font(.title)
             
             customTextfield(title: "Nome",
-                            value: $coordinator.registrationHomeViewModel.nome)
+                            value: $coordinator.registrationViewModel.nome)
             customTextfield(title: "Cognome",
-                            value: $coordinator.registrationHomeViewModel.cognome)
+                            value: $coordinator.registrationViewModel.cognome)
             customTextfield(title: "Email",
-                            value: $coordinator.registrationHomeViewModel.email)
+                            value: $coordinator.registrationViewModel.email)
             customTextfield(title: "Pasword",
-                            value: $coordinator.registrationHomeViewModel.password,
+                            value: $coordinator.registrationViewModel.password,
                             isSecure: true)
             customTextfield(title: "Cellulare",
-                            value: $coordinator.registrationHomeViewModel.cellulare)
+                            value: $coordinator.registrationViewModel.cellulare)
             
             HStack {
                 
@@ -68,9 +68,9 @@ struct RegistrationView: View {
         .containerBackground(.ultraThinMaterial, for: .window)
        
         .background(Color("Blue").ignoresSafeArea())
-        .alert(registrationHomeViewModel.alertMessage, isPresented: $registrationHomeViewModel.showAlert) {
+        .alert(registrationViewModel.alertMessage, isPresented: $registrationViewModel.showAlert) {
             Button {
-                registrationHomeViewModel.showAlert.toggle()
+                registrationViewModel.showAlert.toggle()
             } label: {
                 Text("system.alert.ok")
             }

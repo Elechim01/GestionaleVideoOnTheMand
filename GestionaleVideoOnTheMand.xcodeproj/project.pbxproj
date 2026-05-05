@@ -11,7 +11,7 @@
 		C4169F5B2F1BF82700BE22B0 /* LoadFilmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4169F5A2F1BF82700BE22B0 /* LoadFilmViewModel.swift */; };
 		C4169F5D2F1C002A00BE22B0 /* StepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4169F5C2F1C002A00BE22B0 /* StepView.swift */; };
 		C44112F42F01ADD30070B973 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = C44112F32F01ADD30070B973 /* CachedAsyncImage */; };
-		C443CD9F2A7BCE2100ED417F /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C443CD9E2A7BCE2100ED417F /* CustomView.swift */; };
+		C443CD9F2A7BCE2100ED417F /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C443CD9E2A7BCE2100ED417F /* CustomButton.swift */; };
 		C448E69E2A75B55E00A18EBE /* FilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C448E69D2A75B55E00A18EBE /* FilmView.swift */; };
 		C448E6A02A75B56F00A18EBE /* StorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C448E69F2A75B56F00A18EBE /* StorageView.swift */; };
 		C4548C802F6F16C9009BA431 /* DependecyInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4548C7F2F6F16C9009BA431 /* DependecyInjection.swift */; };
@@ -29,6 +29,7 @@
 		C48106052F8007CA00EB65BE /* ChronologyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48106042F8007CA00EB65BE /* ChronologyView.swift */; };
 		C48106072F80083600EB65BE /* ChronologyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48106062F80083600EB65BE /* ChronologyViewModel.swift */; };
 		C48106092F8019F700EB65BE /* ChronologyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48106082F8019F700EB65BE /* ChronologyCardView.swift */; };
+		C48424552F9B5EA500E138C6 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = C48424542F9B5EA500E138C6 /* FirebaseMessaging */; };
 		C4880F1228B2A1230091B7C4 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = C4880F1128B2A1230091B7C4 /* GoogleSignIn */; };
 		C4880F1428B2A1230091B7C4 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C4880F1328B2A1230091B7C4 /* GoogleSignInSwift */; };
 		C48DD23A2F73EABA00541862 /* LogoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48DD2392F73EABA00541862 /* LogoutUseCase.swift */; };
@@ -50,7 +51,6 @@
 		C4BE732E2A757C8800175BF3 /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = C4BE732D2A757C8800175BF3 /* GRPC */; };
 		C4BE73302A757C8800175BF3 /* protoc-gen-grpc-swift in Frameworks */ = {isa = PBXBuildFile; productRef = C4BE732F2A757C8800175BF3 /* protoc-gen-grpc-swift */; };
 		C4C10B8D2F0705D80086A376 /* Services in Frameworks */ = {isa = PBXBuildFile; productRef = C4C10B8C2F0705D80086A376 /* Services */; };
-		C4C10B8F2F0D84000086A376 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C10B8E2F0D84000086A376 /* CustomButton.swift */; };
 		C4C10B912F0D86AC0086A376 /* SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C10B902F0D86AC0086A376 /* SimpleButton.swift */; };
 		C4C7A7D228A528EB001CB803 /* GestionaleVideoOnTheMandApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A7D128A528EB001CB803 /* GestionaleVideoOnTheMandApp.swift */; };
 		C4C7A7D428A528EB001CB803 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7A7D328A528EB001CB803 /* ContentView.swift */; };
@@ -69,6 +69,11 @@
 		C4DBD09B2F76C30200E3A784 /* RegistrationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBD09A2F76C30200E3A784 /* RegistrationUseCase.swift */; };
 		C4DBD0A12F76E3A600E3A784 /* ElechimCore in Frameworks */ = {isa = PBXBuildFile; productRef = C4DBD0A02F76E3A600E3A784 /* ElechimCore */; };
 		C4F1FD1F2A730315000443AE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C433B0682A72ADC700A0CA1E /* HomeView.swift */; };
+		C4FD38812FA1167400DA3F3C /* GetRememberedCredentialsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FD38802FA1167400DA3F3C /* GetRememberedCredentialsUseCase.swift */; };
+		C4FD38832FA116D800DA3F3C /* DeleteRememberedCredentialsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FD38822FA116D800DA3F3C /* DeleteRememberedCredentialsUseCase.swift */; };
+		C4FD38852FA11DF300DA3F3C /* ExistRememberedCredentialUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FD38842FA11DF300DA3F3C /* ExistRememberedCredentialUseCase.swift */; };
+		C4FD38952FA364B700DA3F3C /* RestorePasswordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FD38942FA364B700DA3F3C /* RestorePasswordUseCase.swift */; };
+		C4FD38992FA368FA00DA3F3C /* RestorePassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FD38982FA368FA00DA3F3C /* RestorePassword.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,7 +81,7 @@
 		C4169F5A2F1BF82700BE22B0 /* LoadFilmViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadFilmViewModel.swift; sourceTree = "<group>"; };
 		C4169F5C2F1C002A00BE22B0 /* StepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepView.swift; sourceTree = "<group>"; };
 		C433B0682A72ADC700A0CA1E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		C443CD9E2A7BCE2100ED417F /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
+		C443CD9E2A7BCE2100ED417F /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		C448E69D2A75B55E00A18EBE /* FilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmView.swift; sourceTree = "<group>"; };
 		C448E69F2A75B56F00A18EBE /* StorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageView.swift; sourceTree = "<group>"; };
 		C4548C7F2F6F16C9009BA431 /* DependecyInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependecyInjection.swift; sourceTree = "<group>"; };
@@ -112,7 +117,6 @@
 		C4B9FC3F2F715B7800671331 /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		C4B9FC412F71768A00671331 /* Steps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Steps.swift; sourceTree = "<group>"; };
 		C4B9FC432F7177F100671331 /* UploadItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItem.swift; sourceTree = "<group>"; };
-		C4C10B8E2F0D84000086A376 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		C4C10B902F0D86AC0086A376 /* SimpleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleButton.swift; sourceTree = "<group>"; };
 		C4C7A7CE28A528EB001CB803 /* GestionaleVideoOnTheMand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GestionaleVideoOnTheMand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4C7A7D128A528EB001CB803 /* GestionaleVideoOnTheMandApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestionaleVideoOnTheMandApp.swift; sourceTree = "<group>"; };
@@ -130,6 +134,11 @@
 		C4DBD0962F768AFC00E3A784 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		C4DBD0982F76A4F400E3A784 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		C4DBD09A2F76C30200E3A784 /* RegistrationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationUseCase.swift; sourceTree = "<group>"; };
+		C4FD38802FA1167400DA3F3C /* GetRememberedCredentialsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRememberedCredentialsUseCase.swift; sourceTree = "<group>"; };
+		C4FD38822FA116D800DA3F3C /* DeleteRememberedCredentialsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRememberedCredentialsUseCase.swift; sourceTree = "<group>"; };
+		C4FD38842FA11DF300DA3F3C /* ExistRememberedCredentialUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExistRememberedCredentialUseCase.swift; sourceTree = "<group>"; };
+		C4FD38942FA364B700DA3F3C /* RestorePasswordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorePasswordUseCase.swift; sourceTree = "<group>"; };
+		C4FD38982FA368FA00DA3F3C /* RestorePassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorePassword.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C48424552F9B5EA500E138C6 /* FirebaseMessaging in Frameworks */,
 				C4C7A7EA28A5A09E001CB803 /* FirebaseAuth in Frameworks */,
 				C4880F1228B2A1230091B7C4 /* GoogleSignIn in Frameworks */,
 				C4C10B8D2F0705D80086A376 /* Services in Frameworks */,
@@ -154,12 +164,10 @@
 		C448E69C2A75B54000A18EBE /* HomeViews */ = {
 			isa = PBXGroup;
 			children = (
+				C4FD38972FA3689F00DA3F3C /* Storage */,
+				C4FD38962FA3689300DA3F3C /* Films */,
 				C48106032F8007B300EB65BE /* Chronology */,
 				C433B0682A72ADC700A0CA1E /* HomeView.swift */,
-				C448E69D2A75B55E00A18EBE /* FilmView.swift */,
-				C448E69F2A75B56F00A18EBE /* StorageView.swift */,
-				C4B8D4C12A78100C008D3CEB /* InfoUserView.swift */,
-				C47815052F2525FE00E7536F /* FilmInfoSheet.swift */,
 			);
 			path = HomeViews;
 			sourceTree = "<group>";
@@ -176,8 +184,7 @@
 		C46915812F12CEAD0028C9EE /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				C443CD9E2A7BCE2100ED417F /* CustomView.swift */,
-				C4C10B8E2F0D84000086A376 /* CustomButton.swift */,
+				C443CD9E2A7BCE2100ED417F /* CustomButton.swift */,
 				C4C10B902F0D86AC0086A376 /* SimpleButton.swift */,
 			);
 			path = Components;
@@ -199,6 +206,13 @@
 				C48106082F8019F700EB65BE /* ChronologyCardView.swift */,
 			);
 			path = Chronology;
+			sourceTree = "<group>";
+		};
+		C48424532F9B5EA500E138C6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		C497F7392F6F0E3900039892 /* RepositoryProtocols */ = {
@@ -255,6 +269,10 @@
 				C48DD2392F73EABA00541862 /* LogoutUseCase.swift */,
 				C4DBD09A2F76C30200E3A784 /* RegistrationUseCase.swift */,
 				C48106012F80058500EB65BE /* FetchChronologyUseCase.swift */,
+				C4FD38802FA1167400DA3F3C /* GetRememberedCredentialsUseCase.swift */,
+				C4FD38822FA116D800DA3F3C /* DeleteRememberedCredentialsUseCase.swift */,
+				C4FD38842FA11DF300DA3F3C /* ExistRememberedCredentialUseCase.swift */,
+				C4FD38942FA364B700DA3F3C /* RestorePasswordUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -329,6 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				C4C7A7D028A528EB001CB803 /* GestionaleVideoOnTheMand */,
+				C48424532F9B5EA500E138C6 /* Frameworks */,
 				C4C7A7CF28A528EB001CB803 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -383,9 +402,9 @@
 		C4C7A7F728A65490001CB803 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C4FD387C2F9FAA9400DA3F3C /* Windows */,
 				C4DBD09D2F76D50100E3A784 /* Registration */,
 				C4DBD09C2F76D4F500E3A784 /* Login */,
-				C47815022F1D400C00E7536F /* Upload */,
 				C448E69C2A75B54000A18EBE /* HomeViews */,
 			);
 			path = Views;
@@ -403,6 +422,7 @@
 			isa = PBXGroup;
 			children = (
 				C4C7A80728A9037A001CB803 /* LoginView.swift */,
+				C4FD38982FA368FA00DA3F3C /* RestorePassword.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -413,6 +433,48 @@
 				C4C7A80928A90398001CB803 /* RegistrationView.swift */,
 			);
 			path = Registration;
+			sourceTree = "<group>";
+		};
+		C4FD387C2F9FAA9400DA3F3C /* Windows */ = {
+			isa = PBXGroup;
+			children = (
+				C4FD387E2F9FAAC100DA3F3C /* UploadFilmWindow */,
+				C4FD387D2F9FAAA600DA3F3C /* InfoUserWindow */,
+			);
+			path = Windows;
+			sourceTree = "<group>";
+		};
+		C4FD387D2F9FAAA600DA3F3C /* InfoUserWindow */ = {
+			isa = PBXGroup;
+			children = (
+				C4B8D4C12A78100C008D3CEB /* InfoUserView.swift */,
+			);
+			path = InfoUserWindow;
+			sourceTree = "<group>";
+		};
+		C4FD387E2F9FAAC100DA3F3C /* UploadFilmWindow */ = {
+			isa = PBXGroup;
+			children = (
+				C47815022F1D400C00E7536F /* Upload */,
+			);
+			path = UploadFilmWindow;
+			sourceTree = "<group>";
+		};
+		C4FD38962FA3689300DA3F3C /* Films */ = {
+			isa = PBXGroup;
+			children = (
+				C448E69D2A75B55E00A18EBE /* FilmView.swift */,
+				C47815052F2525FE00E7536F /* FilmInfoSheet.swift */,
+			);
+			path = Films;
+			sourceTree = "<group>";
+		};
+		C4FD38972FA3689F00DA3F3C /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				C448E69F2A75B56F00A18EBE /* StorageView.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -440,6 +502,7 @@
 				C44112F32F01ADD30070B973 /* CachedAsyncImage */,
 				C4C10B8C2F0705D80086A376 /* Services */,
 				C4DBD0A02F76E3A600E3A784 /* ElechimCore */,
+				C48424542F9B5EA500E138C6 /* FirebaseMessaging */,
 			);
 			productName = GestionaleVideoOnTheMand;
 			productReference = C4C7A7CE28A528EB001CB803 /* GestionaleVideoOnTheMand.app */;
@@ -512,15 +575,16 @@
 				C48DD23A2F73EABA00541862 /* LogoutUseCase.swift in Sources */,
 				C497F7462F6F116000039892 /* MovieRepositoryProtocol.swift in Sources */,
 				C46E72C62F72AF4A007CA286 /* RestoreSessionUseCase.swift in Sources */,
-				C4C10B8F2F0D84000086A376 /* CustomButton.swift in Sources */,
 				C4B9FC3E2F705B2500671331 /* UploadMovieUseCase.swift in Sources */,
-				C443CD9F2A7BCE2100ED417F /* CustomView.swift in Sources */,
+				C443CD9F2A7BCE2100ED417F /* CustomButton.swift in Sources */,
 				C497F7482F6F11EA00039892 /* DeleteMovieUseCase.swift in Sources */,
 				C48106092F8019F700EB65BE /* ChronologyCardView.swift in Sources */,
 				C4548C822F6F174C009BA431 /* MovieRepository.swift in Sources */,
 				C46E72C42F72A83E007CA286 /* LoginUseCase.swift in Sources */,
 				C4B9FC3C2F705AA600671331 /* StorageRepository.swift in Sources */,
 				C48106022F80058500EB65BE /* FetchChronologyUseCase.swift in Sources */,
+				C4FD38852FA11DF300DA3F3C /* ExistRememberedCredentialUseCase.swift in Sources */,
+				C4FD38952FA364B700DA3F3C /* RestorePasswordUseCase.swift in Sources */,
 				C4B9FC382F70544700671331 /* GetCurrentUserUseCase.swift in Sources */,
 				C48105FC2F80049F00EB65BE /* ChronologyRepositoryProtocol.swift in Sources */,
 				C48106072F80083600EB65BE /* ChronologyViewModel.swift in Sources */,
@@ -530,6 +594,8 @@
 				C45937D82F97B29500EF90DB /* SessionManager.swift in Sources */,
 				C48106002F80051F00EB65BE /* ChronologyRepository.swift in Sources */,
 				C4B9FC342F70532E00671331 /* AuthReposotoryProtocol.swift in Sources */,
+				C4FD38992FA368FA00DA3F3C /* RestorePassword.swift in Sources */,
+				C4FD38812FA1167400DA3F3C /* GetRememberedCredentialsUseCase.swift in Sources */,
 				C4B9FC362F7053AE00671331 /* AuthRepository.swift in Sources */,
 				C48105F82F7FF62B00EB65BE /* CredentialRepositoryProtocol.swift in Sources */,
 				C4B9FC402F715B7800671331 /* FileHelper.swift in Sources */,
@@ -545,6 +611,7 @@
 				C448E69E2A75B55E00A18EBE /* FilmView.swift in Sources */,
 				C4548C842F6F1C70009BA431 /* MockMovieRepository.swift in Sources */,
 				C4C7A7D428A528EB001CB803 /* ContentView.swift in Sources */,
+				C4FD38832FA116D800DA3F3C /* DeleteRememberedCredentialsUseCase.swift in Sources */,
 				C4548C802F6F16C9009BA431 /* DependecyInjection.swift in Sources */,
 				C4C7A80628A902C9001CB803 /* LoginViewModel.swift in Sources */,
 				C48106052F8007CA00EB65BE /* ChronologyView.swift in Sources */,
@@ -814,6 +881,11 @@
 		C44112F32F01ADD30070B973 /* CachedAsyncImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CachedAsyncImage;
+		};
+		C48424542F9B5EA500E138C6 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C4C7A7E428A5A09E001CB803 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 		C4880F1128B2A1230091B7C4 /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;

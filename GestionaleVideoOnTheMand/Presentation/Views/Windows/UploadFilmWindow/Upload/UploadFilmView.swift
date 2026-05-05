@@ -8,18 +8,16 @@
 import SwiftUI
 
 struct UploadFilmView: View {
-    
-    @EnvironmentObject var homeViewModel: HomeViewModel
-    @EnvironmentObject var loadFilmHomeViewModel: LoadFilmHomeViewModel
+    @EnvironmentObject var loadFilmViewModel: LoadFilmViewModel
     
     #warning("Quando è completato chiudere la finestra")
 
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
             
-            if loadFilmHomeViewModel.stato == .loadFilm {
+            if loadFilmViewModel.stato == .loadFilm {
                 SimpleButton(color:  .green.opacity(0.4), action: {
-                    loadFilmHomeViewModel.startUploadProcess()
+                    loadFilmViewModel.startUploadProcess()
                 }, label: {
                     Text("system.button.select.film.to.upload")
                         .padding()
@@ -28,12 +26,12 @@ struct UploadFilmView: View {
                 .frame(width: 300)
             }
             
-            if loadFilmHomeViewModel.stato != .loadFilm {
+            if loadFilmViewModel.stato != .loadFilm {
                 
-                if loadFilmHomeViewModel.stato == .succes {
+                if loadFilmViewModel.stato == .succes {
                     
                     SimpleButton(color:  .green.opacity(0.4), action: {
-                        loadFilmHomeViewModel.stato = .loadFilm
+                        loadFilmViewModel.stato = .loadFilm
                     }, label: {
                         Text("system.button.upload.film")
                             .padding()
@@ -43,24 +41,24 @@ struct UploadFilmView: View {
                     
                 } else {
                     
-                    if(loadFilmHomeViewModel.thumbnail != nil){
-                        Image(nsImage: loadFilmHomeViewModel.thumbnail!)
+                    if(loadFilmViewModel.thumbnail != nil){
+                        Image(nsImage: loadFilmViewModel.thumbnail!)
                     }
                     
-                    Text("info.file.name \(loadFilmHomeViewModel.fileName)")
+                    Text("info.file.name \(loadFilmViewModel.fileName)")
                         .padding()
                     
                     
                     StepView()
                         // Use maxWidth to let the view expand, not an infinite concrete width
                         .frame(maxWidth: .infinity)
-                        .environmentObject(loadFilmHomeViewModel)
+                        .environmentObject(loadFilmViewModel)
                     
                     
-                    if loadFilmHomeViewModel.stato == .end {
+                    if loadFilmViewModel.stato == .end {
                         SimpleButton(color: .brown, action: {
-                           // loadFilmHomeViewModel.re
-                            loadFilmHomeViewModel.stato = .loadFilm
+                           // loadFilmViewModel.re
+                            loadFilmViewModel.stato = .loadFilm
                         }, label: {
                             Text("info.end.button")
                         })
@@ -69,15 +67,15 @@ struct UploadFilmView: View {
             }
             
         }
-        .alert(loadFilmHomeViewModel.alertMessage, isPresented: $loadFilmHomeViewModel.showAlert, actions: {
+        .alert(loadFilmViewModel.alertMessage, isPresented: $loadFilmViewModel.showAlert, actions: {
             Button("system.alert.ok",role: .cancel) {
-                loadFilmHomeViewModel.showAlert.toggle()
+                loadFilmViewModel.showAlert.toggle()
             }
         })
         .frame(width: 450, height: 250)
         .onDisappear {
-            loadFilmHomeViewModel.stato = .loadFilm
-           // loadFilmHomeViewModel.resetCurrentUpload()
+            loadFilmViewModel.stato = .loadFilm
+           // loadFilmViewModel.resetCurrentUpload()
         }
     }
 }
@@ -86,8 +84,7 @@ struct UploadFilmView_Previews: PreviewProvider {
     static var previews: some View {
         UploadFilmView()
             .frame(width: 650, height: 250)
-            .environmentObject(PreviewDependecyInjection.shared.makeHomeViewModel())
-            .environmentObject(PreviewDependecyInjection.shared.makeLoadFilmHomeViewModel())
+            .environmentObject(PreviewDependecyInjection.shared.makeLoadFilmViewModel())
            
     }
 }

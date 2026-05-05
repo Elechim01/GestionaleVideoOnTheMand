@@ -10,9 +10,8 @@ import SwiftUI
 import Services
 import ElechimCore
 
-
 @MainActor
-class RegistrationHomeViewModel: ObservableObject {
+class RegistrationViewModel: ObservableObject {
     @Published var nome: String = ""
     @Published var cognome: String = ""
     @Published var email: String = ""

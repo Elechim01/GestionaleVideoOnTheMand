@@ -31,10 +31,8 @@ enum UploadStatus: String, CaseIterable {
     case loadFilm = "Carica Film"
     case end = "Fine"
     
-   static var steps: [Self] {
+    static var steps: [Self] {
         [.createThumnail, .uploadFilm,.uploadThumbnail,.addFilmToDB]
     }
-    
-    
     
 }

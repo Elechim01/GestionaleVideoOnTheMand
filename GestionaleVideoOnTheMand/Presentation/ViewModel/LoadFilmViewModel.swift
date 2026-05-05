@@ -1,5 +1,5 @@
 //
-//  LoadFilmHomeViewModel.swift
+//  loadFilmViewModel.swift
 //  GestionaleVideoOnTheMand
 //
 //  Created by Michele Manniello on 17/01/26.
@@ -10,7 +10,7 @@ import Services
 import ElechimCore
 
 @MainActor
-class LoadFilmHomeViewModel: ObservableObject {
+class LoadFilmViewModel: ObservableObject {
     
     // Proprietà che la View osserva
     @Published private(set) var steps: [Steps] = []
