@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseCrashlytics
 
 final class LogoutUseCase {
     private let repository: AuthRepositoryProtocol
@@ -16,5 +17,6 @@ final class LogoutUseCase {
     
     func execute() throws {
         try repository.logOut()
+        Crashlytics.crashlytics().setUserID("")
     }
 }

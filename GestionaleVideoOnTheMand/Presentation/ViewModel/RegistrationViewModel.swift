@@ -95,7 +95,7 @@ class RegistrationViewModel: ObservableObject {
     }
     
     private func showError(from error: Error) {
-        CustomLog.error(category: .VM, "\(error.localizedDescription)")
+        ErrorReporter.shared.report(error, category: .VM)
         Utils.showError(alertMessage: &alertMessage, showAlert: &showAlert, from: error)
     }
 }

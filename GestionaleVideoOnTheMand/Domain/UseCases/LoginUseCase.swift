@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseCrashlytics
 
 final class LoginUseCase {
     
@@ -24,6 +25,7 @@ final class LoginUseCase {
         let id =  try await authRepository.signIn(email: email, password: password)
         try credentialRepository.saveCredential(email: email, password: password)
         try credentialRepository.saveRememberedCredential(email: email, password: password)
+        Crashlytics.crashlytics().setUserID(id)
         
         try await authRepository.token(username: "Michele", password: "Michele1")
         return id

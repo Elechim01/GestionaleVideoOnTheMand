@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseCrashlytics
 
 final class RestoreSessionUseCase {
     
@@ -20,9 +21,11 @@ final class RestoreSessionUseCase {
     }
     
     func execute() async throws -> Bool {
-        guard let _ = authRepository.currentUser() else {
+        guard let currentUser = authRepository.currentUser() else {
             return false
         }
+       
+        Crashlytics.crashlytics().setUserID(currentUser.uid)
         
         let _ = try credentialRepository.readCredential()
         

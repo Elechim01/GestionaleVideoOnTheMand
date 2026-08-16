@@ -240,12 +240,12 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "7DA6A816-00CF-4F64-92FA-1FD8B629F037 - 65759e77b6817e03"
+                  uuid = "7DA6A816-00CF-4F64-92FA-1FD8B629F037 - f18fa13e04f7fcd0"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "(1) suspend resume partial function for GestionaleVideoOnTheMand.RegistrationViewModel.registration() async -&gt; Swift.Bool"
-                  moduleName = "GestionaleVideoOnTheMand"
+                  moduleName = "GestionaleVideoOnTheMand.debug.dylib"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/michelemanniello/Documents/Sviluppo/Swift/GestionaleVideoOnTheMand/GestionaleVideoOnTheMand/Presentation/ViewModel/RegistrationViewModel.swift"
                   startingColumnNumber = "9223372036854775807"
@@ -254,12 +254,12 @@
                   endingLineNumber = "95">
                </Location>
                <Location
-                  uuid = "7DA6A816-00CF-4F64-92FA-1FD8B629F037 - 76b093d72cce607"
+                  uuid = "7DA6A816-00CF-4F64-92FA-1FD8B629F037 - 8cff9ba69cb8d2"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "(5) suspend resume partial function for GestionaleVideoOnTheMand.RegistrationViewModel.registration() async -&gt; Swift.Bool"
-                  moduleName = "GestionaleVideoOnTheMand"
+                  symbolName = "(3) suspend resume partial function for GestionaleVideoOnTheMand.RegistrationViewModel.registration() async -&gt; Swift.Bool"
+                  moduleName = "GestionaleVideoOnTheMand.debug.dylib"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/michelemanniello/Documents/Sviluppo/Swift/GestionaleVideoOnTheMand/GestionaleVideoOnTheMand/Presentation/ViewModel/RegistrationViewModel.swift"
                   startingColumnNumber = "9223372036854775807"
@@ -268,12 +268,12 @@
                   endingLineNumber = "95">
                </Location>
                <Location
-                  uuid = "7DA6A816-00CF-4F64-92FA-1FD8B629F037 - 7fead64b01200406"
+                  uuid = "7DA6A816-00CF-4F64-92FA-1FD8B629F037 - 581392a91189dad3"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "(6) suspend resume partial function for GestionaleVideoOnTheMand.RegistrationViewModel.registration() async -&gt; Swift.Bool"
-                  moduleName = "GestionaleVideoOnTheMand"
+                  symbolName = "(4) suspend resume partial function for GestionaleVideoOnTheMand.RegistrationViewModel.registration() async -&gt; Swift.Bool"
+                  moduleName = "GestionaleVideoOnTheMand.debug.dylib"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/michelemanniello/Documents/Sviluppo/Swift/GestionaleVideoOnTheMand/GestionaleVideoOnTheMand/Presentation/ViewModel/RegistrationViewModel.swift"
                   startingColumnNumber = "9223372036854775807"
@@ -335,17 +335,125 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EF7649FF-AD40-4A95-9511-C653CD5E181A"
-            shouldBeEnabled = "No"
+            uuid = "2CF0141A-9C8F-4F9E-9EFE-8321729E0B41"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GestionaleVideoOnTheMand/Domain/UseCases/LoginUseCase.swift"
+            filePath = "GestionaleVideoOnTheMand/Presentation/ViewModel/LoginViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "execute(email:password:)"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "login()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "11A736C9-6620-4432-8FA1-FF60226ED785"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GestionaleVideoOnTheMand/Presentation/Coordinator/Coordinator.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "login()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "11A736C9-6620-4432-8FA1-FF60226ED785 - 3337263c4d1c2cb6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for GestionaleVideoOnTheMand.Coordinator.login() async -&gt; ()"
+                  moduleName = "GestionaleVideoOnTheMand.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/michelemanniello/Documents/Sviluppo/Swift/GestionaleVideoOnTheMand/GestionaleVideoOnTheMand/Presentation/Coordinator/Coordinator.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47">
+               </Location>
+               <Location
+                  uuid = "11A736C9-6620-4432-8FA1-FF60226ED785 - 38404dc2ba6ac216"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for GestionaleVideoOnTheMand.Coordinator.login() async -&gt; ()"
+                  moduleName = "GestionaleVideoOnTheMand.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/michelemanniello/Documents/Sviluppo/Swift/GestionaleVideoOnTheMand/GestionaleVideoOnTheMand/Presentation/Coordinator/Coordinator.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DFD9D6DD-ED3F-472F-B13B-57534395CF82"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GestionaleVideoOnTheMand/Presentation/ViewModel/LoginViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "login()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8B95688A-C801-447B-AA48-0E7DF90B1649"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GestionaleVideoOnTheMand/Presentation/ViewModel/HomeViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "loadFilm()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8B95688A-C801-447B-AA48-0E7DF90B1649 - 1af2304557939b09"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for GestionaleVideoOnTheMand.HomeViewModel.loadFilm() async -&gt; ()"
+                  moduleName = "GestionaleVideoOnTheMand.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/michelemanniello/Documents/Sviluppo/Swift/GestionaleVideoOnTheMand/GestionaleVideoOnTheMand/Presentation/ViewModel/HomeViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "120"
+                  endingLineNumber = "120">
+               </Location>
+               <Location
+                  uuid = "8B95688A-C801-447B-AA48-0E7DF90B1649 - 17773e0c11e0dd2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(6) suspend resume partial function for GestionaleVideoOnTheMand.HomeViewModel.loadFilm() async -&gt; ()"
+                  moduleName = "GestionaleVideoOnTheMand.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/michelemanniello/Documents/Sviluppo/Swift/GestionaleVideoOnTheMand/GestionaleVideoOnTheMand/Presentation/ViewModel/HomeViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "120"
+                  endingLineNumber = "120">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

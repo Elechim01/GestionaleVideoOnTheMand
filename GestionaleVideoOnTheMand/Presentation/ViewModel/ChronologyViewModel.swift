@@ -43,7 +43,7 @@ final class ChronologyViewModel: ObservableObject {
             }
         } catch  {
             isLoading = false
-            CustomLog.error(category: .VM, "\(error.localizedDescription)")
+            ErrorReporter.shared.report(error, category: .VM)
             Utils.showError(alertMessage: &alertMessagge, showAlert: &showAlert, from: error)
         }
         
