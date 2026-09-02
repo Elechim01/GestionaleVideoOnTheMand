@@ -782,7 +782,7 @@
 				CODE_SIGN_ENTITLEMENTS = GestionaleVideoOnTheMand/GestionaleVideoOnTheMand.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"GestionaleVideoOnTheMand/Preview Content\"";
 				DEVELOPMENT_TEAM = G7DSPSWXXC;
@@ -817,7 +817,7 @@
 				CODE_SIGN_ENTITLEMENTS = GestionaleVideoOnTheMand/GestionaleVideoOnTheMand.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"GestionaleVideoOnTheMand/Preview Content\"";
 				DEVELOPMENT_TEAM = G7DSPSWXXC;
 				ENABLE_HARDENED_RUNTIME = YES;
