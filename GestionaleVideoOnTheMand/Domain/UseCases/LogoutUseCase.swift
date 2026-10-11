@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseCrashlytics
 
-final class LogoutUseCase {
+final class LogoutUseCase: Sendable {
     private let repository: AuthRepositoryProtocol
     
     init(repository: AuthRepositoryProtocol) {

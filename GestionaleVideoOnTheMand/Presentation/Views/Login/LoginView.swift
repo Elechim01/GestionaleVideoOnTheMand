@@ -107,7 +107,7 @@ struct LoginView: View {
             .padding(.horizontal)
             .padding(.bottom, 30)
         }
-        .background(Color("Blue").ignoresSafeArea())
+        .background(ColorHelper.appBlue.color.ignoresSafeArea())
         .onAppear {
             loginViewModel.clear()
             loginViewModel.checkStatus()

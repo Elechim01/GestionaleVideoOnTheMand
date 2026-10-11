@@ -7,7 +7,8 @@
 
 import Foundation
 
-class PreviewDependecyInjection {
+@MainActor
+final class PreviewDependecyInjection {
     
     static let shared = PreviewDependecyInjection()
     

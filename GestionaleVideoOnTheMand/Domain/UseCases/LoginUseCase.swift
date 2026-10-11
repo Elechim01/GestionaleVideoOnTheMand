@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseCrashlytics
 
-final class LoginUseCase {
+final class LoginUseCase: Sendable {
     
     private let authRepository: AuthRepositoryProtocol
     private let credentialRepository: CredentialRepositoryProtocol

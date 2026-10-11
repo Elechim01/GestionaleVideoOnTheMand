@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseCrashlytics
 
-final class RestoreSessionUseCase {
+final class RestoreSessionUseCase: Sendable {
     
     private let authRepository: AuthRepositoryProtocol
     private let credentialRepository: CredentialRepositoryProtocol

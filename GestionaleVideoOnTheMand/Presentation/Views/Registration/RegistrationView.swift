@@ -44,7 +44,7 @@ struct RegistrationView: View {
                 }
                 .buttonStyle(PlainButtonStyle())
                 .frame(width: 100, height: 40)
-                .background(Color("Blue"))
+                .background(ColorHelper.appBlue.color)
                 .cornerRadius(10)
                 .padding()
 
@@ -67,7 +67,7 @@ struct RegistrationView: View {
         }
         .containerBackground(.ultraThinMaterial, for: .window)
        
-        .background(Color("Blue").ignoresSafeArea())
+        .background(ColorHelper.appBlue.color.ignoresSafeArea())
         .alert(registrationViewModel.alertMessage, isPresented: $registrationViewModel.showAlert) {
             Button {
                 registrationViewModel.showAlert.toggle()

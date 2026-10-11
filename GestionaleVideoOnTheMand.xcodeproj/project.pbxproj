@@ -32,6 +32,7 @@
 		C48424552F9B5EA500E138C6 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = C48424542F9B5EA500E138C6 /* FirebaseMessaging */; };
 		C4880F1228B2A1230091B7C4 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = C4880F1128B2A1230091B7C4 /* GoogleSignIn */; };
 		C4880F1428B2A1230091B7C4 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C4880F1328B2A1230091B7C4 /* GoogleSignInSwift */; };
+		C48B6E5530498FFA0058DF83 /* ColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48B6E5430498FFA0058DF83 /* ColorHelper.swift */; };
 		C48DD23A2F73EABA00541862 /* LogoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48DD2392F73EABA00541862 /* LogoutUseCase.swift */; };
 		C497F7462F6F116000039892 /* MovieRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497F7452F6F116000039892 /* MovieRepositoryProtocol.swift */; };
 		C497F7482F6F11EA00039892 /* DeleteMovieUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497F7472F6F11EA00039892 /* DeleteMovieUseCase.swift */; };
@@ -102,6 +103,7 @@
 		C48106062F80083600EB65BE /* ChronologyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChronologyViewModel.swift; sourceTree = "<group>"; };
 		C48106082F8019F700EB65BE /* ChronologyCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChronologyCardView.swift; sourceTree = "<group>"; };
 		C4880F1528B2A1480091B7C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C48B6E5430498FFA0058DF83 /* ColorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelper.swift; sourceTree = "<group>"; };
 		C48DD2392F73EABA00541862 /* LogoutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutUseCase.swift; sourceTree = "<group>"; };
 		C497F7452F6F116000039892 /* MovieRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepositoryProtocol.swift; sourceTree = "<group>"; };
 		C497F7472F6F11EA00039892 /* DeleteMovieUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteMovieUseCase.swift; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 			isa = PBXGroup;
 			children = (
 				C4B9FC3F2F715B7800671331 /* FileHelper.swift */,
+				C48B6E5430498FFA0058DF83 /* ColorHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -520,7 +523,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1340;
-				LastUpgradeCheck = 1340;
+				LastUpgradeCheck = 2630;
 				TargetAttributes = {
 					C4C7A7CD28A528EB001CB803 = {
 						CreatedOnToolsVersion = 13.4.1;
@@ -572,6 +575,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		C4EC62053031D18300E1A12D /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -649,6 +653,7 @@
 				C4C7A7E128A575D6001CB803 /* HomeViewModel.swift in Sources */,
 				C4DBD09B2F76C30200E3A784 /* RegistrationUseCase.swift in Sources */,
 				C448E6A02A75B56F00A18EBE /* StorageView.swift in Sources */,
+				C48B6E5530498FFA0058DF83 /* ColorHelper.swift in Sources */,
 				C4DBD0972F768AFC00E3A784 /* Coordinator.swift in Sources */,
 				C4C7A7D228A528EB001CB803 /* GestionaleVideoOnTheMandApp.swift in Sources */,
 				C4C7A80A28A90398001CB803 /* RegistrationView.swift in Sources */,
@@ -663,6 +668,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -692,9 +699,12 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = G7DSPSWXXC;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -714,6 +724,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -724,6 +735,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -753,9 +766,12 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = G7DSPSWXXC;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -768,6 +784,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -783,11 +800,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 9;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"GestionaleVideoOnTheMand/Preview Content\"";
-				DEVELOPMENT_TEAM = G7DSPSWXXC;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GestionaleVideoOnTheMand/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
@@ -804,8 +824,9 @@
 				SUPPORTED_PLATFORMS = macosx;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -818,10 +839,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 9;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"GestionaleVideoOnTheMand/Preview Content\"";
-				DEVELOPMENT_TEAM = G7DSPSWXXC;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GestionaleVideoOnTheMand/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
@@ -838,8 +862,9 @@
 				SUPPORTED_PLATFORMS = macosx;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};

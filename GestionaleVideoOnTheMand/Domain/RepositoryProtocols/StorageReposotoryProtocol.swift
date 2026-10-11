@@ -9,7 +9,7 @@ import Foundation
 import Services
 import AppKit
 
-protocol StorageReposotoryProtocol {
+protocol StorageReposotoryProtocol: Sendable {
     func upload(file: URL, onProgress: @escaping (Double) -> Void) async throws -> UploadFilmResponse
     
     func saveFilm(film: Film) async throws

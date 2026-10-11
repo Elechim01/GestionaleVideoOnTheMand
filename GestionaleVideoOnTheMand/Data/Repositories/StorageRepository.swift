@@ -30,7 +30,7 @@ final class StorageRepository: StorageReposotoryProtocol {
     }
 }
 
-class MockStorageRepository: StorageReposotoryProtocol {
+final class MockStorageRepository: StorageReposotoryProtocol {
     func upload(file: URL, onProgress: @escaping (Double) -> Void) async throws -> Services.UploadFilmResponse {
         throw CustomError.genericError
     }

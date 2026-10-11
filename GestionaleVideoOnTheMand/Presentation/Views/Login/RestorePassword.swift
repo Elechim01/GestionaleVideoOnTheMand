@@ -53,7 +53,7 @@ struct RestorePassword: View {
         }
         .padding()
         .frame(width: 350)
-        .background(Color("Blue").ignoresSafeArea())
+        .background(ColorHelper.appBlue.color.ignoresSafeArea())
     }
     
 }

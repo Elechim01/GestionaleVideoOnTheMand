@@ -10,7 +10,7 @@ import Services
 import AppKit
 import ElechimCore
 
-final class UploadMovieUseCase {
+final class UploadMovieUseCase: Sendable {
     private let storageRepo: StorageReposotoryProtocol
     
     init(storageRepo: StorageReposotoryProtocol) {
@@ -23,26 +23,26 @@ final class UploadMovieUseCase {
                  size: Double,
                  onCreateThumbnail: @MainActor @escaping (NSImage) -> (),
                  onUpdate: @MainActor @escaping (UploadStatus, Double) -> ()) async throws {
-        await onUpdate(.createThumnail,0)
+        onUpdate(.createThumnail,0)
         guard let thumbnail = await UtilitiesFiles.createThumbnail(url: file) else {
             throw CustomError.fileError
         }
-        await onUpdate(.createThumnail,100)
-        await onCreateThumbnail(thumbnail)
-        await onUpdate(.uploadFilm,0)
+        onUpdate(.createThumnail,100)
+        onCreateThumbnail(thumbnail)
+        onUpdate(.uploadFilm,0)
         let videoResponse = try await  storageRepo.upload(file: file) { progress in
             Task { @MainActor in
                  onUpdate(.uploadFilm,progress)
             }
         }
-        await onUpdate(.uploadThumbnail,0)
+        onUpdate(.uploadThumbnail,0)
         let fileURLThumbnail = UtilitiesFiles.createTempFile(from: thumbnail)
         let thumbnailResponse = try await storageRepo.upload(file: fileURLThumbnail) { progress in
             Task { @MainActor in
                 onUpdate(.uploadThumbnail,progress)
             }
         }
-       await onUpdate(.addFilmToDB,0)
+        onUpdate(.addFilmToDB,0)
         let film = Film(id: UUID().uuidString,
                         idUtente: idLocalUser,
                         nome: nome,
@@ -53,7 +53,7 @@ final class UploadMovieUseCase {
                         thumbnailName: thumbnailResponse.fileName)
         
         try await storageRepo.saveFilm(film: film)
-        await onUpdate(.addFilmToDB,100)
+        onUpdate(.addFilmToDB,100)
     }
     
 }

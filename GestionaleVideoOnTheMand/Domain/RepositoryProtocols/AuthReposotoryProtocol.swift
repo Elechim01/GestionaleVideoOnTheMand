@@ -9,7 +9,7 @@ import Foundation
 import Services
 import FirebaseAuth
 
-protocol AuthRepositoryProtocol {
+protocol AuthRepositoryProtocol: Sendable {
     func getCurrentUser(idUser: String) async throws -> Utente
     func signIn(email: String, password: String) async throws ->  String
     func token(username: String, password: String) async throws

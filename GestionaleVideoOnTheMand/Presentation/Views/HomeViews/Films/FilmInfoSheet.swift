@@ -57,7 +57,7 @@ struct FilmInfoSheet: View {
         }
         .padding(.horizontal, 24)
         .frame(minWidth: 350, minHeight: 400)
-        .background(Color("Blue").opacity(0.4).ignoresSafeArea())      // Main background colour
+        .background(ColorHelper.appBlue.color.opacity(0.4).ignoresSafeArea())      // Main background colour
     }
     
     // MARK: - Helper for label + value rows

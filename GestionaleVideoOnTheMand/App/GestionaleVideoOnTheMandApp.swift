@@ -49,7 +49,7 @@ struct GestionaleVideoOnTheMandApp: App {
         Window("window.upload.film", id: "uploadFilm") {
             UploadFilmView()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color("Blue").opacity(0.3).ignoresSafeArea())
+                .background(ColorHelper.appBlue.color.opacity(0.3).ignoresSafeArea())
                 .environmentObject(coordinator.loadFilmViewModel)
                 .alwaysOnTop()
         }
@@ -59,7 +59,7 @@ struct GestionaleVideoOnTheMandApp: App {
         Window("window.info.user", id: "infoUser") {
             InfoUserView()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color("Green").opacity(0.3).ignoresSafeArea())
+                .background(ColorHelper.appGreen.color.opacity(0.3).ignoresSafeArea())
                 .environmentObject(Coordinator.container.sessionManager)
                .alwaysOnTop()
         }

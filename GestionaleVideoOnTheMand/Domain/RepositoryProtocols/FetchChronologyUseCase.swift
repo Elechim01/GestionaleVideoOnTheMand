@@ -8,7 +8,7 @@
 import Foundation
 import Services
 
-final class FetchChronologyUseCase {
+final class FetchChronologyUseCase: Sendable {
 
     private let chronologyRepository: ChronologyRepositoryProtocol
 

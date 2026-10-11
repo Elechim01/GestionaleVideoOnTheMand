@@ -9,7 +9,7 @@ import Foundation
 import Services
 import ElechimCore
 
-final class DeleteMovieUseCase {
+final class DeleteMovieUseCase: Sendable {
     let repository: MovieRepositoryProtocol
     
     init(repository: MovieRepositoryProtocol) {

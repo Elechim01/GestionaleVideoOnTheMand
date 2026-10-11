@@ -8,7 +8,7 @@
 import Foundation
 import Services
 
-protocol MovieRepositoryProtocol {
+protocol MovieRepositoryProtocol: Sendable {
     func deleteMovie(fileName: String,thumbnailName: String, docId: String) async throws
     func loadFilm(localUserId: String) async  -> AsyncThrowingStream<[Film],Error>
 }

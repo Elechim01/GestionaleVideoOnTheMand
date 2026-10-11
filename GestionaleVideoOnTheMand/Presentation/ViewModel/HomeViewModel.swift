@@ -155,7 +155,7 @@ class HomeViewModel: ObservableObject {
 
 
 //    TODO:  Apple
-    func authenticate(response: @escaping (Bool) -> ()) {
+    func authenticate(response: @Sendable @escaping (Bool) -> ()) {
         let contex = LAContext()
         var error: NSError?
         if contex.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometricsOrCompanion, error: &error) {

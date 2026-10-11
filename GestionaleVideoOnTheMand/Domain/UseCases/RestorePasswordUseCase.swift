@@ -7,8 +7,8 @@
 
 import Foundation
 
-final class RestorePasswordUseCase {
-    private var repository: AuthRepositoryProtocol
+final class RestorePasswordUseCase: Sendable {
+    private let repository: AuthRepositoryProtocol
     
     init(repository: AuthRepositoryProtocol) {
         self.repository = repository

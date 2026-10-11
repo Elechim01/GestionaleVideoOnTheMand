@@ -46,13 +46,10 @@ struct InfoUserView: View {
     @ViewBuilder
     func InfoElement(description: String, element: String?) -> some View {
         
-        ( Text(description)
-            .fontWeight(.bold)
-          +
-          Text(": \(element ?? "")"))
-        .font(.body)
-        .padding(.horizontal,3)
-        .padding(.vertical, 4)
+        Text("\(Text(description).fontWeight(.bold)): \(element ?? "")")
+            .font(.body)
+            .padding(.horizontal, 3)
+            .padding(.vertical, 4)
     }
     
     @ViewBuilder

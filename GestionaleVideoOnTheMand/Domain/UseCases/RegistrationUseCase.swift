@@ -8,7 +8,7 @@
 import Foundation
 import Services
 
-final class RegistrationUseCase {
+final class RegistrationUseCase: Sendable {
 
     private let authRepository: AuthRepositoryProtocol
     private let credentialRepository: CredentialRepositoryProtocol

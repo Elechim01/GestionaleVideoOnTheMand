@@ -8,7 +8,7 @@
 import Foundation
 import Services
 
-final class GetCurrentUserUseCase {
+final class GetCurrentUserUseCase: Sendable {
     
     private let authRepository: AuthRepositoryProtocol
     private let credentialRepository: CredentialRepositoryProtocol
