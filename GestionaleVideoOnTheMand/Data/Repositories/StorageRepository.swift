@@ -22,7 +22,7 @@ final class StorageRepository: StorageReposotoryProtocol {
                 throw error
             }
         }
-        throw CustomError.genericError
+        throw CustomError.storageError
     }
     
     func saveFilm(film: Film) async throws {
