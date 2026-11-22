@@ -13,8 +13,8 @@ import ElechimCore
 final class AuthRepository: AuthRepositoryProtocol {
     
     func signIn(email: String, password: String) async throws -> String {
-        let authResult = try await FirebaseUtils.shared.signIn(email: email, password: password)
-        return authResult.user.uid
+      return try await FirebaseUtils.shared.signIn(email: email, password: password)
+      
     }
     
     func token(username: String, password: String) async throws {
