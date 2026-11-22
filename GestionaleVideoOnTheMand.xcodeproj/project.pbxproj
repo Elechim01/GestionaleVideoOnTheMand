@@ -18,6 +18,7 @@
 		C4548C822F6F174C009BA431 /* MovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4548C812F6F174C009BA431 /* MovieRepository.swift */; };
 		C4548C842F6F1C70009BA431 /* MockMovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4548C832F6F1C70009BA431 /* MockMovieRepository.swift */; };
 		C45937D82F97B29500EF90DB /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45937D72F97B29500EF90DB /* SessionManager.swift */; };
+		C468C0B030B39A7A00232BCB /* ElechimCore in Frameworks */ = {isa = PBXBuildFile; productRef = C468C0AF30B39A7A00232BCB /* ElechimCore */; };
 		C46E72C42F72A83E007CA286 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46E72C32F72A83E007CA286 /* LoginUseCase.swift */; };
 		C46E72C62F72AF4A007CA286 /* RestoreSessionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46E72C52F72AF4A007CA286 /* RestoreSessionUseCase.swift */; };
 		C47815062F2525FE00E7536F /* FilmInfoSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47815052F2525FE00E7536F /* FilmInfoSheet.swift */; };
@@ -150,6 +151,7 @@
 				C48424552F9B5EA500E138C6 /* FirebaseMessaging in Frameworks */,
 				C4C7A7EA28A5A09E001CB803 /* FirebaseAuth in Frameworks */,
 				C4880F1228B2A1230091B7C4 /* GoogleSignIn in Frameworks */,
+				C468C0B030B39A7A00232BCB /* ElechimCore in Frameworks */,
 				C4C10B8D2F0705D80086A376 /* Services in Frameworks */,
 				C44112F42F01ADD30070B973 /* CachedAsyncImage in Frameworks */,
 				C4BE732E2A757C8800175BF3 /* GRPC in Frameworks */,
@@ -507,6 +509,7 @@
 				C4DBD0A02F76E3A600E3A784 /* ElechimCore */,
 				C48424542F9B5EA500E138C6 /* FirebaseMessaging */,
 				C4EC62033031D11200E1A12D /* FirebaseCrashlytics */,
+				C468C0AF30B39A7A00232BCB /* ElechimCore */,
 			);
 			productName = GestionaleVideoOnTheMand;
 			productReference = C4C7A7CE28A528EB001CB803 /* GestionaleVideoOnTheMand.app */;
@@ -542,8 +545,8 @@
 				C4880F1028B2A1220091B7C4 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				C4BE732A2A757C8800175BF3 /* XCRemoteSwiftPackageReference "grpc-swift" */,
 				C44112F22F01ADD30070B973 /* XCLocalSwiftPackageReference "../CachedAsyncImage" */,
-				C4C10B8B2F0705D80086A376 /* XCLocalSwiftPackageReference "../Services" */,
-				C4DBD09F2F76E3A600E3A784 /* XCLocalSwiftPackageReference "../ElechimCore" */,
+				C468C0AD30B39A2600232BCB /* XCRemoteSwiftPackageReference "ServicesVideoOnTheMand" */,
+				C468C0AE30B39A7A00232BCB /* XCRemoteSwiftPackageReference "ElechimCore" */,
 			);
 			productRefGroup = C4C7A7CF28A528EB001CB803 /* Products */;
 			projectDirPath = "";
@@ -782,7 +785,7 @@
 				CODE_SIGN_ENTITLEMENTS = GestionaleVideoOnTheMand/GestionaleVideoOnTheMand.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"GestionaleVideoOnTheMand/Preview Content\"";
 				DEVELOPMENT_TEAM = G7DSPSWXXC;
@@ -817,7 +820,7 @@
 				CODE_SIGN_ENTITLEMENTS = GestionaleVideoOnTheMand/GestionaleVideoOnTheMand.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"GestionaleVideoOnTheMand/Preview Content\"";
 				DEVELOPMENT_TEAM = G7DSPSWXXC;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -871,17 +874,25 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../CachedAsyncImage;
 		};
-		C4C10B8B2F0705D80086A376 /* XCLocalSwiftPackageReference "../Services" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../Services;
-		};
-		C4DBD09F2F76E3A600E3A784 /* XCLocalSwiftPackageReference "../ElechimCore" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../ElechimCore;
-		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C468C0AD30B39A2600232BCB /* XCRemoteSwiftPackageReference "ServicesVideoOnTheMand" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:Elechim01/ServicesVideoOnTheMand.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		C468C0AE30B39A7A00232BCB /* XCRemoteSwiftPackageReference "ElechimCore" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:Elechim01/ElechimCore.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		C4880F1028B2A1220091B7C4 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
@@ -902,7 +913,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
-				kind = upToNextMajorVersion;
+				kind = upToNextMinorVersion;
 				minimumVersion = 10.26.0;
 			};
 		};
@@ -912,6 +923,11 @@
 		C44112F32F01ADD30070B973 /* CachedAsyncImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CachedAsyncImage;
+		};
+		C468C0AF30B39A7A00232BCB /* ElechimCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C468C0AE30B39A7A00232BCB /* XCRemoteSwiftPackageReference "ElechimCore" */;
+			productName = ElechimCore;
 		};
 		C48424542F9B5EA500E138C6 /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;
